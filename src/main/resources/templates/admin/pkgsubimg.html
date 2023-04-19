@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN ADD SUB IMAGE</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Admin Add Sub Image</h2>
+        <form
+          action="/admin/pkgAddSubImgProcess"
+          method="post"
+          th:object="${pkgDto}"
+          enctype="multipart/form-data"
+        >
+          <input type="hidden" name="pkgNo" th:value="${pkgDto.pkgNo}" />
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="pkgNo"
+              th:value="${pkgDto.pkgNo}"
+              disabled
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="pkgName"
+              th:value="${pkgDto.pkgName}"
+              disabled
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image01</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg01"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image02</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg02"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image03</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg03"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image04</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg04"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image05</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg05"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image06</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg06"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image07</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg07"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Sub Image08</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="originSubImg08"
+            />
+          </div>
+          <div class="joinBtn">
+            <button type="button confirm" class="btn btn-primary btn-lg">
+              Submit
+            </button>
+            <button type="button reset" class="btn btn-secondary btn-lg">
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <script></script>
+    </div>
+  </body>
+</html>

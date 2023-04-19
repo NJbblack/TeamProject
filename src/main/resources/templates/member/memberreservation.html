@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>LOGGED USER INFO</title>
+  </head>
+  <body>
+    <div
+      class="formContainer"
+      id="contents"
+      layout:fragment="contents"
+      style="z-index: 99"
+    >
+      <div class="row">
+        <div class="col-2">
+          <div>
+            <a href="/member/memberinfo"
+              ><h5 style="font-weight: normal">User Information</h5></a
+            >
+          </div>
+          <hr />
+
+          <div>
+            <a href="/member/memberreservation" style="color: rgb(5, 99, 193)"
+              ><h4>My <br />Reservation</h4></a
+            >
+          </div>
+          <hr />
+
+          <div>
+            <a href="/member/memberrequest"
+              ><h5 style="font-weight: normal">My Request</h5></a
+            >
+          </div>
+        </div>
+        <input
+          type="hidden"
+          id="loggedMemberNo"
+          th:value="${session.loggedMember.no}"
+        />
+        <div id="" class="reserv col ms-5">
+          <h2>My Reservation</h2>
+          <a class="btn btn-outline-warning" id="btnCurrentReserv"
+            >Current Reservation</a
+          >
+          <a class="btn btn-outline-dark" id="btnPastReserv"
+            >Past Reservation</a
+          >
+          <a class="btn btn-outline-danger" id="btnCanceledReserv"
+            >Canceled Reservation</a
+          >
+          <div class="result"></div>
+        </div>
+      </div>
+      <div id="alarmMsg" class="adminAlarm" style="display: block"></div>
+      <script>
+        //////////////////////화면 알림창 관련 Json 받아오기
+        getAlert();
+        function getAlert() {
+          const sendData = {
+            userNo: $("#loggedMemberNo").val(),
+          };
+          $.ajax({
+            url: "/member/memberreservation",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+            },
+          });
+        }
+
+        currentReserv();
+        console.log("안녕");
+        //////////////////////info 화면에서 버튼 클릭시 현재 예약 정보를 뿌리는 기능
+        $("#btnCurrentReserv").on("click", function (e) {
+          currentReserv();
+        });
+
+        function currentReserv() {
+          const sendData = {
+            no: $("#loggedMemberNo").val(),
+          };
+          $.ajax({
+            url: "/reservation/getAllReserv",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+              let tempHtml = "";
+              $.each(response, function (idx, item) {
+                tempHtml += `
+        <form
+        action="/reservation/getDetailReserv"
+        method="post"
+        >
+        <input type="hidden" name="reservNo" value=${item.reservNo}>
+        <button href="" class="card cardReserv btn-warning w-100" style="height:26vh;">
+          <div class="card-text"><strong><small>Reservation No: ${item.reservNo}</small></strong></div>
+          <div class="card-body package_result row">
+            <div class="col-2">
+            <img
+            src="http://localhost:9091/upload/${item.reservImg}"
+            alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
+            />
+            </div>
+            <div class="col-3" style="text-align:left; margin-top:-20px; margin-left:45px; ">
+              <h4 class="card-title"><strong>${item.reservPkg}</strong></h4>
+              <div>
+              <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
+              </div>
+              <div>
+              <span style="font-size:13px;">Departure Date: </span><br><strong style="font-size:16px;">${item.reservDepart}</strong>
+              </div>
+              <div>
+              <span style="font-size:13px;">Return Date: </span><br><strong style="font-size:16px;">${item.reservReturn}</strong>
+              </div>
+            </div>
+            <div class="col" style="text-align:left; margin-top:0; margin-left:-110px;  margin-bottom:40px;">
+            <div style="position: absolute; top:0; right:5px;">
+            <span style="font-size:13px;">Reservation Date: &ensp;</span><strong>20${item.reservRegDate}</strong>
+            </div>
+            <span style="font-size:12px; line-height:0; margin:0;">${item.pkgContents}</span>
+            </div>
+          </div>
+        </button>
+        </form>`;
+              });
+              $(".result").html(tempHtml);
+            },
+          });
+        }
+
+        //////////////////////화면 알림창 관련 Json 받아오기
+        getAlert();
+        function getAlert() {
+          const sendData = {
+            userNo: $("#loggedMemberNo").val(),
+          };
+          $.ajax({
+            url: "/member/memberAlert",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+              if (response.msg) {
+                $("#alarmMsg").attr("style", "opacity:1 !important");
+                const tempHtml = `
+              <div>
+                <div style="text-align:center;"><span>${response.msg}</span></div>
+                <div class="row text-center mt-2">
+                  <div class="col">
+                    <button id="btnAlarmConfirm" class="btn btn-outline-danger" style="padding:5px 10px; font-size:20px;">
+                      Never show this again
+                    </button>
+                    <button id="btnAlarmClose" class="btn btn-outline-dark" style="padding:5px 10px; font-size:20px;">
+                      Close
+                    </button>
+                </div>
+                </div>
+              </div>
+              `;
+                $("#alarmMsg").html(tempHtml);
+              } else {
+              }
+            },
+          });
+        }
+
+        //////////////////////알림 메시지 띄우기
+        $("#alarmMsg").on("click", "#btnAlarmClose", function () {
+          $("#alarmMsg").css("display", "none");
+        });
+
+        $("#alarmMsg").on("click", "#btnAlarmConfirm", function () {
+          $("#alarmMsg").css("display", "none");
+          const sendData = {
+            userNo: $("#loggedMemberNo").val(),
+          };
+          $.ajax({
+            url: "/member/memberAlertClear",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+            },
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>

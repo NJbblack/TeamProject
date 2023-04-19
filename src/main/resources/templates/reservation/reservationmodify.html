@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>RESERVATION MODIFY</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Modify Personal Information for Reservation</h2>
+        <form action="/reservation/reservationModifyProcess" method="post">
+          <input
+            type="hidden"
+            name="customerNo"
+            th:value="${reservDto.customerNo}"
+          />
+          <input
+            type="hidden"
+            name="reservNo"
+            th:value="${reservDto.reservNo}"
+          />
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Reservation No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="reservNo"
+              th:value="${reservDto.reservNo}"
+              disabled
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Reservation Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="reservName"
+              th:value="${reservDto.reservName}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Birth Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker01"
+              placeholder="YYYY/MM/DD"
+              name="reservBday"
+              th:value="${reservDto.reservBday}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Passport Number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="reservPassport"
+              th:value="${reservDto.reservPassport}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="reservEmail"
+              th:value="${reservDto.reservEmail}"
+            />
+          </div>
+          <button type="button confirm" class="btn btn-primary btn-lg">
+            Submit
+          </button>
+          <button type="button reset" class="btn btn-secondary btn-lg">
+            Reset
+          </button>
+        </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

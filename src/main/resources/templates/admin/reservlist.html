@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>RESERVATION LIST</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <h3>Reservation List</h3>
+      <table class="adminList table table-striped  table-hover mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col"><span>No | User | Pkg</span></th>
+                    <!-- <th scope="col">Reserv Customer No</th>
+                    <th scope="col">Reserv Pkg No</th> -->
+                    <th scope="col">Reserv Pkg Name</th>
+                    <th scope="col">Reserv Date</th>
+                    <th scope="col">Reserv Name</th>
+                    <th scope="col">Departure Date</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col"><span>Avail | Req | ReqNo</span></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="item : ${reservList}">
+                    <td><span th:text="${item.reservNo}"></span> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <span th:text="${item.customerNo}"></span> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <span th:text="${item.selectedPkgNo}"></span></td>
+                    <!-- <td th:text="${item.reservNo}">2023.03.23</td> -->
+                    <!-- <td th:text="${item.customerNo}">2023.03.23</td>
+                    <td th:text="${item.selectedPkgNo}">2023.03.23</td> -->
+                    <td th:text="${item.reservPkg}">2023.03.23</td>
+                    <td th:text="${item.reservRegDate}">1</td>
+                    <td th:text="${item.reservName}">2023.03.23</td>
+                    <td th:text="${item.reservDepart}">1</td>
+                    <td th:text="${item.reservReturn}">1</td>
+                    <td><span th:text="${item.reservAvailable}"></span> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <span th:text="${item.reservReq}"></span> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <span th:text="${item.reservReqNo}"></span></td>
+                    <td><a th:href="@{/admin/reservrequestview(customerNo=${item.customerNo},reservNo=${item.reservNo},reservReqNo=${item.reservReqNo})}" class="btn btn-success btn-sm">VIEWREQ</span></a></td>
+                    <td><a th:href="@{/admin/reservmodify(reservNo=${item.reservNo},reservReqNo=${item.reservReqNo})}" class="btn btn-primary btn-sm">MODIFY</a></td>
+                    <td><a th:href="@{/admin/reservDeleteProcess(reservNo=${item.reservNo})}" class="btn btn-danger btn-sm">DELETE</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paging text-center">
+                <a th:href="@{/admin/reservlist(page=${pagingMaker.prevPage})}" th:if="${pagingMaker.prev == true}">PREV&nbsp;&nbsp;</a>
+                <th:block
+                th:each="page:${#numbers.sequence(pagingMaker.startPage,pagingMaker.endPage)}"
+                            >
+                <a th:href="@{/admin/reservlist(page=${page})}" th:text="${page}"></a>
+                            </th:block>
+                            <a th:href="@{/admin/reservlist(page=${pagingMaker.nextPage})}" th:if="${pagingMaker.next == true}">&nbsp;&nbsp;NEXT</a>
+              </div>
+
+            <form class="mt-5" action="/admin/reservlist" method="get" id="searchForm">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=1 name="requested" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Requested
+                </label>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <select class="form-select" aria-label="Default select example" name="category" 
+                        th:if="${param.category!=null}">
+                        <!-- <option value="all" 
+                          th:selected="${param.category.toString().equals('all') ? true : false}">All</option> -->
+                        <option value="reservNo" th:selected="${param.category.toString().equals('reservNo') ? true : false}">Reservation No</option>
+                        <option value="customerNo" th:selected="${param.category.toString().equals('customerNo') ? true : false}">Customer No</option>
+                        <option value="reservName" th:selected="${param.category.toString().equals('reservName') ? true : false}">Reservation Name</option>
+                        <option value="selectedPkgNo" th:selected="${param.category.toString().equals('selectedPkgNo') ? true : false}">Package No</option>
+                        <option value="reservPkg" th:selected="${param.category.toString().equals('reservPkg') ? true : false}">Package Name</option>
+                        <option value="reservAvailable" th:selected="${param.category.toString().equals('reservAvailable') ? true : false}">Available</option>
+                    </select>
+                    <select class="form-select" aria-label="Default select example" name="category"
+                    th:unless="${param.category!=null}">
+                      <!-- <option value="all" selected>전체검색</option> -->
+                      <option value="reservNo">Reservation No</option>
+                      <option value="customerNo">Customer No</option>
+                      <option value="reservName">Reservation Name</option>
+                      <option value="selectedPkgNo">Package No</option>
+                      <option value="reservPkg">Package Name</option>
+                      <option value="reservAvailable">Available</option>
+                    </select>
+                  </div>
+                    <div class="col-8"><input class="form-control" type="text" placeholder="검색어를 입력하세요." aria-label="default input example" name="searchTxt" th:value="${param.searchTxt}"></div>
+                    <div class="col"><button class="btn btn-dark" id="btnSearch" 
+                      style="height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;">SEARCH</button></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

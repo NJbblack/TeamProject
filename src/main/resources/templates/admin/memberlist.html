@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>MEMBER LIST</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <h3>Member List</h3>
+      <table class="adminList table table-striped  table-hover mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">userId</th>
+                    <th scope="col">userPw</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">address</th>
+                    <th scope="col">userPoint</th>
+                    <th scope="col">userRank</th>
+                    <th scope="col">userBday</th>
+                    <th scope="col">passport</th>
+                    <th scope="col">available</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="item : ${memberList}">
+                    <td scope="row" th:text="${item.no}">1</td>
+                    <td th:text="${item.userId}">2023.03.23</td>
+                    <td th:text="${item.userPw}">2023.03.23</td>
+                    <td th:text="${item.userNickname}">2023.03.23</td>
+                    <td th:text="${item.email}">2023.03.23</td>
+                    <td th:text="${item.address}">1</td>
+                    <td th:text="${item.userPoint}">1</td>
+                    <td th:text="${item.userRank}">1</td>
+                    <td th:text="${item.userBday}">1</td>
+                    <td th:text="${item.passport}">1</td>
+                    <td th:text="${item.userAvailable}">1</td>
+                    <td><a th:href="@{/admin/membermodify(no=${item.no})}" class="btn btn-primary btn-sm">MODIFY</a></td>
+                    <td><a th:href="@{/admin/memberDeleteProcess(no=${item.no})}" class="btn btn-danger btn-sm">DELETE</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paging text-center">
+                <a th:href="@{/admin/memberlist(page=${pagingMaker.prevPage})}" th:if="${pagingMaker.prev == true}">PREV&nbsp;&nbsp;</a>
+                <th:block
+                th:each="page:${#numbers.sequence(pagingMaker.startPage,pagingMaker.endPage)}"
+                            >
+                <a th:href="@{/admin/memberlist(page=${page})}" th:text="${page}"></a>
+                            </th:block>
+                            <a th:href="@{/admin/memberlist(page=${pagingMaker.nextPage})}" th:if="${pagingMaker.next == true}">&nbsp;&nbsp;NEXT</a>
+              </div>
+            <form class="mt-5" action="/admin/memberlist" method="get" id="searchForm">
+              <div class="container" style="width: 100vw;">
+                <div class="row">
+                  <div class="col">
+                    <select class="form-select" aria-label="Default select example" name="category" 
+                        th:if="${param.category!=null}">
+                        <option value="all" 
+                          th:selected="${param.category.toString().equals('all') ? true : false}">전체검색</option>
+                        <option value="no" th:selected="${param.category.toString().equals('no') ? true : false}">NO</option>
+                        <option value="userId" th:selected="${param.category.toString().equals('userId') ? true : false}">User ID</option>
+                        <option value="userRank" th:selected="${param.category.toString().equals('userRank') ? true : false}">User Rank</option>
+                        <option value="passport" th:selected="${param.category.toString().equals('passport') ? true : false}">Passport</option>
+                        <option value="userAvailable" th:selected="${param.category.toString().equals('userAvailable') ? true : false}">Available</option>
+                    </select>
+                    <select class="form-select" aria-label="Default select example" name="category"
+                    th:unless="${param.category!=null}">
+                      <option value="all" selected>전체검색</option>
+                      <option value="no">NO</option>
+                      <option value="userId">User ID</option>
+                      <option value="userRank">User Rank</option>
+                      <option value="passport">Passport</option>
+                      <option value="userAvailable">Available</option>
+                    </select>
+                  </div>
+                    <div class="col-8">
+                      <input class="form-control" type="text" placeholder="검색어를 입력하세요." aria-label="default input example" name="searchTxt" th:value="${param.searchTxt}">
+                    </div>
+                    <div class="col"><button class="btn btn-dark" id="btnSearch" 
+                      style="height: 40px;
+                      display: flex;
+                      align-items: center;
+                      margin-bottom: 4px;
+                      justify-content: center;">SEARCH</button></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

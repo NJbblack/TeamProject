@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>REQUEST VIEW</title>
+  </head>
+  <body>
+    <div
+      class="formContainer"
+      id="contents"
+      layout:fragment="contents"
+      style="z-index: 99"
+    >
+    <div class="row w-100">
+      <div class="col-5">
+        <input type="hidden" name="reqNo" value=${requestDto.reqNo}>
+        <input type="hidden" name="reqUserNo" value=${requestDto.reqUserNo}>
+          <table class="table " style="text-align: left; font-size: 14px;">
+            <colgroup>
+            <col width="25%">
+            <col>
+            </colgroup>
+            <tbody>
+              <tr class=""><th class="table-dark">Request No </th><td th:text="${requestDto.reqNo}"></td></tr>
+              <tr class=""><th class="table-dark">Reservation No </th><td th:text="${reservDto.reservNo}"></td></tr>
+              <tr class=""><th class="table-dark">Package No </th><td th:text="${pkgDto.pkgNo}"></td></tr>
+              <tr class=""><th class="table-dark">Package Name </th><td th:text="${pkgDto.pkgName}"></td></tr>
+              <tr class=""><th class="table-dark">Category </th><td th:text="${requestDto.reqCategory}"></td></tr>
+              <tr class=""><th class="table-dark">Depart </th><td>2023/04/01</td></tr>
+              <tr class=""><th class="table-dark">Return </th><td>2023/04/31</td></tr>
+              <tr class="">
+                <th class="table-dark">Contents</th>
+                <td  th:text="${requestDto.reqContents}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div id="" class="reserv mt-5">
+          <!-- <a class="btn btn-primary" id="btnReqOngoing">Ongoing Request</a> -->
+          <a class="btn btn-secondary" id="btnReqClosed">Closed Request</a>
+          <div class="resultReq">
+          </div>
+        </div>
+          <h2>User Information</h2>
+          <table class="table mt-5">
+            <colgroup>
+              <col class="th" />
+              <col class="td" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>UserId</th>
+                <td th:text="${memberDto.userId}">UserId</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <td th:text="${memberDto.userName}">userName</td>
+              </tr>
+              <tr>
+                <th>Nickname</th>
+                <td th:text="${memberDto.userNickname}">userNickname</td>
+              </tr>
+              <tr>
+                <th>Rank</th>
+                <td th:text="${memberDto.userRank}">userRank</td>
+              </tr>
+              <tr>
+                <th>Birth Date</th>
+                <td th:text="${memberDto.userBday}">userBday</td>
+              </tr>
+              <tr>
+                <th>PassPort No</th>
+                <td th:text="${memberDto.passport}">passport</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td th:text="${memberDto.email}">userName</td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td th:text="${memberDto.address}">address</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <h3>User Reservation Information</h3>
+          <a class="btn btn-warning" id="btnCurrentReserv">Current Reservation</a>
+          <a class="btn btn-dark" id="btnPastReserv">Past Reservation</a>
+          <a class="btn btn-danger" id="btnCanceledReserv">Canceled Reservation</a>
+        <div class="result">
+        </div> -->
+      </div>
+        <input type="hidden" id="loggedMemberNo" th:value="${memberDto.no}">
+      <div class="col-7">
+          <div id="sending">
+            <h2>Admin Modify Reservation</h2>
+            <form action="/admin/reservModifyProcess" method="post">
+              <input
+                type="hidden"
+                name="reservNo"
+                th:value="${reservDto.reservNo}"
+              />
+              <input
+                type="hidden"
+                name="reservReqNo"
+                th:value="${reservDto.reservReqNo}"
+              />
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Reservation No</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="reservNo"
+                  th:value="${reservDto.reservNo}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Customer No</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="customerNo"
+                  th:value="${reservDto.customerNo}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Selected Package No</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="selectedPkgNo"
+                  th:value="${reservDto.selectedPkgNo}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Reservation Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="reservName"
+                  th:value="${reservDto.reservName}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Birth Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="datepicker01"
+                  placeholder="YYYY/MM/DD"
+                  name="reservBday"
+                  th:value="${reservDto.reservBday}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Passport Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="reservPassport"
+                  th:value="${reservDto.reservPassport}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <label for="" class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="reservEmail"
+                  th:value="${reservDto.reservEmail}"
+                />
+              </div>
+              <div class="mb-2 leftAlign">
+                <p>Request & Available</p>
+                <div class="mb-2 leftAlign">
+                  <label
+                    >Request Close<input
+                      type="radio"
+                      name="reservReq"
+                      value="0"
+                      checked
+                  /></label>
+                  <label
+                    >Ongoing<input type="radio" name="reservReq" value="1"
+                  /></label>
+                </div>
+                <label
+                  >available<input
+                    type="radio"
+                    name="reservAvailable"
+                    value="1"
+                    checked
+                /></label>
+                <label
+                  >unavailable<input type="radio" name="reservAvailable" value="0"
+                /></label>
+              </div>
+              <button type="button confirm" class="btn btn-primary btn-lg">
+                Submit
+              </button>
+              <button type="button reset" class="btn btn-secondary btn-lg">
+                Reset
+              </button>
+            </form>
+      </div>
+
+        </div>
+    </div>
+        </div>
+        
+      <script>
+
+      </script>
+    </div>
+  </body>
+</html>

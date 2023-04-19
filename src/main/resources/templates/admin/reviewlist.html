@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>REVIEW LIST</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <h3>Review List</h3>
+      <table class="adminList table table-striped  table-hover mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">Review No</th>
+                    <th scope="col">Reservation No</th>
+                    <th scope="col">Package No</th>
+                    <th scope="col">Package Name</th>
+                    <th scope="col">Review Title</th>
+                    <th scope="col">Review Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="item : ${reviewList}">
+                    <td><span th:text="${item.reviewNo}"></span> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <td th:text="${item.pkgNo}">2023.03.23</td>
+                    <td th:text="${item.reservNo}">1</td>
+                    <td th:text="${item.pkgName}">2023.03.23</td>
+                    <td th:text="${item.reviewTitle}">1</td>
+                    <td th:text="${item.reviewDate}">1</td>
+                    <td><a th:href="@{/admin/reviewmodify(reviewNo=${item.reviewNo})}" class="btn btn-primary btn-sm">MODIFY</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paging text-center">
+                <a th:href="@{/admin/reviewlist(page=${pagingMaker.prevPage})}" th:if="${pagingMaker.prev == true}">PREV&nbsp;&nbsp;</a>
+                <th:block
+                th:each="page:${#numbers.sequence(pagingMaker.startPage,pagingMaker.endPage)}"
+                            >
+                <a th:href="@{/admin/reviewlist(page=${page})}" th:text="${page}"></a>
+                            </th:block>
+                            <a th:href="@{/admin/reviewlist(page=${pagingMaker.nextPage})}" th:if="${pagingMaker.next == true}">&nbsp;&nbsp;NEXT</a>
+              </div>
+
+            <form class="mt-5" action="/admin/reviewlist" method="get" id="searchForm">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=1 name="requested" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Requested
+                </label>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <select class="form-select" aria-label="Default select example" name="category" 
+                        th:if="${param.category!=null}">
+                        <option value="all" 
+                          th:selected="${param.category.toString().equals('all') ? true : false}">All</option>
+                        <option value="reviewNo" th:selected="${param.category.toString().equals('reviewNo') ? true : false}">Review No</option>
+                        <!-- <option value="pkgNo" th:selected="${param.category.toString().equals('pkgNo') ? true : false}">Package No</option> -->
+                        <option value="pkgName" th:selected="${param.category.toString().equals('pkgName') ? true : false}">Package Name</option>
+                        <option value="reviewTitle" th:selected="${param.category.toString().equals('reviewTitle') ? true : false}">Review Title</option>
+                        <!-- <option value="reviewContents" th:selected="${param.category.toString().equals('reviewContents') ? true : false}">Review Contents</option> -->
+                    </select>
+                    <select class="form-select" aria-label="Default select example" name="category"
+                    th:unless="${param.category!=null}">
+                      <option value="all" selected>전체검색</option>
+                      <option value="reviewNo">Review No</option>
+                      <!-- <option value="pkgNo">Package No</option> -->
+                      <option value="pkgName">Package Name</option>
+                      <option value="reviewTitle">Review Title</option>
+                      <!-- <option value="reviewContents">Review Contents</option> -->
+                    </select>
+                  </div>
+                    <div class="col-8"><input class="form-control" type="text" placeholder="검색어를 입력하세요." aria-label="default input example" name="searchTxt" th:value="${param.searchTxt}"></div>
+                    <div class="col"><button class="btn btn-dark" id="btnSearch" 
+                      style="height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;">SEARCH</button></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

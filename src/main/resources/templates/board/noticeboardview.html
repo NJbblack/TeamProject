@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>NOTICE BOARD VIEW</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <input
+        type="hidden"
+        name="noticeNo"
+        id="noticeNoForDelete"
+        th:value="${noticeBoardDto.noticeNo}"
+      />
+      <div id="boardSending">
+        <h2>Notice Board View</h2>
+        <table class="table">
+          <colgroup>
+            <col style="width: 25%; background-color: #eee" class="font900" />
+            <col style="width: 75%" />
+          </colgroup>
+          <tr>
+            <th>Title</th>
+            <td th:text="${noticeBoardDto.noticeTitle}"></td>
+          </tr>
+          <tr>
+            <th>Writer</th>
+            <td th:text="${memberDto.userNickname}"></td>
+          </tr>
+
+          <tr>
+            <th>Date</th>
+            <td th:text="${noticeBoardDto.noticeRegDate}"></td>
+          </tr>
+
+          <tr class="boardContents">
+            <th>Contents</th>
+            <td th:text="${noticeBoardDto.noticeContents}"></td>
+          </tr>
+        </table>
+
+        <div class="joinBtn">
+          <td>
+            <a
+              href=""
+              class="btn btn-primary sessionCheck"
+              th:href="@{/board/noticeboardmodify(no=${noticeBoardDto.noticeNo})}"
+              >Modify</a
+            >
+          </td>
+          <td>
+            <a
+              href=""
+              id="btnNoticeDeleteBoardAjax"
+              class="btn btn-danger"
+              th:href="@{/board/noticeBoardDeleteProcess(no=${noticeBoardDto.noticeNo})}"
+              >Delete</a
+            >
+          </td>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

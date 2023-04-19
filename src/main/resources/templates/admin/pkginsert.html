@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN PACKAGE FORM</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>ADD NEW PACKAGE</h2>
+        <form
+          action="/admin/pkgInsertProcess"
+          method="post"
+          th:object="${pkgDto}"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="pkgName"
+              name="pkgName"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Contents</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="7"
+              name="pkgContents"
+            ></textarea>
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Region</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              name="pkgRegion"
+            >
+              <option selected>Select Region</option>
+              <option value="KOREA">South Korea</option>
+              <option value="JAPAN">Japan</option>
+              <option value="CHINA">China</option>
+            </select>
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Departure Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker01"
+              placeholder="YYYY/MM/DD"
+              name="pkgDepart"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Return Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker02"
+              placeholder="YYYY/MM/DD"
+              name="pkgReturn"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Budget</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Package Budget"
+              name="pkgBudget"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <p>Packagle Available</p>
+            <label
+              >available<input
+                type="radio"
+                name="pkgAvailable"
+                value="1"
+                checked
+            /></label>
+            <label
+              >unavailable<input type="radio" name="pkgAvailable" value="0"
+            /></label>
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Main Image</label>
+            <input
+              type="file"
+              class="form-control"
+              placeholder="Package Main Image"
+              name="pkgMainOrigin"
+            />
+          </div>
+          <div class="joinBtn">
+            <button type="button confirm" class="btn btn-primary btn-lg">
+              Submit
+            </button>
+            <button type="button reset" class="btn btn-secondary btn-lg">
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <script></script>
+    </div>
+  </body>
+</html>

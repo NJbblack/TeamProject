@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bb.voyage.dao.PkgDao">
+<!--===========================================-->
+<!--Member용 매퍼 -->
+  <select id="pkgKoreaList" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGREGION='KOREA' AND PKGDEPART='2023/05/01'
+  </select>
+
+  <select id="pkgJapanList" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGREGION='JAPAN' AND PKGDEPART='2023/05/01'
+  </select>
+
+  <select id="pkgChinaList" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGREGION='CHINA' AND PKGDEPART='2023/05/01'
+  </select>
+
+  <select id="getDiscountedPkgList" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGDEPART='2023/05/01' AND PKGBUDGET <![CDATA[<=]]> 1000
+  </select>
+
+  <select id="getRecommendedPkgList" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGDEPART='2023/05/01' AND PKGBUDGET <![CDATA[>]]> 1000
+  </select>
+
+  <update id="pkgSetRating" parameterType="PkgDto">
+    UPDATE PACKAGE SET RATEDGS =#{ratedGS}, RATEDFA =#{ratedFA}, RATEDCE =#{ratedCE}, RATEDCOUNT =#{ratedCount}, RATEDAVG=#{ratedAVG}, RATEDAVGTXT=#{ratedAVGTxt}, RATEDSTAR=#{ratedStar} WHERE PKGNAME =#{pkgName}
+  </update>
+
+  <select id="getReview" parameterType="PkgDto" resultType="ReviewDto">
+    SELECT * FROM REVIEW WHERE PKGNAME=#{pkgName} ORDER BY REVIEWNO DESC
+  </select>
+
+  <select id="getSelectedReview" parameterType="Integer" resultType="ReviewDto">
+    SELECT * FROM REVIEW WHERE REVIEWNO =#{reviewNo}
+  </select>
+
+  <select id="getTempRecoList" parameterType="PkgDto" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE RATEDGS <![CDATA[>]]> #{ratedGS} AND RATEDFA <![CDATA[>]]> #{ratedFA} AND RATEDCE <![CDATA[>]]> #{ratedCE} AND RATEDAVG <![CDATA[>]]> #{ratedAVG} AND PKGNO LIKE '%' || 5 AND ROWNUM <![CDATA[<]]> 9
+  </select>
+
+  <select id="getRecommendedList" parameterType="HashMap" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGNO = #{pkgNo01} OR PKGNO = #{pkgNo02} OR PKGNO = #{pkgNo03} OR PKGNO = #{pkgNo04} 
+  </select>
+</mapper>

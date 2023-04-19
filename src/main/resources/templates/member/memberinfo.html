@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>LOGGED USER INFO</title>
+  </head>
+  <body>
+    <div
+      class="formContainer"
+      id="contents"
+      layout:fragment="contents"
+      style="z-index: 99"
+    >
+      <div class="row">
+        <div class="col-2">
+          <div>
+            <a href="/member/memberinfo" style="color:rgb(5,99,193)"><h4>User <br>Information</h4></a>
+          </div>
+          <hr />
+          <div>
+            <a href="/member/memberreservation"
+              ><h5 style="font-weight: normal">My Reservation</h5></a
+            >
+          </div>
+          <hr />
+          <div>
+            <a href="/member/memberrequest"
+              ><h5 style="font-weight: normal">My Request</h5></a
+            >
+          </div>
+        </div>
+        <div class="col ms-5">
+          <h2>User Information</h2>
+          <table class="table mt-5">
+            <colgroup>
+              <col class="th" />
+              <col class="td" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th><strong>User ID</strong></th>
+                <td th:text="${session.loggedMember.userId}">UserId</td>
+              </tr>
+              <tr>
+                <th><strong>Name</strong></th>
+                <td th:text="${session.loggedMember.userName}">userName</td>
+              </tr>
+              <tr>
+                <th><strong>Nickname</strong></th>
+                <td th:text="${session.loggedMember.userNickname}">
+                  userNickname
+                </td>
+              </tr>
+              <tr>
+                <th><strong>Rank</strong></th>
+                <td th:text="${session.loggedMember.userRank}">userRank</td>
+              </tr>
+              <tr>
+                <th><strong>Birth Date</strong></th>
+                <td th:text="${session.loggedMember.userBday}">userBday</td>
+              </tr>
+              <tr>
+                <th><strong>PassPort No</strong></th>
+                <td th:text="${session.loggedMember.passport}">passport</td>
+              </tr>
+              <tr>
+                <th><strong>Email</strong></th>
+                <td th:text="${session.loggedMember.email}">userName</td>
+              </tr>
+              <tr>
+                <th><strong>Address</strong></th>
+                <td th:text="${session.loggedMember.address}">address</td>
+              </tr>
+              <tr>
+                <th><strong>User Menu</strong></th>
+                <td colspan="2">
+                  <a href="/"><button class="btn btn-success">Home</button></a>
+                  <a href="/member/memberlogout"
+                    ><button class="btn btn-secondary">logout</button></a
+                  >
+                  <a
+                    href="/member/membermodify"
+                    th:href="@{/member/membermodify(no=${session.loggedMember.no})}"
+                    ><button class="btn btn-primary">Modify</button></a
+                  >
+                  <a href="/member/delete"
+                    ><button class="btn btn-danger" id="btnDeleteAjax">
+                      Delete
+                    </button>
+                  </a>
+                </td>
+              </tr>
+              <tr th:if="${session.loggedMember.userRank >= 9}">
+                <th><strong>Admin Menu</strong></th>
+                <td colspan="2">
+                  <a href="/admin/pkglist"
+                    ><button class="btn btn-outline-primary">
+                      Package List
+                    </button></a
+                  >
+                  <a href="/admin/reservlist"
+                    ><button class="btn btn-outline-secondary">
+                      Reservation List
+                    </button></a
+                  >
+                  <a href="/admin/memberlist"
+                    ><button class="btn btn-outline-success">
+                      Member List
+                    </button></a
+                  >
+                  <a href="/admin/reviewlist"
+                    ><button class="btn btn-outline-dark">
+                      Review List
+                    </button></a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input
+            type="hidden"
+            id="loggedMemberNo"
+            th:value="${session.loggedMember.no}"
+          />
+      </div>
+      <div id="alarmMsg" class="adminAlarm" style="display:block;">
+      </div>
+      <script>
+
+      //////////////////////화면 알림창 관련 Json 받아오기
+      getAlert();
+      function getAlert() {
+        const sendData = {
+          userNo: $("#loggedMemberNo").val(),
+          };
+          $.ajax({
+            url: "/member/memberAlert",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+              if(response.msg){
+              $("#alarmMsg").attr("style","opacity:1 !important");
+              const tempHtml = `
+              <div>
+                <div style="text-align:center;"><span>${response.msg}</span></div>
+                <div class="row text-center mt-2">
+                  <div class="col">
+                    <button id="btnAlarmConfirm" class="btn btn-outline-danger" style="padding:5px 10px; font-size:20px;">
+                      Never show this again
+                    </button>
+                    <button id="btnAlarmClose" class="btn btn-outline-dark" style="padding:5px 10px; font-size:20px;">
+                      Close
+                    </button>
+                </div>
+                </div>
+              </div>
+              `;
+              $("#alarmMsg").html(tempHtml);}
+              else{
+
+              }
+            },
+          });
+        }
+
+        //////////////////////알림 메시지 띄우기
+        $("#alarmMsg").on("click","#btnAlarmClose",function () {
+          $("#alarmMsg").css("display","none");
+        })
+
+        $("#alarmMsg").on("click","#btnAlarmConfirm",function () {
+          $("#alarmMsg").css("display","none");
+          const sendData = {
+            userNo: $("#loggedMemberNo").val(),
+          };
+          $.ajax({
+            url: "/member/memberAlertClear",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response)
+            }
+        })})
+      </script>
+    </div>
+  </body>
+</html>

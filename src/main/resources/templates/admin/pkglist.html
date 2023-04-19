@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>PACKAGE LIST</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <h3>Package List</h3>
+      <table class="adminList table table-striped  table-hover mt-5">
+        <colgroup>
+        <col>
+        <col>
+        </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">Package No</th>
+                    <th width="12%" scope="col">Package Name</th>
+                    <th scope="col">Package Region</th>
+                    <th scope="col">Departure Date</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Package Budget</th>
+                    <th scope="col">Package Available</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="item : ${pkgList}">
+                    <td scope="row" th:text="${item.pkgNo}">1</td>
+                    <td width="12%" th:text="${item.pkgName}">2023.03.23</td>
+                    <td th:text="${item.pkgRegion}">2023.03.23</td>
+                    <td th:text="${item.pkgDepart}">2023.03.23</td>
+                    <td th:text="${item.pkgReturn}">2023.03.23</td>
+                    <td th:text="${item.pkgBudget}">1</td>
+                    <td th:text="${item.pkgAvailable}">1</td>
+                    <td><a th:href="@{/admin/pkgmodify(pkgNo=${item.pkgNo})}" class="btn btn-primary btn-sm">Modify</a></td>
+                    <td><a th:href="@{/admin/pkgmodifyimg(pkgNo=${item.pkgNo})}" class="btn btn-warning btn-sm">AlterImg</a></td>
+                    <td><a th:href="@{/admin/pkgsubimg(pkgNo=${item.pkgNo})}" class="btn btn-dark btn-sm">AddSubImg</a></td>
+                    <td><a th:href="@{/admin/pkgmodifysubimg(pkgNo=${item.pkgNo})}" class="btn btn-light btn-sm">AlterSubImg</a></td>
+                    <td><a th:href="@{/admin/pkgviewimg(pkgNo=${item.pkgNo})}" class="btn btn-success btn-sm">ViewImg</a></td>
+                    <td><a th:href="@{/admin/pkgDeleteProcess(pkgNo=${item.pkgNo})}" class="btn btn-danger btn-sm">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paging text-center">
+                <a th:href="@{/admin/pkglist(page=${pagingMaker.prevPage})}" th:if="${pagingMaker.prev == true}">PREV&nbsp;&nbsp;</a>
+                <th:block
+                th:each="page:${#numbers.sequence(pagingMaker.startPage,pagingMaker.endPage)}"
+                            >
+                <a th:href="@{/admin/pkglist(page=${page})}" th:text="${page}"></a>
+                            </th:block>
+                            <a th:href="@{/admin/pkglist(page=${pagingMaker.nextPage})}" th:if="${pagingMaker.next == true}">&nbsp;&nbsp;NEXT</a>
+              </div>
+              <a href="/admin/pkginsert" class="btn btn-secondary btn-lg">Add New Package</a>
+
+              <form class="mt-5" action="/admin/pkglist" method="get" id="searchForm">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <select class="form-select" aria-label="Default select example" name="category" 
+                          th:if="${param.category!=null}">
+                          <option value="all" 
+                            th:selected="${param.category.toString().equals('all') ? true : false}">전체검색</option>
+                          <option value="pkgNo" th:selected="${param.category.toString().equals('pkgNo') ? true : false}">Package No</option>
+                          <option value="pkgName" th:selected="${param.category.toString().equals('pkgName') ? true : false}">Package Name</option>
+                          <option value="pkgContents" th:selected="${param.category.toString().equals('pkgContents') ? true : false}">Package Contents</option>
+                          <option value="pkgRegion" th:selected="${param.category.toString().equals('pkgRegion') ? true : false}">Package Region</option>
+                          <option value="pkgAvailable" th:selected="${param.category.toString().equals('pkgAvailable') ? true : false}">Available</option>
+                      </select>
+                      <select class="form-select" aria-label="Default select example" name="category"
+                      th:unless="${param.category!=null}">
+                        <option value="all" selected>전체검색</option>
+                        <option value="pkgNo">Package No</option>
+                        <option value="pkgName">Package Name</option>
+                        <option value="pkgContents">Package Contents</option>
+                        <option value="pkgRegion">Package Region</option>
+                        <option value="pkgAvailable">Available</option>
+                      </select>
+                    </div>
+                      <div class="col-8"><input class="form-control" type="text" placeholder="검색어를 입력하세요." aria-label="default input example" name="searchTxt" th:value="${param.searchTxt}"></div>
+                      <div class="col"><button class="btn btn-dark" id="btnSearch" 
+                        style="height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;">SEARCH</button></div>
+                  </div>
+                </div>
+              </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+                xmlns:th="http://www.thymeleaf.org" 
+                xmlns="http://www.thymeleaf.org"
+                layout:decorate="~{/layout/layout.html}">
+<head>
+  <title>Stellar Tour</title>
+</head>
+<body>
+  <div layout:fragment="contents">
+    <main>
+      <section class="visual" data-aos="fade">
+        <h2 class="hidden">main video</h2>
+
+        <div class="wrap"><video
+          src="/videos/drive.mp4"
+          autoplay
+          muted
+          loop
+          class="visual_img"
+        ></video></div>
+
+        <div class="visaul_txt_wrap">
+          <div class="visual_txt">
+            <h2 data-aos="fade-down" class="green" data-aos-delay="600">
+              Stellar <br />
+              Tour
+            </h2>
+            <p data-aos="fade-right" data-aos-delay="800">Most Fun</p>
+            <p data-aos="fade-left" data-aos-delay="1000">Most Reasonable</p>
+          </div>
+        </div>
+      </section>
+      <!-- visual end-->
+
+      <section class="promotion container1">
+        <a class="promo-a" href="/country/korea" data-aos="fade-right" data-aos-delay="500">
+          <h2>South Korea</h2>
+          <div class="promotion-banner">
+            <img src="/images/korea/korea (2).jpg" alt="korea" />
+          </div>
+          <p>
+            South Korea boasts abundant tourist attractions. Tourists can experience distinctive harmony 
+            between historical cultural heritage and modern culture. With these preserved local identities,
+             tourists can also explore and enjoy local cultures, natural environments, and unique food.
+          </p>
+        </a>
+        <a class="promo-a" href="/country/japan" data-aos="fade" data-aos-delay="500">
+          <h2>Japan</h2>
+          <div class="promotion-banner">
+            <img src="/images/japan/japan (1).jpg" alt="japan" />
+          </div>
+          <p>
+            Japan is one of the oldest civilizations and has a beautiful and diverse history. 
+            The stunning, diverse scenery with mountains and breathtaking views, 
+            which are much appreciated by the Japanese, offers so many different experiences 
+            that attract tourists from all corners of the world.
+          </p>
+        </a>
+        <a class="promo-a" href="country/china" data-aos="fade-left" data-aos-delay="500">
+          <h2>China</h2>
+          <div class="promotion-banner">
+            <img src="/images/china/china (11).jpg" alt="china" />
+          </div>
+          <p>
+            China's awesome and monumental ancient treasures exceed all other countries for size and number. 
+             The country with the history numbering more than one thousand years, 
+             has a great many of monuments belonging to different dynasties ruling as far back as BC. 
+             The architecture and cultural features within the country differ considerably depending on the region.
+          </p>
+        </a>
+      </section>
+      <!-- promotion end -->
+
+      <!-- map start -->
+      <!-- <section class="mapLink container1">
+        <div class="pointer" >
+          <a href="#" class="city_link city_01 capital">Seoul</a>
+          <a href="#" class="city_link city_02 capital">Tokyo</a>
+          <a href="#" class="city_link city_03 capital">Beijing</a>
+          <a href="#" class="city_link city_04">Busan</a>
+          <a href="#" class="city_link city_05">Osaka</a>
+          <a href="#" class="city_link city_06">Daejeon</a>
+        </div>
+        <div class="wrap"><img src="/images/higashi_map.png" alt="" usemap = "#mapname"></div>
+      </section> -->
+      <!-- map end -->
+
+      <section class="airplane container1">
+        <div data-aos="fade-right" class="airplane_title">
+          <h2 data-aos="fade-right" data-aos-delay="400">Airplane</h2>
+          <p>Offered with the cheapest price</p>
+        </div>
+        <div data-aos="fade-up-right" class="airplane_img">
+          <img src="/images/plane.png" alt="" />
+        </div>
+        <div class="airplane_btn" data-aos="fade-left">
+          <a class="btn" href="/transportation/airplane">Move to the page</a>
+        </div>
+      </section>
+      <!-- airplane 1 end -->
+
+      <section class="bus container1">
+        <div class="bus_btn" data-aos="fade-right">
+          <a class="btn" href="/transportation/bus">Move to the page</a>
+        </div>
+        <div data-aos="fade-up" class="bus_img">
+          <img src="/images/bus.png" alt="" />
+        </div>
+        <div data-aos="fade-left" class="bus_title">
+          <h2 data-aos="fade-left" data-aos-delay="400">Bus</h2>
+          <p>Offered with the cheapest price</p>
+        </div>
+      </section>
+      <!-- bus end -->
+
+       <section class="airplane container1">
+        <div data-aos="fade-right" class="airplane_title">
+          <h2 data-aos="fade-right" data-aos-delay="400">Train</h2>
+          <p>Offered with the cheapest price</p>
+        </div>
+        <div data-aos="fade-up-right" class="airplane_img">
+          <img src="/images/train.jpg" alt="" />
+        </div>
+        <div class="airplane_btn" data-aos="fade-left">
+          <a class="btn" href="/transportation/train">Move to the page</a>
+        </div>
+      </section>
+      <!-- train 1 end -->
+
+          <section class="reco" style="width: 500px; margin-left: 310px;">
+            <h2 data-aos="fade-right" data-aos-delay="600">
+              Travels only recommended for you
+            </h2>
+            <div id="pkgContainer"  style="display:flex; width: 85vw; flex-wrap:wrap; margin-left: -5.5vw;">
+              <div class="" th:each="item : ${recommededPkgList}" style="padding:10px;" data-aos="fade-right" data-aos-duration="600">
+                <a href="" th:href="@{/package/pkgdetailview(pkgNo=${item.pkgNo})}" class="reco_wrap" disabled>
+                <div class="reco_img">
+                  <span class="material-symbols-outlined forward"> forward </span>
+                    <img th:src="@{|/upload/${item.pkgMainRenamedPath}|}" style="width:17vw; height: 17vh; border-radius: 5px;">
+                    <div class="reco_desc text-center">
+                      <span th:text="${item.pkgName}" style="font-weight: bold; font-size: 22px;">Package</span> 
+                      <span style="color:#ccac00; font-size: 22px;" th:text="${item.ratedAVGTxt}"></span> <br>
+                      <span th:text="${item.pkgRegion}">#Korea #Asia</span>
+                      <p th:text="${item.pkgBudget}">8,000$~</p>
+                    </div>
+                </div>
+                </a>
+              </div>
+            </div>
+            </section>
+      </section>
+      <!-- reco end -->
+
+      <section class="discount">
+
+        <div class="discount-title">
+          <a href="/package/pkgkorea" class="btn discount-btn" data-aos="fade-down" data-aos-delay="500">See More Packages</a>
+          <div>
+            <h2 data-aos="fade-right" data-aos-delay="300">Last Discount!</h2>
+            <h4 data-aos="fade" data-aos-delay="600"><strong>This is the last chance!</strong></h4>
+          </div>
+        </div>
+        <div class="container">
+          <div class="discount-banner">
+            <ul class="discount-banner-list swiper-wrapper" id="pkgSlide">
+              <li id="" class="swiper-slide" th:each="item : ${discountedPkgList}" data-aos="zoom-in" data-aos-duration="600" >
+                <a href="" th:href="@{/package/pkgdetailview(pkgNo=${item.pkgNo})}">
+                  <div class="discount-img">
+                    <img src="/images/korea/korea (5).jpg"
+                    th:src="@{|/upload/${item.pkgMainRenamedPath}|}"
+                    alt="" />
+                    <span class="sticker">HOT!</span>
+                  </div>
+                  <div class="discount-txt">
+                    <h3>
+                      <span th:text="${item.pkgName}">
+                        Last Deal!
+                      </span>
+                      <th:block th:each="num: ${#numbers.sequence(1,item.ratedStar)}">
+                        <span class="star" style="color:#ccac00;">★</span>
+                      </th:block>
+                    </h3>
+                    <p class="date" th:text="${item.pkgBudget}">$2,000~</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </section>
+      <!-- discount end -->
+    </main>
+    <script inline:javascript>
+
+    </script>
+  </div>
+</body>
+</html>

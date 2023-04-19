@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN PACKAGE MODIFY</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Admin Modify Package</h2>
+        <form
+          action="/admin/pkgModifyProcess"
+          method="post"
+          th:object="${pkgDto}"
+          enctype="multipart/form-data"
+        >
+          <input type="hidden" name="pkgNo" th:value="${pkgDto.pkgNo}" />
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="pkgName"
+              name="pkgName"
+              th:value="${pkgDto.pkgName}"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Contents</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="7"
+              name="pkgContents"
+              th:text="${pkgDto.pkgContents}"
+            >
+            </textarea>
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Departure Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker01"
+              placeholder="YYYY/MM/DD"
+              name="pkgDepart"
+              th:value="${pkgDto.pkgDepart}"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Return Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker02"
+              placeholder="YYYY/MM/DD"
+              name="pkgReturn"
+              th:value="${pkgDto.pkgReturn}"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Budget</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Package Budget"
+              name="pkgBudget"
+              th:value="${pkgDto.pkgBudget}"
+            />
+          </div>
+
+          <div class="input-group">
+            <span class="input-group-text">ratedGS</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratedGS"
+              th:value="${pkgDto.ratedGS}"
+            />
+            <span class="input-group-text">ratedFA</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratedFA"
+              th:value="${pkgDto.ratedFA}"
+            />
+            <span class="input-group-text">ratedCE</span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ratedCE"
+              name="ratedCE"
+              th:value="${pkgDto.ratedCE}"
+            />
+            <span class="input-group-text">ratedCount</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratedCount"
+              th:value="${pkgDto.ratedCount}"
+            />
+            <span class="input-group-text">ratedAVG</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratedAVG"
+              th:value="${pkgDto.ratedAVG}"
+            />
+            <span class="input-group-text">ratedAVGTxt</span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ratedAVGTxt"
+              name="ratedAVGTxt"
+              th:value="${pkgDto.ratedAVGTxt}"
+            />
+            <span class="input-group-text">ratedStar</span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ratedStar"
+              name="ratedStar"
+              th:value="${pkgDto.ratedStar}"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <p>Packagle Available</p>
+            <label
+              >available<input
+                type="radio"
+                name="pkgAvailable"
+                value="1"
+                checked
+            /></label>
+            <label
+              >unavailable<input type="radio" name="pkgAvailable" value="0"
+            /></label>
+          </div>
+          <div class="joinBtn">
+            <button type="button confirm" class="btn btn-primary btn-lg">
+              Submit
+            </button>
+            <button type="button reset" class="btn btn-secondary btn-lg">
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <script></script>
+    </div>
+  </body>
+</html>

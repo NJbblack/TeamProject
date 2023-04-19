@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN RESERVATION MODIFY</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Admin Modify Reservation</h2>
+        <form action="/admin/reservModifyProcess" method="post">
+          <input
+            type="hidden"
+            name="reservNo"
+            th:value="${reservDto.reservNo}"
+          />
+          <input
+            type="hidden"
+            name="reservReqNo"
+            th:value="${reservDto.reservReqNo}"
+          />
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Reservation No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="reservNo"
+              th:value="${reservDto.reservNo}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Customer No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="customerNo"
+              th:value="${reservDto.customerNo}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Selected Package No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="selectedPkgNo"
+              th:value="${reservDto.selectedPkgNo}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Reservation Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="reservName"
+              th:value="${reservDto.reservName}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Birth Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker01"
+              placeholder="YYYY/MM/DD"
+              name="reservBday"
+              th:value="${reservDto.reservBday}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Passport Number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="reservPassport"
+              th:value="${reservDto.reservPassport}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="reservEmail"
+              th:value="${reservDto.reservEmail}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <p>Request & Available</p>
+            <div class="mb-2 leftAlign">
+              <label
+                >Request Close<input
+                  type="radio"
+                  name="reservReq"
+                  value="0"
+                  checked
+              /></label>
+              <label
+                >Ongoing<input type="radio" name="reservReq" value="1"
+              /></label>
+            </div>
+            <label
+              >available<input
+                type="radio"
+                name="reservAvailable"
+                value="1"
+                checked
+            /></label>
+            <label
+              >unavailable<input type="radio" name="reservAvailable" value="0"
+            /></label>
+          </div>
+          <button type="button confirm" class="btn btn-primary btn-lg">
+            Submit
+          </button>
+          <button type="button reset" class="btn btn-secondary btn-lg">
+            Reset
+          </button>
+        </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

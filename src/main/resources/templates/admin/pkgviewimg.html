@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN VIEW PACKAGE IMAGES</title>
+  </head>
+  <body>
+    <div
+      class="adminContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Admin View Package Images</h2>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-5">Package Original Image</label></div>
+                
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgDto.pkgMainRenamedPath}|}"
+                    alt="${pkgDto.pkgMainRenamedPath}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgDto.pkgMainRenamedPath}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image01</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg01}|}"
+                    alt="${pkgSubImgDto.subImg01}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg01}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image02</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg02}|}"
+                    alt="${pkgSubImgDto.subImg02}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg02}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image03</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg03}|}"
+                    alt="${pkgSubImgDto.subImg03}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg03}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image04</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg04}|}"
+                    alt="${pkgSubImgDto.subImg04}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg04}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image05</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg05}|}"
+                    alt="${pkgSubImgDto.subImg05}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg05}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image06</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg06}|}"
+                    alt="${pkgSubImgDto.subImg06}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg06}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image07</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg07}|}"
+                    alt="${pkgSubImgDto.subImg07}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg07}" class="mt-3"></span></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="mb-2 leftAlign">
+                <div class="col"><label for="" class="form-label mt-3">Package Sub Image08</label></div>
+                <div class="col">
+                  <img
+                    th:src="@{|/upload/${pkgSubImgDto.subImg08}|}"
+                    alt="${pkgSubImgDto.subImg08}"
+                  />
+                </div>
+                <div class="col"><span th:text="${pkgSubImgDto.subImg08}" class="mt-3"></span></div>
+              </div>
+          </div>
+          </div>
+          </div>
+        </form>
+      </div>
+
+      <script></script>
+    </div>
+  </body>
+</html>

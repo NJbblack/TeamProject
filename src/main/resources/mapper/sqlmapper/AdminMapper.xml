@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bb.voyage.dao.AdminDao">
+<!--===========================================-->
+<!-- 관리자용 Package 관리 매퍼 -->
+  <select id="getAllPkg" resultType="PkgDto" parameterType="HashMap">
+    SELECT * FROM 
+      (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM PACKAGE) B) 
+      WHERE NUM BETWEEN (SELECT COUNT(*) FROM PACKAGE)-(#{page}*10) 
+      AND (SELECT COUNT(*) FROM PACKAGE)-((#{page}-1)*10) 
+      <if test="searchTxt != null and category != null">
+        <choose>
+          <when test="category=='all'">
+          AND 
+          (PKGNO LIKE '%' || #{searchTxt} || '%') OR
+          (PKGNAME LIKE '%' || #{searchTxt} || '%') OR
+          (PKGCONTENTS LIKE '%' || #{searchTxt} || '%') OR
+          (PKGREGION LIKE '%' || #{searchTxt} || '%') OR
+          (PKGAVAILABLE LIKE '%' || #{searchTxt} || '%')
+          </when>
+          <when test="category=='pkgNo'">
+          AND 
+          (PKGNO LIKE '%' || #{searchTxt} || '%')
+          </when>
+          <when test="category=='pkgName'">
+          AND 
+          (PKGNAME LIKE '%' || #{searchTxt} || '%')
+          </when>
+          <when test="category=='pkgContents'">
+          AND 
+          (PKGCONTENTS LIKE '%' || #{searchTxt} || '%')
+          </when>
+          <when test="category=='pkgRegion'">
+          AND 
+          (PKGREGION LIKE '%' || #{searchTxt} || '%')
+          </when>
+          <when test="category=='pkgAvailable'">
+          AND 
+          (PKGAVAILABLE LIKE '%' || #{searchTxt} || '%')
+          </when>
+        </choose>
+      </if>      
+      ORDER BY PKGNO DESC
+  </select>
+
+
+
+  <select id="getOnePkg" resultType="PkgDto" parameterType="Integer">
+    SELECT * FROM PACKAGE WHERE PKGNO = #{pkgNo}    
+  </select>
+
+  <select id="getOnePkgImg" resultType="PkgSubImgDto" parameterType="Integer">
+    SELECT * FROM PACKAGESUBIMG WHERE PKGNO = #{pkgNo}
+  </select>
+
+  <select id="totalCountPkg" resultType="Integer">
+    SELECT COUNT(*) FROM PACKAGE
+  </select>
+
+  <insert id="pkgInsertProcess" parameterType="PkgDto">
+    INSERT INTO PACKAGE VALUES (
+      PACKAGE_SEQ.NEXTVAL,
+      #{pkgName},
+      #{pkgContents},
+      #{pkgRegion},
+      #{pkgDepart},
+      #{pkgReturn},
+      #{pkgBudget},
+      #{pkgAvailable},
+      #{pkgMainOriginPath},
+      #{pkgMainRenamedPath},
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    )
+  </insert>
+  
+  <insert id="pkgAddSubImgProcess" parameterType="PkgSubImgDto">
+    INSERT INTO PACKAGESUBIMG VALUES (
+      PACKAGESUBIMG_SEQ.NEXTVAL,
+      #{pkgNo},
+      #{subImg01},
+      #{subImg02},
+      #{subImg03},
+      #{subImg04},
+      #{subImg05},
+      #{subImg06},
+      #{subImg07},
+      #{subImg08}
+    )
+  </insert>
+
+  <update id="UpdateSubImgNoToPkg" parameterType="PkgSubImgDto">
+    UPDATE PACKAGE SET PKGSUBIMGNO = (SELECT PKGSUBNO FROM PACKAGESUBIMG WHERE PKGNO = #{pkgNo}) WHERE PKGNO = #{pkgNo}
+  </update>
+
+  <select id="getOnePkgSubImg" parameterType="Integer" resultType="PkgSubImgDto">
+    SELECT * FROM PACKAGESUBIMG WHERE PKGSUBNO = (SELECT PKGSUBIMGNO FROM PACKAGE WHERE PKGNO = #{pkgNo})
+  </select>
+
+  <update id="pkgModifyProcess" parameterType="PkgDto">
+    UPDATE PACKAGE SET PKGNAME=#{pkgName}, PKGCONTENTS=#{pkgContents}, PKGDEPART=#{pkgDepart}, PKGRETURN=#{pkgReturn}, PKGBUDGET=#{pkgBudget}, PKGAVAILABLE=#{pkgAvailable} WHERE PKGNO=#{pkgNo}
+  </update>
+
+  <update id="pkgModifyReservProcess" parameterType="PkgDto">
+    UPDATE RESERVATION SET RESERVDEPART =#{pkgDepart}, RESERVRETURN =#{pkgReturn} WHERE RESERVNO = (SELECT RESERVNO FROM RESERVATION WHERE SELECTEDPKGNO = #{pkgNo})
+  </update>
+
+  <update id="pkgModifyImgProcess" parameterType="PkgDto">
+    UPDATE PACKAGE SET PKGNAME=#{pkgName}, PKGREGION=#{pkgRegion}, PKGMAINORIGINPATH=#{pkgMainOriginPath}, PKGMAINRENAMEDPATH=#{pkgMainRenamedPath} WHERE PKGNO=#{pkgNo}
+  </update>
+
+  <update id="pkgAlterSubImgProcess" parameterType="PkgSubImgDto">
+    UPDATE PACKAGESUBIMG SET SUBIMG01=#{subImg01},SUBIMG02=#{subImg02},SUBIMG03=#{subImg03},SUBIMG04=#{subImg04},SUBIMG05=#{subImg05},SUBIMG06=#{subImg06},SUBIMG07=#{subImg07}, SUBIMG08=#{subImg08} WHERE PKGNO=#{pkgNo}
+  </update>
+
+  <update id="pkgDeleteProcess" parameterType="Integer">
+    UPDATE PACKAGE SET PKGAVAILABLE=0 WHERE PKGNO=#{pkgNo}
+  </update>
+
+<!--===========================================-->
+<!-- 관리자용 Reservation 관리 매퍼 -->
+  <select id="getAllReserv" resultType="ReservDto" parameterType="HashMap">
+    SELECT * FROM (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM RESERVATION) B) 
+    WHERE NUM BETWEEN (SELECT COUNT(*) FROM RESERVATION)-(#{page}*10) 
+    AND (SELECT COUNT(*) FROM RESERVATION)-((#{page}-1)*10) 
+    <if test="searchTxt != null and category != null and requested != null">
+      AND RESERVREQ = #{requested}
+      <choose>
+        <when test="category=='all'">
+        AND 
+        (RESERVNO LIKE '%' || #{searchTxt} || '%') OR
+        (CUSTOMERNO LIKE '%' || #{searchTxt} || '%') OR
+        (RESERVNAME LIKE '%' || #{searchTxt} || '%') OR
+        (SELECTEDPKGNO LIKE '%' || #{searchTxt} || '%') OR
+        (RESERVPKG LIKE '%' || #{searchTxt} || '%') OR
+        (RESERVAVAILABLE LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='reservNo'">
+        AND 
+        (RESERVNO LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='customerNo'">
+        AND 
+        (CUSTOMERNO LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='reservName'">
+        AND 
+        (RESERVNAME LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='selectedPkgNo'">
+        AND 
+        (SELECTEDPKGNO LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='reservPkg'">
+        AND 
+        (RESERVPKG LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='reservAvailable'">
+        AND 
+        (RESERVAVAILABLE LIKE '%' || #{searchTxt} || '%')
+        </when>
+      </choose>
+    </if>          
+    ORDER BY RESERVNO DESC
+  </select>
+
+  <select id="getOneReserv" resultType="ReservDto" parameterType="Integer">
+    SELECT * FROM RESERVATION WHERE RESERVNO = #{reservNo}    
+  </select>
+
+  <select id="totalCountReserv" resultType="Integer">
+    SELECT COUNT(*) FROM RESERVATION
+  </select>
+
+  <update id="reservModifyProcess" parameterType="ReservDto">
+    UPDATE RESERVATION SET CUSTOMERNO = #{customerNo}, SELECTEDPKGNO = #{selectedPkgNo}, RESERVNAME = #{reservName}, RESERVBDAY = #{reservBday}, RESERVPASSPORT = #{reservPassport}, RESERVEMAIL = #{reservEmail}, RESERVPKG = #{reservPkg}, RESERVIMG = #{reservImg}, RESERVDEPART = #{reservDepart}, RESERVRETURN = #{reservReturn}, RESERVAVAILABLE = #{reservAvailable}, RESERVREQ = #{reservReq} WHERE RESERVNO=#{reservNo}
+  </update>
+
+  <update id="updateReq" parameterType="ReservDto">
+    UPDATE REQUEST SET REQNOW = #{reservReq} WHERE REQNO = #{reservReqNo}
+  </update>
+  
+  <update id="reservDeleteProcess" parameterType="Integer">
+    UPDATE RESERVATION SET RESERVAVAILABLE=0 WHERE RESERVNO=#{reservNo}
+  </update>
+
+<!--===========================================-->
+<!-- 관리자용 Member 관리 매퍼 -->
+  <select id="getAllMember" resultType="MemberDto" parameterType="HashMap">
+    SELECT * FROM (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM MEMBER) B) 
+    WHERE NUM BETWEEN (SELECT COUNT(*) FROM MEMBER)-(#{page}*10) 
+    AND (SELECT COUNT(*) FROM MEMBER)-((#{page}-1)*10) 
+  <if test="searchTxt != null and category != null">
+    <choose>
+      <when test="category=='all'">
+      AND 
+      (NO LIKE '%' || #{searchTxt} || '%') OR
+      (USERID LIKE '%' || #{searchTxt} || '%') OR
+      (USERRANK LIKE '%' || #{searchTxt} || '%') OR
+      (PASSPORT LIKE '%' || #{searchTxt} || '%') OR
+      (USERAVAILABLE LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='no'">
+      AND 
+      (NO LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='userId'">
+      AND 
+      (USERID LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='userRank'">
+      AND 
+      (USERRANK LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='passport'">
+      AND 
+      (PASSPORT LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='userAvailable'">
+      AND 
+      (USERAVAILABLE LIKE '%' || #{searchTxt} || '%')
+      </when>
+    </choose>
+  </if>
+    ORDER BY NO DESC
+  </select>
+
+  <select id="getOneMember" resultType="MemberDto" parameterType="Integer">
+    SELECT * FROM MEMBER WHERE NO = #{no}    
+  </select>
+
+  <select id="totalCountMember" resultType="Integer">
+    SELECT COUNT(*) FROM MEMBER
+  </select>
+
+  <update id="memberModifyProcess" parameterType="MemberDto">
+    UPDATE MEMBER SET USERID=#{userId}, USERPW=#{userPw}, USERNAME=#{userName}, USERNICKNAME=#{userNickname}, EMAIL=#{email}, ADDRESS=#{address}, USERPOINT=#{userPoint}, USERRANK=#{userRank}, USERBDAY=#{userBday}, PASSPORT=#{passport}, USERAVAILABLE=#{userAvailable} WHERE NO=#{no}
+  </update>
+  
+  <update id="memberDeleteProcess" parameterType="Integer">
+    UPDATE MEMBER SET USERAVAILABLE=0 WHERE NO=#{no}
+  </update>
+  
+
+  <!--===========================================-->
+<!-- 관리자용 Review 관리 매퍼 -->
+<select id="getAllReview" resultType="ReviewDto" parameterType="HashMap">
+  SELECT * FROM (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM REVIEW) B) 
+  WHERE NUM BETWEEN (SELECT COUNT(*) FROM REVIEW)-(#{page}*10) 
+  AND (SELECT COUNT(*) FROM REVIEW)-((#{page}-1)*10) 
+  <if test="searchTxt != null and category != null">
+    <choose>
+      <when test="category=='all'">
+      AND 
+      (REVIEWNO LIKE '%' || #{searchTxt} || '%') OR
+      (PKGNO LIKE '%' || #{searchTxt} || '%') OR
+      (PKGNAME LIKE '%' || #{searchTxt} || '%') OR
+      (REVIEWTITLE LIKE '%' || #{searchTxt} || '%') OR
+      (REVIEWCONTENTS LIKE '%' || #{searchTxt} || '%') OR
+      </when>
+      <when test="category=='reviewNo'">
+      AND 
+      (REVIEWNO LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='pkgNo'">
+      AND 
+      (PKGNO LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='pkgName'">
+      AND 
+      (PKGNAME LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='reviewTitle'">
+      AND 
+      (REVIEWTITLE LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='reviewContents'">
+      AND 
+      (REVIEWCONTENTS LIKE '%' || #{searchTxt} || '%')
+      </when>
+    </choose>
+  </if>          
+  ORDER BY REVIEWNO DESC
+</select>
+
+<select id="getOneReview" resultType="ReviewDto" parameterType="Integer">
+  SELECT * FROM REVIEW WHERE REVIEWNO = #{reviewNo}    
+</select>
+
+<update id="reviewModifyProcess" parameterType="ReviewDto">
+  UPDATE REVIEW SET REVIEWTITLE=#{reviewTitle}, REVIEWCONTENTS=#{reviewContents}, RATINGGS=#{ratingGS}, RATINGFA=#{ratingFA}, RATINGCE=#{ratingCE}, RATINGAVG=#{ratingAVG}, RATINGAVGTXT=#{ratingAVGTxt} WHERE REVIEWNO=#{reviewNo}
+</update>
+
+</mapper>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN MENU</title>
+  </head>
+  <body>
+    <div
+      class="container formContainer"
+      id="contents"
+      layout:fragment="contents"
+      style="z-index: 99"
+    >
+      <h2>Admin Menu</h2>
+      <table class="table mt-5">
+        <colgroup>
+          <col class="th" />
+          <col class="td" />
+        </colgroup>
+        <tbody>
+          <!-- <tr>
+            <th>UserId</th>
+            <td th:text="${session.loggedMember.userId}">UserId</td>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <td th:text="${session.loggedMember.userName}">userName</td>
+          </tr>
+          <tr>
+            <th>Nickname</th>
+            <td th:text="${session.loggedMember.userNickname}">userNickname</td>
+          </tr>
+          <tr>
+            <th>Rank</th>
+            <td th:text="${session.loggedMember.userRank}">userRank</td>
+          </tr>
+          <tr>
+            <th>Birth Date</th>
+            <td th:text="${session.loggedMember.userBday}">userBday</td>
+          </tr>
+          <tr>
+            <th>PassPort No</th>
+            <td th:text="${session.loggedMember.passport}">passport</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td th:text="${session.loggedMember.email}">userName</td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td th:text="${session.loggedMember.address}">address</td>
+          </tr> -->
+          <tr>
+            <th></th>
+            <td>
+              <a href="/admin/pkglist"
+                ><button class="btn btn-dark">Package List</button></a
+              >
+              <a href="/admin/reservlist"
+                ><button class="btn btn-primary">Reservation List</button></a
+              >
+              <a href="/admin/memberlist"
+                ><button class="btn btn-success">Member List</button></a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <script></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bb.voyage.dao.MemberDao">
+<!--===========================================-->
+<!--Member용 매퍼 -->
+  <select id="getMemberInfo" parameterType="Integer" resultType="MemberDto">
+    SELECT * FROM MEMBER WHERE NO = #{no}
+  </select>
+
+  <select id="idCheck" parameterType="MemberDto" resultType="Integer">
+    SELECT COUNT(*) FROM MEMBER WHERE USERID = #{userId}
+  </select>
+
+    <insert id="memberJoinProcess" parameterType="MemberDto">
+    INSERT INTO MEMBER VALUES (
+      MEMBER_SEQ.NEXTVAL,
+      #{userId},
+      #{userPw},
+      #{userName},
+      #{userNickname},
+      #{email},
+      #{address},
+      0,
+      0,
+      #{userBday},
+      #{passport},
+      1,
+      0
+    )
+  </insert>
+
+  <select id="memberLoginProcess" parameterType="MemberDto" resultType="MemberDto">
+    SELECT * FROM MEMBER WHERE USERID = #{userId} AND USERPW = #{userPw} AND USERAVAILABLE = 1
+  </select>
+
+  <update id="memberModifyProcess" parameterType = "MemberDto">
+    UPDATE MEMBER SET USERNAME = #{userName}, USERNICKNAME = #{userNickname},  EMAIL = #{email}, ADDRESS = #{address}, USERBDAY=#{userBday}, PASSPORT=#{passport}
+    WHERE NO = #{no} AND USERPW = #{userPw}
+  </update>
+
+  <delete id="memberDeleteProcess" parameterType="MemberDto">
+    UPDATE MEMBER SET USERAVAILABLE = 0 WHERE NO=#{no} AND USERPW = #{userPw}
+  </delete>
+
+  <update id="updateUserAlert" parameterType="HashMap">
+    UPDATE MEMBER SET USERALERT = #{userAlert} WHERE NO = #{userNo}
+  </update>
+
+  <update id="updateAdminAlert" parameterType="Integer">
+    UPDATE MEMBER SET USERALERT = #{userAlert} WHERE USERRANK = 9
+  </update>
+</mapper>

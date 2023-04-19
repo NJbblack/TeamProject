@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>Write Review</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Write Your Review</h2>
+        <form action="/reservation/reviewProcess" method="POST">
+          <input
+            type="hidden"
+            name="reservNo"
+            th:value="${reservDto.reservNo}"
+          />
+          <input type="hidden" name="pkgName" th:value="${pkgDto.pkgName}" />
+          <input type="hidden" name="pkgNo" th:value="${pkgDto.pkgNo}" />
+          <input
+            type="hidden"
+            name="memberNo"
+            th:value="${session.loggedMember.no}"
+          />
+          <div class="text-start">
+            <div class="row">
+              <div class="col-3">
+                <div>
+                  Reservation No:
+                  <strong
+                    ><span
+                      th:text="${reservDto.reservNo}"
+                      style="color: black"
+                    ></span
+                  ></strong>
+                </div>
+                <img
+                  src="..."
+                  th:src="@{|/upload/${pkgDto.pkgMainRenamedPath}|}"
+                  class="img-fluid rounded-start mt-3 ml-1 packageImage"
+                  alt="..."
+                  style="height: 20vh; width: 15vw"
+                />
+              </div>
+              <div class="col-3 mt-4">
+                <div>
+                  <span style="color: black">
+                    <h3>
+                      <strong th:text="${pkgDto.pkgName}"></strong></h3
+                  ></span>
+                </div>
+                <div>
+                  <span style="color: black"
+                    ><span style="font-size: 12px; color: black"
+                      >Reservation Name: </span
+                    ><br />
+                    <strong th:text="${reservDto.reservName}"></strong
+                  ></span>
+                </div>
+                <div>
+                  <span style="color: black">
+                    <span style="font-size: 12px; color: black"
+                      >Package Region: </span
+                    ><br />
+                    <strong th:text="${pkgDto.pkgRegion}"></strong
+                  ></span>
+                </div>
+                <div>
+                  <span style="color: black">
+                    <span style="font-size: 12px; color: black"
+                      >Package Budget: </span
+                    ><br />
+                    <strong th:text="${pkgDto.pkgBudget}"></strong
+                  ></span>
+                </div>
+              </div>
+              <div class="col-2 mt-4" style="margin-left: -5vw">
+                <div>
+                  <span style="color: black">
+                    <h3>
+                      <strong>ㅤ</strong>
+                    </h3></span
+                  >
+                </div>
+                <div>
+                  <span style="color: black"
+                    ><span style="font-size: 12px; color: black"
+                      >Reservation Date:</span
+                    ><br />
+                    <strong>20</strong
+                    ><strong th:text="${reservDto.reservRegDate}"></strong
+                  ></span>
+                </div>
+                <div>
+                  <span style="color: black">
+                    <span style="font-size: 12px; color: black"
+                      >Departure Date: </span
+                    ><br />
+                    <strong th:text="${pkgDto.pkgDepart}"></strong
+                  ></span>
+                </div>
+                <div>
+                  <span style="color: black">
+                    <span style="font-size: 12px; color: black"
+                      >Return Date: </span
+                    ><br />
+                    <strong th:text="${pkgDto.pkgReturn}"></strong
+                  ></span>
+                </div>
+              </div>
+              <div class="col-4" style="margin-top: 7.75vh; margin-left: 3vw">
+                <h4 style="color: #ccac00">Please Rate Your Experience</h4>
+                <div class="star-rating space-x-4 mx-auto">
+                  <input
+                    type="radio"
+                    id="5-starsGS"
+                    name="ratingGS"
+                    value="5"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="5-starsGS" class="star pr-4">★</label>
+                  <input
+                    type="radio"
+                    id="4-starsGS"
+                    name="ratingGS"
+                    value="4"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="4-starsGS" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="3-starsGS"
+                    name="ratingGS"
+                    value="3"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="3-starsGS" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="2-starsGS"
+                    name="ratingGS"
+                    value="2"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="2-starsGS" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="1-starGS"
+                    name="ratingGS"
+                    value="1"
+                    v-model="ratings"
+                    checked
+                  />&nbsp;
+                  <label for="1-starGS" class="star">★</label>
+                  <p style="font-size: 17px; font-weight: 700">
+                    General&nbsp;Service&nbsp;&nbsp;
+                  </p>
+                </div>
+                <div class="star-rating space-x-4 mx-auto">
+                  <input
+                    type="radio"
+                    id="5-starsFA"
+                    name="ratingFA"
+                    value="5"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="5-starsFA" class="star pr-4">★</label>
+                  <input
+                    type="radio"
+                    id="4-starsFA"
+                    name="ratingFA"
+                    value="4"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="4-starsFA" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="3-starsFA"
+                    name="ratingFA"
+                    value="3"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="3-starsFA" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="2-starsFA"
+                    name="ratingFA"
+                    value="2"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="2-starsFA" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="1-starFA"
+                    name="ratingFA"
+                    value="1"
+                    v-model="ratings"
+                    checked
+                  />&nbsp;
+                  <label for="1-starFA" class="star">★</label>
+                  <p style="font-size: 17px; font-weight: 700">
+                    Food&nbsp;&&nbsp;Accommodation&nbsp;&nbsp;
+                  </p>
+                </div>
+                <div class="star-rating space-x-4 mx-auto">
+                  <input
+                    type="radio"
+                    id="5-starsCE"
+                    name="ratingCE"
+                    value="5"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="5-starsCE" class="star pr-4">★</label>
+                  <input
+                    type="radio"
+                    id="4-starsCE"
+                    name="ratingCE"
+                    value="4"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="4-starsCE" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="3-starsCE"
+                    name="ratingCE"
+                    value="3"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="3-starsCE" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="2-starsCE"
+                    name="ratingCE"
+                    value="2"
+                    v-model="ratings"
+                  />&nbsp;
+                  <label for="2-starsCE" class="star">★</label>
+                  <input
+                    type="radio"
+                    id="1-starCE"
+                    name="ratingCE"
+                    value="1"
+                    v-model="ratings"
+                    checked
+                  />&nbsp;
+                  <label for="1-starCE" class="star">★</label>
+                  <p style="font-size: 17px; font-weight: 700">
+                    Cost&nbsp;Effectiveness&nbsp;&nbsp;
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 mt-3 text-start">
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Title"
+              name="reviewTitle"
+            />
+          </div>
+          <div class="mb-3 text-start">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Contents</label
+            >
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="10"
+              name="reviewContents"
+            ></textarea>
+          </div>
+          <button type="button confirm" class="btn btn-primary btn-lg mt-3">
+            Submit
+          </button>
+          <button type="button reset" class="btn btn-secondary btn-lg mt-3">
+            Reset
+          </button>
+        </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

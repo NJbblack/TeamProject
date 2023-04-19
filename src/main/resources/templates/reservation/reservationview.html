@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>RESERVATION DETAIL VIEW</title>
+  </head>
+  <body>
+    <div class="packageContainer" id="contents" layout:fragment="contents">
+      <div id="sending">
+      <h2 class="mb-5">View Reservation Details</h2>
+      <div class="container">
+        <div class="row">
+            <div class="col" style="width: 20%;" >
+                    <img th:src="@{|/upload/${pkgDto.pkgMainRenamedPath}|}" class="card-img-top" alt="..." style="width: 32rem; height: 28rem;">
+                    <div id="btns" class="reservViewBtns">
+                      <div class="row mt-4">
+                        <a class="col"
+                        href="/reservation/reservationmodify"
+                        th:href="@{/reservation/reservationmodify(reservNo=${reservDto.reservNo})}"
+                        ><button class="btn btn-outline-warning" style="padding: 12.5px 12.5px;"><strong>Modify</strong></button></a
+                        >
+                        <a class="col" th:href="@{/reservation/request(reservNo=${reservDto.reservNo})}"
+                        ><button class="btn btn-outline-danger" style="padding: 12.5px 12.5px;">
+                          <strong>Cancel/Other</strong>
+                        </button>
+                      </a>
+                      <a class="col" href="javascript:window.history.back();"
+                        ><button class="btn btn-outline-secondary" style="padding: 12.5px 12.5px;"><strong>Back</strong></button></a
+                      >
+                        </div>
+                    </div>
+            </div>
+            <div class="col" style="width: 80%;
+            display: flex;
+            align-items: center;">
+                <table class="table" style="width:40vw; font-size: 16px; height: 40vh; margin-left: 100px; margin-bottom: 30px;">
+                  <thead class="table-dark">
+                  </thead>
+                  <tbody>
+                    <colgroup>
+                    <col style="width:20%">
+                    <col style="width:80%;">
+                    </colgroup>
+                    <tr>
+                        <td style="font-size: 14px;"><strong>Reservation No</strong></td>
+                        <td th:text="${reservDto.reservNo}"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 14px;"><strong>Reservation Name</strong></td>
+                        <td th:text="${reservDto.reservName}"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 14px;"><strong>Birthdate</strong></td>
+                        <td th:text="${reservDto.reservBday}"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 14px;"><strong>Passport</strong></td>
+                        <td th:text="${reservDto.reservPassport}"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 14px;"><strong>Email</strong></td>
+                        <td th:text="${reservDto.reservEmail}"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 14px;"><strong>Reservation Date</strong></td>
+                        <td th:text="${reservDto.reservRegDate}"></td>
+                    </tr>
+                    <tr >
+                        <td style="font-size: 14px;"><strong>Package Name</strong></td>
+                          <td th:text="${pkgDto.pkgName}"></td>
+                      </tr>
+                      <tr>
+                        <td style="font-size: 14px;"><strong>Package Region</strong></td>
+                        <td th:text="${pkgDto.pkgRegion}"></td>
+                      </tr>
+                      <tr>
+                        <td style="font-size: 14px;"><strong>Package Budget</strong></td>
+                        <td th:text="${pkgDto.pkgBudget}"></td>
+                      </tr>
+                      <tr>
+                        <td style="font-size: 14px;"><strong>Departure Date</strong></td>
+                        <td th:text="${pkgDto.pkgDepart}"></td>
+                      </tr>
+                      <tr>
+                        <td style="font-size: 14px;"><strong>Return Date</strong></td>
+                        <td th:text="${pkgDto.pkgReturn}"></td>
+                      </tr>
+                      <tr >
+                          <td><strong>Package Contents</strong></td>
+                          <td style="text-align:left;" th:text="${pkgDto.pkgContents}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+    </body>
+  </body>
+</html>

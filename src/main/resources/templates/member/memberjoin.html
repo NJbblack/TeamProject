@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+                xmlns:th="http://www.thymeleaf.org" 
+                xmlns="http://www.thymeleaf.org"
+                layout:decorate="~{/layout/layout.html}">
+<head>
+  <head>
+    <title>MEMBER SIGN UP</title>
+  </head>
+  <body>
+    <div class="container1 formContainer" id="contents" layout:fragment="contents">
+      <div id="sending">
+        <h2>SIGN UP</h2>
+        <form action="/member/memberJoinProcess" method="post" th:object="${memberDto}" enctype="multipart/form-data">
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">ID</label>
+            <div class="iDduplCheck">
+              <input type="text" class="form-control" placeholder="ID" name="userId" id="userId" />
+              <a href class="btn btn-secondary idCheck" id="idCheck">ID duplicate check</a>
+            </div>
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="Password" name="userPw" />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Name</label>
+            <input type="text" class="form-control" placeholder="Name" name="userName" />
+          </div>
+  
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Nickname</label>
+            <input type="text" class="form-control" placeholder="Nickname" name="userNickname" />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Email</label>
+            <input type="email" class="form-control"  placeholder="example@email.com" name="email" />
+          </div>
+
+      <!-- address start-->
+      <div  class="mb-2 leftAlign">
+            <label for="" class="form-label">Zipcode</label>
+               <div class="container">
+                 <div class="row">
+                   <div class="col-2"
+                   style="padding: 0;"><input type="text"  class="form-control" name="userZipcode" id="userZipcode" placeholder="Enter Zipcode" readonly></div>
+                   <div class="col-1"><button class="btn btn-warning zipCode"
+                                        style="width: 130px;
+                                                height: 40px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;">Zipcode</button></div>
+                 </div>
+               </div>
+           </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Address 01</label>
+            <input type="text"  class="form-control"  placeholder="Address" name="userAddr01" id="userAddr01"/>
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Address 02</label>
+            <input type="text"  class="form-control"  placeholder="Extra Address" name="userAddr02" id="userAddr02"/>
+          </div>
+      <!-- address end -->
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Birthday</label>
+            <input type="date"  class="form-control"  placeholder="Birthday" name="userBday" />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Passport Number</label>
+            <input type="text"  class="form-control"  placeholder="Passport" name="passport" />
+          </div>     
+          <div class="joinBtn">
+            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            <button class="btn btn-secondary btn-lg" type="reset">Reset</button>
+          </div>
+
+          
+        </form>
+      </div>
+
+      <script>
+        // 아이디 중복 확인
+        	$("#idCheck").on("click", function(){
+            const sendUserId = $("#userId").val();
+       		$.ajax({
+       			url: "/member/idCheck",
+       			data: {userId : sendUserId},
+            type: "POST",
+       			success: function(response) {
+       				if(response) {
+                alert("중복된 아이디 입니다.");
+       					$("#userId").val("");
+       					$("#userId").focus();
+                return false;
+       				} else {
+                alert("사용 가능한 아이디 입니다.");
+       					$("#userId").attr("readonly", true);
+                return false;
+       				}
+       			},
+       			fail : function(error) {
+              console.log("실패");
+       				console.log(error);
+               return false;
+       			}
+       		})
+           return false;  // 제일 마지막에 달아줘야 a태그가 안 움직임
+        } 
+        )
+      
+        // 주소
+         $(".zipCode").on("click", function () {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            let addr = ""; // 주소 변수
+            let extraAddr = ""; // 참고항목 변수
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === "R") {
+              // 사용자가 도로명 주소를 선택했을 경우
+              addr = data.roadAddress;
+            } else {
+              // 사용자가 지번 주소를 선택했을 경우(J)
+              addr = data.jibunAddress;
+            }
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if (data.userSelectedType === "R") {
+              // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+              // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+              // 건물명이 있고, 공동주택일 경우 추가한다.
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr += extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
+              }
+              // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+              // 조합된 참고항목을 해당 필드에 넣는다.
+              $("#userAddr03").val(extraAddr);
+            } else {
+              $("#userAddr03").val("");
+            }
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            $("#userZipcode").val(data.zonecode);
+            $("#userAddr01").val(addr);
+            // 커서를 상세주소 필드로 이동한다.
+            $("userAddr02").focus();
+          },
+        }).open();
+        return false;
+      });
+      </script>
+    </div>
+  </body>
+</html>

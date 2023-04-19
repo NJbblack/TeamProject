@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>TITLE</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <section class="visual pkgCountryVisual">
+          <h2 class="hidden">main video</h2>
+
+          <div class="pkgCountryHead">
+            <h2 style="background: rgb(255, 192, 74)">Touring China</h2>
+          </div>
+
+          <div class="wrap pkgCountryVideo">
+            <video
+              src="/videos/china.mp4"
+              autoplay
+              muted
+              loop
+              class="visual_img"
+            ></video>
+          </div>
+        </section>
+
+        <div
+          th:each="item : ${pkgList}"
+          data-aos="fade-left"
+          data-aos-delay="300"
+        >
+          <a
+            href=""
+            th:href="@{/package/pkgdetailview(pkgNo=${item.pkgNo})}"
+            class="card mb-3 btn-outline-warning pkgCountryList"
+            style="max-width: 100vw"
+          >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="..."
+                  th:src="@{|/upload/${item.pkgMainRenamedPath}|}"
+                  class="img-fluid rounded-start mt-3 ml-1 packageImage"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div
+                  class="card-body"
+                  style="
+                    text-align: left;
+                    font-size: 14px;
+                    color: black;
+                    font-weight: bold;
+                  "
+                >
+                  <h5>
+                    <span
+                      class="card-title"
+                      th:text="${item.pkgName}"
+                      style="
+                        color: white;
+                        display: inline-block;
+                        padding: 0.1em 0;
+                        background: rgb(255, 192, 74);
+                      "
+                    >
+                      Card title
+                    </span>
+                    <th:block
+                      th:each="num: ${#numbers.sequence(1,item.ratedStar)}"
+                    >
+                      <span class="star" style="color: #ccac00; font-size: 17px"
+                        >★</span
+                      >
+                    </th:block>
+                  </h5>
+                  <br />
+                  Package No:ㅤㅤㅤㅤㅤ&nbsp;
+                  <span
+                    style="
+                      font-size: 13px;
+                      color: black;
+                      font-weight: normal;
+                      font-weight: normal;
+                    "
+                    class="card-text"
+                    th:text="${item.pkgNo}"
+                  ></span
+                  ><br />
+                  Package Region:ㅤㅤㅤ
+                  <span
+                    style="font-size: 13px; color: black; font-weight: normal"
+                    class="card-text"
+                    th:text="${item.pkgRegion}"
+                  ></span
+                  ><br />
+                  Departure Date:ㅤㅤㅤ
+                  <span
+                    style="font-size: 13px; color: black; font-weight: normal"
+                    class="card-text"
+                    th:text="${item.pkgDepart}"
+                  ></span
+                  ><br />
+                  Return Date:ㅤㅤㅤㅤㅤ
+                  <span
+                    style="font-size: 13px; color: black; font-weight: normal"
+                    class="card-text"
+                    th:text="${item.pkgReturn}"
+                  ></span
+                  ><br />
+                  Package Budget:ㅤㅤ&nbsp;&nbsp;&nbsp;
+                  <span
+                    style="font-size: 13px; color: black; font-weight: normal"
+                    class="card-text"
+                    th:text="${item.pkgBudget}"
+                  ></span
+                  ><br />
+                  Package Contents:
+                  <br />
+                  <span
+                    style="font-size: 13px; color: black; font-weight: normal"
+                    class="card-text"
+                    th:text="${item.pkgContents}"
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

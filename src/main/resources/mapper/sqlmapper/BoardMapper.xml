@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bb.voyage.dao.BoardDao">
+<!--===========================================-->
+<!--FaqBoard용 매퍼 -->
+  <select id="getAllFaq" resultType="FaqBoardDto" parameterType="HashMap">
+    SELECT * FROM (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM FAQBOARD) B) 
+    WHERE FAQAVAILABLE = 1 
+    AND NUM BETWEEN (SELECT COUNT(*) FROM FAQBOARD)-(1*10) 
+    AND (SELECT COUNT(*) FROM FAQBOARD)-((1-1)*10) 
+    <if test="searchTxt != null and category != null">
+      <choose>
+        <when test="category=='all'">
+        AND 
+        (FAQTITLE LIKE '%' || #{searchTxt} || '%') OR
+        (FAQCONTENTS LIKE '%' || #{searchTxt} || '%') 
+        </when>
+        <when test="category=='subject'">
+          AND 
+          (FAQTITLE LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='contents'">
+          AND 
+          (FAQCONTENTS LIKE '%' || #{searchTxt} || '%') 
+          </when>
+      </choose>
+    </if>
+    ORDER BY NUM DESC
+  </select>
+
+  <select id="getOneFaq" resultType="FaqBoardDto" parameterType="Integer">
+    SELECT * FROM FAQBOARD WHERE FAQNO = #{no} AND FAQAVAILABLE = 1
+  </select> 
+
+  <select id="getMemberInfo" resultType="MemberDto" parameterType="Integer">
+    SELECT * FROM MEMBER WHERE NO = (SELECT NO FROM MEMBER WHERE NO = (SELECT FAQWRITERNO FROM FAQBOARD WHERE FAQNO = #{no}))
+  </select>
+
+  <select id="totalCountFaq" resultType="Integer">
+    SELECT COUNT(*) FROM FAQBOARD
+  </select>
+
+  <update id="updateFaqHit" parameterType="Integer">
+    UPDATE FAQBOARD SET FAQHIT = FAQHIT + 1 WHERE FAQNO=#{no}
+  </update>
+
+  <insert id="faqBoardWriteProcess" parameterType="FaqBoardDto">
+    INSERT INTO FAQBOARD VALUES (
+      FAQBOARD_SEQ.NEXTVAL,
+      #{faqWriterNo},
+      #{faqTitle},
+      #{faqContents},
+      SYSDATE,
+      1,
+      0,
+      0,
+      0,
+      0
+    )
+  </insert>
+
+  <update id="faqBoardModifyProcess" parameterType="FaqBoardDto">
+    UPDATE FAQBOARD 
+    SET FAQTITLE = #{faqTitle}, FAQCONTENTS = #{faqContents} 
+    WHERE FAQNO = #{faqNo}
+  </update>
+
+  <update id="faqBoardDeleteProcess" parameterType="HashMap">
+    UPDATE FAQBOARD SET FAQAVAILABLE = 0 WHERE FAQNO = #{faqNo} AND (SELECT USERPW FROM MEMBER WHERE NO = (SELECT FAQWRITERNO FROM FAQBOARD WHERE FAQNO = #{faqNo})) = #{userPw}
+  </update>
+
+<!--===========================================-->
+<!--NoticeBoard용 매퍼 -->
+  <select id="getAllNotice" resultType="NoticeBoardDto" parameterType="Integer">
+    SELECT * FROM (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM NOTICEBOARD) B) 
+    WHERE NOTICEAVAILABLE = 1 
+    AND NUM BETWEEN (SELECT COUNT(*) FROM NOTICEBOARD)-(#{page}*10) 
+    AND (SELECT COUNT(*) FROM NOTICEBOARD)-((#{page}-1)*10) 
+    <if test="searchTxt != null and category != null">
+      <choose>
+        <when test="category=='all'">
+        AND 
+        (NOTICETITLE LIKE '%' || #{searchTxt} || '%') OR
+        (NOTICECONTENTS LIKE '%' || #{searchTxt} || '%') 
+        </when>
+        <when test="category=='subject'">
+          AND 
+          (NOTICETITLE LIKE '%' || #{searchTxt} || '%')
+        </when>
+        <when test="category=='contents'">
+          AND 
+          (NOTICECONTENTS LIKE '%' || #{searchTxt} || '%') 
+          </when>
+      </choose>
+    </if>
+    ORDER BY NUM DESC
+  </select>
+  <select id="getOneNotice" resultType="NoticeBoardDto" parameterType="Integer">
+    SELECT * FROM NOTICEBOARD WHERE NOTICENO = #{no} AND NOTICEAVAILABLE = 1
+  </select> 
+
+  <select id="getMemberInfo02" resultType="MemberDto" parameterType="Integer">
+    SELECT * FROM MEMBER 
+    WHERE NO = (SELECT NO FROM MEMBER WHERE NO = (SELECT NOTICEWRITERNO FROM NOTICEBOARD WHERE NOTICENO = #{no}))
+  </select>
+
+  <select id="totalCountNotice" resultType="Integer">
+    SELECT COUNT(*) FROM NOTICEBOARD
+  </select>
+
+  <update id="updateNoticeHit" parameterType="Integer">
+    UPDATE NOTICEBOARD SET NOTICEHIT = NOTICEHIT + 1 WHERE NOTICENO=#{no}
+  </update>
+
+  <insert id="noticeBoardWriteProcess" parameterType="NoticeBoardDto">
+    INSERT INTO NOTICEBOARD VALUES (
+      NOTICEBOARD_SEQ.NEXTVAL,
+      #{noticeWriterNo},
+      #{noticeTitle},
+      #{noticeContents},
+      SYSDATE,
+      1,
+      0,
+      0,
+      0,
+      0
+    )
+  </insert>
+
+  <update id="noticeBoardModifyProcess" parameterType="NoticeBoardDto">
+    UPDATE NOTICEBOARD 
+    SET NOTICETITLE = #{noticeTitle}, NOTICECONTENTS = #{noticeContents} 
+    WHERE NOTICENO = #{noticeNo}
+  </update>
+
+  <update id="noticeBoardDeleteProcess" parameterType="HashMap">
+    UPDATE NOTICEBOARD SET NOTICEAVAILABLE = 0 WHERE NOTICENO = #{noticeNo} AND (SELECT USERPW FROM MEMBER WHERE NO = (SELECT NOTICEWRITERNO FROM NOTICEBOARD WHERE NOTICENO = #{noticeNo})) = #{userPw}
+  </update>
+
+<!--===========================================-->
+<!--FaqBoard용 매퍼 -->
+  <insert id="insertFaqComment" parameterType="FaqCommentDto">
+    INSERT INTO FAQCOMMENT VALUES (FAQCOMMENT_SEQ.NEXTVAL,
+    #{faqId},
+    #{comments},
+    #{commenter}
+    )
+  </insert>
+
+  <select id="getAllFaqComment" resultType="FaqCommentDto" parameterType="Integer">
+    SELECT * FROM FAQCOMMENT WHERE FAQ_ID = #{faqId}
+  </select>
+
+  <!--===========================================-->
+<!--QnaBoard용 매퍼 -->
+ <select id="getAllQna" resultType="QnaBoardDto" parameterType="HashMap">
+  SELECT * FROM (SELECT ROWNUM AS NUM, B. * FROM (SELECT * FROM QNABOARD) B) 
+  WHERE QNAAVAILABLE = 1 
+  AND NUM BETWEEN (SELECT COUNT(*) FROM QNABOARD)-(1*10) 
+  AND (SELECT COUNT(*) FROM QNABOARD)-((1-1)*10) 
+  <if test="searchTxt != null and category != null">
+    <choose>
+      <when test="category=='all'">
+      AND 
+      (QNATITLE LIKE '%' || #{searchTxt} || '%') OR
+      (QNACONTENTS LIKE '%' || #{searchTxt} || '%') 
+      </when>
+      <when test="category=='subject'">
+        AND 
+        (QNATITLE LIKE '%' || #{searchTxt} || '%')
+      </when>
+      <when test="category=='contents'">
+        AND 
+        (QNACONTENTS LIKE '%' || #{searchTxt} || '%') 
+        </when>
+    </choose>
+  </if>
+  ORDER BY NUM DESC
+</select>
+<select id="getMemberInfo03" resultType="MemberDto" parameterType="Integer">
+  SELECT * FROM MEMBER 
+  WHERE NO = (SELECT NO FROM MEMBER WHERE NO = (SELECT QNAWRITERNO FROM QNABOARD WHERE QNANO = #{no}))
+</select>
+<select id="getOneQna" resultType="QnaBoardDto" parameterType="Integer">
+  SELECT * FROM QNABOARD WHERE QNANO = #{no} AND QNAAVAILABLE = 1
+</select> 
+
+<select id="totalCountQna" resultType="Integer">
+  SELECT COUNT(*) FROM QNABOARD
+</select>
+
+<update id="updateQnaHit" parameterType="Integer">
+  UPDATE QNABOARD SET QNAHIT = QNAHIT + 1 WHERE QNANO=#{no}
+</update>
+
+<insert id="qnaBoardWriteProcess" parameterType="QnaBoardDto">
+  INSERT INTO QnaBOARD VALUES (
+    QNABOARD_SEQ.NEXTVAL,
+    #{qnaWriterNo},
+    #{qnaTitle},
+    #{qnaContents},
+    SYSDATE,
+    1,
+    0,
+    0,
+    0,
+    0
+  )
+</insert>
+
+<update id="qnaBoardModifyProcess" parameterType="QnaBoardDto">
+  UPDATE QnaBOARD 
+  SET QNATITLE = #{qnaTitle}, QNACONTENTS = #{qnaContents} 
+  WHERE QNANO = #{qnaNo}
+</update>
+
+<update id="qnaBoardDeleteProcess" parameterType="HashMap">
+  UPDATE QNABOARD SET QNAAVAILABLE = 0 WHERE QNANO = #{qnaNo} AND (SELECT USERPW FROM MEMBER WHERE NO = (SELECT QNAWRITERNO FROM QNABOARD WHERE QNANO = #{qnaNo})) = #{userPw}
+</update>
+
+<insert id="insertQnaComment" parameterType="QnaCommentDto">
+  INSERT INTO QNACOMMENT VALUES (QNACOMMENT_SEQ.NEXTVAL,
+  #{qnaId},
+  #{comments},
+  #{commenter}
+  )
+</insert>
+
+<select id="getAllQnaComment" resultType="QnaCommentDto" parameterType="Integer">
+  SELECT * FROM QNACOMMENT WHERE QNA_ID = #{qnaId}
+</select>
+</mapper>

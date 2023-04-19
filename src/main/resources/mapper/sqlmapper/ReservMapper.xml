@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bb.voyage.dao.ReservDao">
+<!--===========================================-->
+<!--Reservation용 매퍼 -->
+  <select id="getAllReserv" resultType="ReservDto" parameterType="Integer">
+    SELECT * FROM RESERVATION WHERE CUSTOMERNO=#{no} AND RESERVAVAILABLE = 1 AND RESERVRETURN <![CDATA[>=]]> SYSDATE ORDER BY RESERVNO DESC
+  </select>
+
+  <select id="getOneReserv" resultType="ReservDto" parameterType="Integer">
+    SELECT * FROM RESERVATION WHERE RESERVNO = #{reservNo}    
+  </select>
+  
+  <select id="getPastReserv" resultType="ReservDto" parameterType="Integer">
+    SELECT * FROM RESERVATION WHERE CUSTOMERNO=#{no} AND RESERVAVAILABLE = 1 AND RESERVRETURN <![CDATA[<]]> SYSDATE ORDER BY RESERVNO DESC
+  </select>
+
+  <select id="getCanceledReserv" resultType="ReservDto" parameterType="Integer">
+    SELECT * FROM RESERVATION WHERE CUSTOMERNO=#{no} AND RESERVAVAILABLE = 0 ORDER BY RESERVNO DESC
+  </select>
+
+  <select id="getAllRequest" resultType="RequestDto" parameterType="Integer">
+    SELECT * FROM REQUEST WHERE REQUSERNO=#{no} AND REQNOW = 1 ORDER BY REQNO DESC
+  </select>
+
+  <select id="getClosedRequest" resultType="RequestDto" parameterType="Integer">
+    SELECT * FROM REQUEST WHERE REQUSERNO=#{no} AND REQNOW = 0 ORDER BY REQNO DESC
+  </select>
+
+  <select id="getAllRequestFor" resultType="RequestDto" parameterType="Integer">
+    SELECT * FROM REQUEST WHERE RESERVNO = #{reservNo}
+  </select>
+
+  <select id="getOneRequest" resultType="RequestDto" parameterType="Integer">
+    SELECT * FROM REQUEST WHERE REQNO=#{reqNo}
+  </select>
+
+  <select id="getDetailReserv" resultType="ReservDto" parameterType="Integer">
+    SELECT * FROM RESERVATION WHERE RESERVNO=#{reservNo}
+  </select>
+
+  <select id="getDetailPkg" resultType="PkgDto" parameterType="Integer">
+    SELECT * FROM PACKAGE WHERE PKGNO = (SELECT SELECTEDPKGNO FROM (SELECT * FROM RESERVATION WHERE RESERVNO=#{reservNo}))
+  </select>
+  
+  <select id="getDetailMember" resultType="MemberDto" parameterType="Integer">
+    SELECT * FROM MEMBER WHERE NO = (SELECT CUSTOMERNO FROM (SELECT * FROM RESERVATION WHERE RESERVNO=#{reservNo}))
+  </select>
+
+  <insert id="reservProcess" parameterType="ReservDto">
+    INSERT INTO RESERVATION VALUES (
+      RESERVATION_SEQ.NEXTVAL,
+      #{customerNo},
+      #{selectedPkgNo},
+      #{reservName},
+      #{reservBday},
+      #{reservPassport},
+      #{reservEmail},
+      SYSDATE,
+      #{reservPkg},
+      #{reservImg},
+      #{reservDepart},
+      #{reservReturn},
+      1,
+      0,
+      0,
+      1
+    )
+  </insert>
+
+  <select id="getLinkedPkg" resultType="PkgDto" parameterType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGNAME = #{pkgName} AND PKGAVAILABLE = 1 AND PKGDEPART <![CDATA[>]]> SYSDATE ORDER BY PKGDEPART
+  </select>
+
+  <select id="getFilteredPkg" resultType="PkgDto" parameterType="PkgDto">
+    SELECT * FROM PACKAGE WHERE
+    <if test="!pkgDepart.equals('')">
+    PKGDEPART = #{pkgDepart} AND 
+    </if>
+    <if test="!pkgReturn.equals('')">
+    PKGRETURN = #{pkgReturn} AND 
+    </if>
+    <if test="pkgRegion != 'Select Region'">
+    PKGREGION = #{pkgRegion} AND 
+    </if>
+    <if test="pkgName != null">
+    PKGNAME = #{pkgName} AND 
+    </if>
+    PKGAVAILABLE = 1 AND PKGDEPART <![CDATA[>]]> SYSDATE AND PKGBUDGET BETWEEN #{minBudget} AND #{maxBudget}
+  </select>
+
+  <select id="getOnePkg" resultType="PkgDto" parameterType="Integer">
+    SELECT * FROM PACKAGE WHERE PKGNO=#{selectedPkgNo}
+  </select>
+
+  <update id="reservationModifyProcess" parameterType="ReservDto">
+    UPDATE RESERVATION SET RESERVNAME=#{reservName}, RESERVBDAY=#{reservBday}, RESERVPASSPORT=#{reservPassport}, RESERVEMAIL=#{reservEmail} WHERE RESERVNO=#{reservNo}
+  </update>
+
+  <insert id="requestProcess" parameterType= "RequestDto">
+    INSERT INTO REQUEST VALUES (
+      REQUEST_SEQ.NEXTVAL,
+      #{reservNo},
+      #{reqCategory},
+      #{reqTitle},
+      #{reqContents},
+      1,
+      #{reqUserNo},
+      SYSDATE
+      )
+  </insert>
+
+  <update id="requesttoReserv" parameterType="RequestDto">
+    UPDATE RESERVATION SET RESERVREQ = 1, RESERVREQNO = REQUEST_SEQ.NEXTVAL - 1 WHERE RESERVNO = #{reservNo}
+  </update>
+
+  <update id="requestModifyProcess" parameterType="RequestDto">
+    UPDATE REQUEST SET REQCATEGORY=#{reqCategory}, REQTITLE=#{reqTitle}, REQCONTENTS=#{reqContents} WHERE REQNO=#{reqNo}
+  </update>
+
+  <select id="reqGetReserv" parameterType="Integer" resultType="ReservDto">
+  SELECT * FROM RESERVATION WHERE RESERVNO = #{reservNo}
+  </select>
+
+  <select id="reqGetPkg" parameterType="Integer" resultType="PkgDto">
+    SELECT * FROM PACKAGE WHERE PKGNO = (SELECT SELECTEDPKGNO FROM RESERVATION WHERE RESERVNO = #{reservNo})
+  </select>
+
+
+
+
+  <insert id="reviewProcess" parameterType= "ReviewDto">
+    INSERT INTO REVIEW VALUES (
+      REVIEW_SEQ.NEXTVAL,
+      #{pkgNo},
+      #{reservNo},
+      #{memberNo},
+      #{reviewTitle},
+      #{reviewContents},
+      SYSDATE,
+      #{ratingGS},
+      #{ratingFA},
+      #{ratingCE},
+      #{ratingAVG},
+      #{ratingAVGTxt},
+      #{pkgName}
+      )
+  </insert>
+
+  <update id="updateReviewAvailable" parameterType = "Integer">
+    UPDATE RESERVATION SET REVIEWAVAILABLE = 0 WHERE RESERVNO = #{reservNo}
+  </update>
+  
+
+
+</mapper>

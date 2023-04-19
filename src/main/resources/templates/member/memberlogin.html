@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>MEMBER LOG IN</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer login"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>LOG IN</h2>
+        <form action="/member/memberLoginProcess" method="post">
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">ID</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ID"
+              name="userId"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              name="userPw"
+            />
+          </div>
+
+          <div class="joinBtn">
+            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            <button class="btn btn-secondary btn-lg" type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <script></script>
+    </div>
+  </body>
+</html>

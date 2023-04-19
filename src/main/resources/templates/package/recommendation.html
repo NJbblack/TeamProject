@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>PACKAGE RECOMMNEDATION</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <h3>Package Recommendation</h3>
+      <div class="">
+        <div class="">
+          <label class="btnGS">GS<input type="radio" name="Q01" /></label>
+          <label class="btnFA">FA<input type="radio" name="Q01" /></label>
+        </div>
+        <div class="">
+          <label class="btnGS">GS<input type="radio" name="Q02" /></label>
+          <label class="btnFA">FA<input type="radio" name="Q02" /></label>
+        </div>
+        <div class="">
+          <label class="btnGS">GS<input type="radio" name="Q03" /></label>
+          <label class="btnAVG">AVG<input type="radio" name="Q03" /></label>
+        </div>
+        <div class="">
+          <label class="btnAVG">AVG<input type="radio" name="Q04" /></label>
+          <label class="btnCE">CE<input type="radio" name="Q04" /></label>
+        </div>
+        <div class="">
+          <label class="btnCE">CE<input type="radio" name="Q05" /></label>
+          <label class="btnFA">FA<input type="radio" name="Q05" /></label>
+        </div>
+        <div class="">
+          <label class="btnCE btnRF">CE<input type="radio" name="Q06" /></label>
+          <label class="btnAVG btnRF"
+            >AVG<input type="radio" name="Q06"
+          /></label>
+        </div>
+      </div>
+      <div id="imageFrame"></div>
+      <div id="recommendedVideo"></div>
+      <div id="recommendedResult"></div>
+      <script>
+        let FA = 1;
+        let CE = 1;
+        let GS = 1;
+        let AVG = 1;
+        let array = new Array();
+        $(".btnGS").on("click", function () {
+          GS = GS + 0.75;
+          $(this).parent().css("display", "none");
+        });
+        $(".btnCE").on("click", function () {
+          CE = CE + 0.75;
+          $(this).parent().css("display", "none");
+        });
+        $(".btnFA").on("click", function () {
+          FA = FA + 0.75;
+          $(this).parent().css("display", "none");
+        });
+        $(".btnAVG").on("click", function () {
+          AVG = AVG + 0.75;
+          $(this).parent().css("display", "none");
+        });
+        $(".btnRF").on("click", function () {
+          // console.log("GS: " + GS);
+          // console.log("CE: " + CE);
+          // console.log("FA: " + FA);
+          // console.log("AVG: " + AVG);
+          const sendData = {
+            ratedGS: Math.round(GS),
+            ratedCE: Math.round(CE),
+            ratedFA: Math.round(FA),
+            ratedAVG: AVG,
+          };
+          $.ajax({
+            url: "/package/getTempRecoList",
+            data: sendData,
+            type: "POST",
+            success: function (res) {
+              // console.log(res);
+              let tempHtml = "";
+              tempHtml += `
+              <div class="imgFrame">
+                  <img src="http://localhost:9091/upload/${res[0].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[0].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[1].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[1].pkgNo}"/>
+                </div>
+                <div class="imgFrame">
+                  <img src="http://localhost:9091/upload/${res[2].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[2].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[3].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[3].pkgNo}"/>
+                </div>
+                <div class="imgFrame">
+                  <img src="http://localhost:9091/upload/${res[4].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[4].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[5].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[5].pkgNo}"/>
+                </div>
+                <div class="imgFrame">
+                  <img src="http://localhost:9091/upload/${res[6].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[6].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[7].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[7].pkgNo}"/>
+                </div>
+                  `;
+              $("#imageFrame").html(tempHtml);
+            },
+          });
+        });
+        $("#imageFrame").on("click", ".imgFrame img", function () {
+          $(this).parent().css("display", "none");
+          array.push($(this).data("no"));
+          const sendData = {
+            pkgNo01: array[0],
+            pkgNo02: array[1],
+            pkgNo03: array[2],
+            pkgNo04: array[3],
+          };
+          $.ajax({
+            url: "/package/getRecommendedList",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+              let tempVideo = `
+              <video src="/videos/recommendation.mp4" autoplay muted loop class="visual_img" style="position:fixed; width:100vw; height:100vh; left:0; top:0;"></video>
+              `;
+              $("#recommendedVideo").html(tempVideo);
+
+              let tempHtml = "";
+              $.each(response, function (idx, item) {
+                tempHtml += `
+                <a href="/package/pkgdetailview?pkgNo=${item.pkgNo}"
+                class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                  <img src="http://localhost:9091/upload/${item.pkgMainRenamedPath}" class="img-fluid rounded-start mt-3 ml-1 packageImage"
+                  style="width:22.5vw;height:30vh"/>
+                  </div>
+                <div class="col-md-8">
+                  <div class="card-body" style="text-align: left;font-size: 14px;color: black;font-weight: bold;">
+                  <h5><span class="card-title" style="color: white;display: inline-block;padding: 0.1em 0;background: rgb(152, 55, 146);">
+                    ${item.pkgName}</span>
+                    <span style="color: #ccac00; font-size: 17px">${item.ratedAVGTxt}</span>
+                  </h5>
+                  Package No:ㅤㅤㅤㅤㅤ&nbsp;
+                  <span style="font-size: 13px;color: black;font-weight: normal;font-weight: normal;" class="card-text">
+                    ${item.pkgNo}</span>
+                  <br/> Package Region:ㅤㅤㅤ
+                  <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
+                    ${item.pkgRegion}</span>
+                  <br/> Departure Date:ㅤㅤㅤ
+                  <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
+                    ${item.pkgDepart}</span>
+                  <br /> Return Date:ㅤㅤㅤㅤㅤ
+                  <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
+                    ${item.pkgReturn}</span>
+                  <br/> Package Budget:ㅤㅤ&nbsp;&nbsp;&nbsp;
+                  <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
+                    ${item.pkgBudget}</span>
+                  <br/> Package Contents: 
+                  <br/><span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
+                    ${item.pkgContents}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+              `;
+              });
+              $("#recommendedResult").html(tempHtml);
+            },
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>

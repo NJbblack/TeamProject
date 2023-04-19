@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>MODIFY REQUEST</title>
+  </head>
+  <body>
+    <div class="formContainer " id="contents" layout:fragment="contents">
+      <h3>Modify Your Request</h3>
+      <form action="/reservation/requestModifyProcess" method="post" class="mt-5" style="z-index:99">
+          <div><span><strong>Request No: </strong> <strong th:text="${requestDto.reqNo}"></strong></span></div>
+          <input type="hidden" name="reqNo" th:value="${requestDto.reqNo}">
+          <input type="hidden" name="reqUserNo" th:value="${requestDto.reqUserNo}">
+          <div class="mb-3 select">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Request Category</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              name="reqCategory"
+            >
+              <option value="Cancel">Cancel</option>
+              <option value="Modify">Modify</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Title</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title"
+              name="reqTitle" th:value="${requestDto.reqTitle}">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
+              name="reqContents" th:value="${requestDto.reqContents}" th:text="${requestDto.reqContents}"></textarea>
+            </div>
+            <button type="button confirm" class="btn btn-primary btn-lg mt-3">Submit</button>
+            <button type="button reset" class="btn btn-secondary btn-lg mt-3">Reset</button>
+      </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

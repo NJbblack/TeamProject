@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN MEMBER MODIFY</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Admin Modify Member</h2>
+        <form action="/admin/memberModifyProcess" method="post">
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">No</label>
+            <input
+              type="text"
+              class="form-control"
+              name="no"
+              th:value="${memberDto.no}"
+              readonly
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User ID</label>
+            <input
+              type="text"
+              class="form-control"
+              name="userId"
+              th:value="${memberDto.userId}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Password</label>
+            <input
+              type="text"
+              class="form-control"
+              name="userPw"
+              th:value="${memberDto.userPw}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="userName"
+              th:value="${memberDto.userName}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Nickname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="userNickname"
+              th:value="${memberDto.userNickname}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              th:value="${memberDto.email}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Address</label>
+            <input
+              type="text"
+              class="form-control"
+              name="address"
+              th:value="${memberDto.address}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Point</label>
+            <input
+              type="text"
+              class="form-control"
+              name="userPoint"
+              th:value="${memberDto.userPoint}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">User Rank</label>
+            <input
+              type="text"
+              class="form-control"
+              name="userRank"
+              th:value="${memberDto.userRank}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Birth Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datepicker01"
+              placeholder="YYYY/MM/DD"
+              name="userBday"
+              th:value="${memberDto.userBday}"
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Passport Number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="passport"
+              th:value="${memberDto.passport}"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <p>User Available</p>
+            <label
+              >available<input
+                type="radio"
+                name="UserAvailable"
+                value="1"
+                checked
+            /></label>
+            <label
+              >unavailable<input type="radio" name="UserAvailable" value="0"
+            /></label>
+          </div>
+          <button type="button confirm" class="btn btn-primary btn-lg">
+            Submit
+          </button>
+          <button type="button reset" class="btn btn-secondary btn-lg">
+            Reset
+          </button>
+        </form>
+      </div>
+      <script></script>
+    </div>
+  </body>
+</html>

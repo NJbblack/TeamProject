@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>Q&A BOARD VIEW</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <input
+        type="hidden"
+        name="qnaNo"
+        id="qnaNoForDelete"
+        th:value="${qnaBoardDto.qnaNo}"
+      />
+      <div id="boardSending">
+        <h2>Q&A Board View</h2>
+        <table class="table">
+          <colgroup>
+            <col style="width: 25%; background-color: #eee" class="font900" />
+            <col style="width: 75%" />
+          </colgroup>
+          <tr>
+            <th>Title</th>
+            <td th:text="${qnaBoardDto.qnaTitle}"></td>
+          </tr>
+          <tr>
+            <th>Writer</th>
+            <td th:text="${memberDto.userNickname}"></td>
+          </tr>
+
+          <tr>
+            <th>Date</th>
+            <td th:text="${qnaBoardDto.qnaRegDate}"></td>
+          </tr>
+
+          <tr class="boardContents">
+            <th>Contents</th>
+            <td th:text="${qnaBoardDto.qnaContents}"></td>
+          </tr>
+        </table>
+        <div class="joinBtn">
+          <td>
+            <a
+              href=""
+              class="btn btn-primary sessionCheck"
+              th:href="@{/board/qnaboardmodify(no=${qnaBoardDto.qnaNo})}"
+              >Modify</a
+            >
+          </td>
+          <td>
+            <a
+              href=""
+              class="btn btn-danger"
+              id="btnDeleteQnaBoardAjax"
+              th:href="@{/board/qnaBoardDeleteProcess(no=${qnaBoardDto.qnaNo})}"
+              >Delete</a
+            >
+          </td>
+        </div>
+        <div class="replyBox">
+          <ul>
+            <li>댓글이 출력됩니다.</li>
+            <li>댓글이 출력됩니다.</li>
+            <li>댓글이 출력됩니다.</li>
+            <li>댓글이 출력됩니다.</li>
+          </ul>
+        </div>
+        <hr />
+        <div class="container" style="width: 100vw !important">
+          <div class="row" style="width: 80vw !important">
+            <div class="col-9">
+              <label
+                for="exampleFormControlTextarea1"
+                class="form-label"
+              ></label>
+              <textarea
+                class="form-control reply"
+                style="margin-bottom: 10px !important; margin-top: 0 !important"
+                id="exampleFormControlTextarea1"
+                rows="4"
+                placeholder="Write Reply"
+              ></textarea>
+            </div>
+            <div class="col-1 mt-4">
+              <button
+                class="btn btn-warning btn-lg sessionCheck"
+                id="btnComment"
+                style="width: 200px; height: 115px"
+              >
+                COMMENT
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script th:inline="javascript">
+        const qnaId = [[${qnaBoardDto.qnaNo}]];
+        console.log(qnaId); // 1
+        function loadReply(){
+            const sendData = {
+                qnaId: qnaId
+            }
+           $.ajax({
+                url: "/board/getAllQnaComment", // Board Controller에 Request Mapping("/board")가 있으므로 풀 경로를 써줘야 함
+                data: sendData,
+                type: "POST",
+                success:function(response) {
+                    // console.log(response);
+                    let tempHtml = "";
+                    $.each(response, function(idx, item){
+                        tempHtml += `<li>${item.commenter}  |  ${item.comments}</li>`// commenter가 표시될 수 있게 수정
+                    });
+                    $(".replyBox ul").html(tempHtml);
+                },
+                error: function(error) {
+                  console.log(error);
+                }
+            });
+        }
+
+        loadReply();
+
+        $("#btnComment").on("click", function() {
+            const sendData = {
+                qnaId: qnaId,
+                comments: $(".reply").val(),
+              }
+              console.log(sendData);
+              $.ajax({
+                url: "/board/insertQnaComment",  // Board Controller에 Request Mapping("/board")가 있으므로 풀 경로를 써줘야 함
+                data: sendData,
+                type: "POST",
+                success:function(response) {
+                  console.log(response);
+                    let tempHtml = "";
+                    $.each(response, function(idx, item){
+                        tempHtml += `<li>${item.commenter}  |  ${item.comments}</li>` // commenter가 표시될 수 있게 수정
+                    });
+                    $(".replyBox ul").html(tempHtml);
+                    $(".reply").val("");
+                },
+                error: function(error) {
+                  console.log(error);
+                }
+            });
+        });
+      </script>
+    </div>
+  </body>
+</html>

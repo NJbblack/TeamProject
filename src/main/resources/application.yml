@@ -1,0 +1,55 @@
+#server port
+server:
+  port: 9091
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+#spring setting
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: CCC
+    password: 1234
+
+  thymeleaf:
+    cache: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+      location: C:/upload/
+
+  devtools:
+    liverelaod:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    "[com.jjang051.replyboard03]": DEBUG
+
+mybatis:
+  mapper-locations: classpath:mapper/sqlmapper/**/*.xml
+  config-location: classpath:mapper/config/config.xml
+  type-aliases-package: com.jjang051.replyboard03.dto
+
+file:
+  path: C:/UploadedFiles/
+
+jpa:
+  open-in-view: true
+  show-sql: true
+  database: oracle
+  database-platform: org.hibernate.dialect.Oracle10gDialect
+  hibernate:
+    ddl-auto: update
+    naming:
+      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>FAQ BOARD MODIFY</title>
+  </head>
+  <body>
+    <div class="formContainer" id="contents" layout:fragment="contents">
+      <div id="boardSending">
+        <h2>FAQ Board Modify</h2>
+        <form action="/board/faqBoardModifyProcess" method="post" class="mt-5">
+          <input
+            type="hidden"
+            name="no"
+            th:value="${session.loggedMember.no}"
+          />
+          <input type="hidden" name="faqNo" th:value="${faqBoardDto.faqNo}" />
+
+          <div class="mb-3">
+            <label for="subject" class="form-label">SUBJECT</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subject"
+              name="faqTitle"
+              th:value="${faqBoardDto.faqTitle}"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="txt" class="form-label">CONTENTS</label>
+            <textarea
+              class="form-control"
+              id="txt"
+              rows="4"
+              name="faqContents"
+              th:text="${faqBoardDto.faqContents}"
+            ></textarea>
+          </div>
+
+          <div class="mt-5 text-center">
+            <button type="submit" class="btn btn-lg btn-primary">
+              CONFIRM
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

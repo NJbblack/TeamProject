@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  layout:decorate="~{/layout/layout.html}"
+>
+  <head>
+    <title>ADMIN REVIEW MODIFY</title>
+  </head>
+  <body>
+    <div
+      class="container1 formContainer"
+      id="contents"
+      layout:fragment="contents"
+    >
+      <div id="sending">
+        <h2>Admin Review Modify</h2>
+        <form
+          action="/admin/reviewModifyProcess"
+          method="post"
+          th:object="${reviewDto}"
+          enctype="multipart/form-data"
+        >
+          <input
+            type="hidden"
+            name="reviewNo"
+            th:value="${reviewDto.reviewNo}"
+          />
+          <input
+            type="hidden"
+            name="reservNo"
+            th:value="${reviewDto.reservNo}"
+          />
+          <input type="hidden" name="pkgNo" th:value="${reviewDto.pkgNo}" />
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Package Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="pkgName"
+              name="pkgName"
+              th:value="${reviewDto.pkgName}"
+              readonly
+            />
+          </div>
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Review Title</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="reviewTitle"
+              name="reviewTitle"
+              th:value="${reviewDto.reviewTitle}"
+            />
+          </div>
+
+          <div class="mb-2 leftAlign">
+            <label for="" class="form-label">Review Contents</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="7"
+              name="reviewContents"
+              th:text="${reviewDto.reviewContents}"
+            >
+            </textarea>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">ratingGS</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratingGS"
+              th:value="${reviewDto.ratingGS}"
+            />
+            <span class="input-group-text">ratingFA</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratingFA"
+              th:value="${reviewDto.ratingFA}"
+            />
+            <span class="input-group-text">ratingCE</span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ratingCE"
+              name="ratingCE"
+              th:value="${reviewDto.ratingCE}"
+            />
+            <span class="input-group-text">ratingAVG</span>
+            <input
+              type="text"
+              class="form-control"
+              name="ratingAVG"
+              th:value="${reviewDto.ratingAVG}"
+              disabled
+            />
+            <span class="input-group-text">ratingAVGTxt</span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ratingAVGTxt"
+              name="ratingAVGTxt"
+              th:value="${reviewDto.ratingAVGTxt}"
+              disabled
+            />
+          </div>
+
+          <!-- <div class="mb-2 leftAlign">
+            <p>Packagle Available</p>
+            <label
+              >available<input
+                type="radio"
+                name="pkgAvailable"
+                value="1"
+                checked
+            /></label>
+            <label
+              >unavailable<input type="radio" name="pkgAvailable" value="0"
+            /></label>
+          </div> -->
+          <div class="joinBtn">
+            <button type="button confirm" class="btn btn-primary btn-lg">
+              Submit
+            </button>
+            <button type="button reset" class="btn btn-secondary btn-lg">
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <script></script>
+    </div>
+  </body>
+</html>
