@@ -1,5 +1,6 @@
 package com.bb.voyage.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,13 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.bb.voyage.dao.PkgDao;
 import com.bb.voyage.dto.PkgDto;
+import com.bb.voyage.dto.PkgSubImgDto;
 import com.bb.voyage.dto.ReviewDto;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PkgServiceImpl implements PkgService {
 
     @Autowired
     PkgDao pkgDao;
+    @Autowired
+    AdminService adminService;
 
     public List<PkgDto> pkgKoreaList() {
         return pkgDao.pkgKoreaList();
@@ -52,10 +59,23 @@ public class PkgServiceImpl implements PkgService {
     }
 
     public List<PkgDto> getTempRecoList(PkgDto pkgDto) {
-        return pkgDao.getTempRecoList(pkgDto);
+        List<PkgDto> pkgList = pkgDao.getTempRecoList(pkgDto);
+        ArrayList<String> randomList = new ArrayList<>();
+        for(int i=0;i<8;i++){
+        randomList.clear();
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg01());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg02());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg03());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg04());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg05());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg06());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg07());
+        randomList.add(adminService.getOnePkgSubImg(pkgList.get(i).getPkgNo()).getSubImg08());
+        pkgList.get(i).setPkgMainRenamedPath(randomList.get((int)Math.round(Math.random()*7)));
+        }
+        return pkgList;
     }
 
-    @Override
     public List<PkgDto> getRecommendedList(HashMap hashMap) {
         return pkgDao.getRecommendedList(hashMap);
     }

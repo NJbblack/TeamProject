@@ -6,7 +6,7 @@
   layout:decorate="~{/layout/layout.html}"
 >
   <head>
-    <title>PACKAGE RECOMMNEDATION</title>
+    <title>PACKAGE RECOMMENDATION</title>
   </head>
   <body>
     <div class="formContainer" id="contents" layout:fragment="contents">
@@ -43,32 +43,44 @@
       <div id="recommendedVideo"></div>
       <div id="recommendedResult"></div>
       <script>
+        let GS = 1;
         let FA = 1;
         let CE = 1;
-        let GS = 1;
         let AVG = 1;
         let array = new Array();
         $(".btnGS").on("click", function () {
-          GS = GS + 0.75;
+          GS = GS + 1;
           $(this).parent().css("display", "none");
         });
         $(".btnCE").on("click", function () {
-          CE = CE + 0.75;
+          CE = CE + 1;
           $(this).parent().css("display", "none");
         });
         $(".btnFA").on("click", function () {
-          FA = FA + 0.75;
+          FA = FA + 1;
           $(this).parent().css("display", "none");
         });
         $(".btnAVG").on("click", function () {
-          AVG = AVG + 0.75;
+          AVG = AVG + 1;
           $(this).parent().css("display", "none");
         });
         $(".btnRF").on("click", function () {
-          // console.log("GS: " + GS);
-          // console.log("CE: " + CE);
-          // console.log("FA: " + FA);
-          // console.log("AVG: " + AVG);
+          if (GS >= 4) {
+            GS = 4;
+          }
+          if (CE >= 4) {
+            CE = 4;
+          }
+          if (FA >= 4) {
+            FA = 4;
+          }
+          if (AVG >= 4) {
+            AVG = 4;
+          }
+          console.log("GS: " + GS);
+          console.log("CE: " + CE);
+          console.log("FA: " + FA);
+          console.log("AVG: " + AVG);
           const sendData = {
             ratedGS: Math.round(GS),
             ratedCE: Math.round(CE),
@@ -84,20 +96,20 @@
               let tempHtml = "";
               tempHtml += `
               <div class="imgFrame">
-                  <img src="http://localhost:9091/upload/${res[0].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[0].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[1].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[1].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[0].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[0].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[1].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[1].pkgNo}"/>
                 </div>
                 <div class="imgFrame">
-                  <img src="http://localhost:9091/upload/${res[2].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[2].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[3].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[3].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[2].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[2].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[3].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[3].pkgNo}"/>
                 </div>
                 <div class="imgFrame">
-                  <img src="http://localhost:9091/upload/${res[4].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[4].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[5].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[5].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[4].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[4].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[5].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[5].pkgNo}"/>
                 </div>
                 <div class="imgFrame">
-                  <img src="http://localhost:9091/upload/${res[6].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[6].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[7].pkgMainRenamedPath}" style="height:45vh;width:45vw" data-no="${res[7].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[6].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[6].pkgNo}"/>
+                  <img src="http://localhost:9091/upload/${res[7].pkgMainRenamedPath}" style="height:70vh;width:45vw" data-no="${res[7].pkgNo}"/>
                 </div>
                   `;
               $("#imageFrame").html(tempHtml);
@@ -137,7 +149,7 @@
                 <div class="col-md-8">
                   <div class="card-body" style="text-align: left;font-size: 14px;color: black;font-weight: bold;">
                   <h5><span class="card-title" style="color: white;display: inline-block;padding: 0.1em 0;background: rgb(152, 55, 146);">
-                    ${item.pkgName}</span>
+                    &nbsp;${item.pkgName}&nbsp;</span>
                     <span style="color: #ccac00; font-size: 17px">${item.ratedAVGTxt}</span>
                   </h5>
                   Package No:ㅤㅤㅤㅤㅤ&nbsp;
