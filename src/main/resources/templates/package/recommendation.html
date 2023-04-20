@@ -9,7 +9,28 @@
     <title>PACKAGE RECOMMENDATION</title>
   </head>
   <body>
-    <div class="formContainer" id="contents" layout:fragment="contents">
+    <div
+      class="formContainer"
+      id="contents"
+      layout:fragment="contents"
+      style="height: 175vh !important"
+    >
+      <video
+        src="/videos/loading.mp4"
+        id="videoObj"
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          min-width: 100%;
+          min-height: 100%;
+          width: 100%;
+          height: auto;
+          z-index: 9999;
+          display: none;
+        "
+      ></video>
       <div class="QuestionTxt">
         <div class="" style="z-index: 29">
           <h2>
@@ -101,7 +122,10 @@
       </div>
       <div id="imageFrame"></div>
       <div id="recommendedVideo"></div>
-      <div id="recommendedResult"></div>
+      <div
+        id="recommendedResult"
+        style="position: relative; top: -85vh; height: 100vh"
+      ></div>
       <script>
         let GS = 1;
         let FA = 1;
@@ -111,7 +135,7 @@
 
         $(".btnGS").on("click", function () {
           const clicked = $(this).parent().parent();
-          if (GS < 4) {
+          if (GS < 3) {
             GS = GS + 1;
           }
           $(this).parent().parent().css("opacity", "0");
@@ -121,7 +145,7 @@
         });
         $(".btnCE").on("click", function () {
           const clicked = $(this).parent().parent();
-          if (CE < 4) {
+          if (CE < 3) {
             CE = CE + 1;
           }
           $(this).parent().parent().css("opacity", "0");
@@ -131,7 +155,7 @@
         });
         $(".btnFA").on("click", function () {
           const clicked = $(this).parent().parent();
-          if (FA < 4) {
+          if (FA < 3) {
             FA = FA + 1;
           }
           $(this).parent().parent().css("opacity", "0");
@@ -141,7 +165,7 @@
         });
         $(".btnAVG").on("click", function () {
           const clicked = $(this).parent().parent();
-          if (AVG < 4) {
+          if (AVG < 3) {
             AVG = AVG + 1;
           }
           $(this).parent().parent().css("opacity", "0");
@@ -197,13 +221,18 @@
                   </div>
                 </div>
                   `;
+
               $("#imageFrame").html(tempHtml);
             },
           });
         });
-        $("#imageFrame").on("click", ".imgFrame div label img", function () {
-          $(this).parent().parent().parent().css("display", "none");
-          array.push($(this).data("no"));
+        $("#imageFrame").on("click", ".imgFrame div label", function () {
+          const clicked = $(this).parent().parent();
+          setTimeout(function () {
+            clicked.css("display", "none");
+          }, 500);
+          $(this).parent().parent().css("opacity", "0");
+          array.push($(this).children("img").data("no"));
           const sendData = {
             pkgNo01: array[0],
             pkgNo02: array[1],
@@ -219,13 +248,11 @@
               let tempVideo = `
               <video src="/videos/recommendation.mp4" autoplay muted loop class="visual_img" style="position:fixed; width:100vw; height:100vh; left:0; top:0;"></video>
               `;
-              $("#recommendedVideo").html(tempVideo);
-
               let tempHtml = "";
               $.each(response, function (idx, item) {
                 tempHtml += `
                 <a href="/package/pkgdetailview?pkgNo=${item.pkgNo}"
-                class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;">
+                class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;" data-aos="fade">
                 <div class="row g-0">
                   <div class="col-md-4">
                   <img src="http://localhost:9091/upload/${item.pkgMainRenamedPath}" class="img-fluid rounded-start mt-3 ml-1 packageImage"
@@ -261,8 +288,14 @@
           </a>
               `;
               });
-              $("#recommendedResult").html(tempHtml);
-              $(".footer").css("display", "none");
+              $("#videoObj").css("display", "block");
+              $("#videoObj").trigger("play");
+              setTimeout(function () {
+                $("#videoObj").css("display", "none");
+                $("#recommendedVideo").html(tempVideo);
+                $("#recommendedResult").html(tempHtml);
+                $(".footer").css("display", "none");
+              }, 3500);
             },
           });
         });

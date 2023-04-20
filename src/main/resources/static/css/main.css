@@ -1618,7 +1618,6 @@ h2 {
 
 #imageFrame {
   position: relative;
-  height: 100vh;
   top: -100vh;
 }
 #imageFrame div {
