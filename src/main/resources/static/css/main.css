@@ -1560,3 +1560,34 @@ h2 {
 .btnGoReserv {
   margin-top: 0 !important;
 }
+
+.QuestionTxt div {
+  margin-top: 5vh;
+}
+.QuestionTxt div h2 {
+  display: block;
+  text-align: center;
+  font-size: 32px;
+}
+.QuestionTxt div div {
+  margin: 6vh auto;
+  display: flex;
+  width: 65vw;
+  height: 50vh;
+  font-size: 25px;
+  flex-direction: row;
+  text-align: center;
+}
+.QuestionTxt div div div:hover {
+  font-size: 50px;
+}
+.QuestionTxt div div label {
+  display: block;
+  font-weight: 700;
+}
+.QuestionTxt div div label img {
+  width: 32.5vw;
+  height: 45vh;
+  padding-left: 1vw;
+  margin-bottom: 2vh;
+}

@@ -10,33 +10,86 @@
   </head>
   <body>
     <div class="formContainer" id="contents" layout:fragment="contents">
-      <h3>Package Recommendation</h3>
-      <div class="">
+      <div class="QuestionTxt">
         <div class="">
-          <label class="btnGS">GS<input type="radio" name="Q01" /></label>
-          <label class="btnFA">FA<input type="radio" name="Q01" /></label>
+          <h2>Q1 여행 장소를 정해야 한다! 어디든 갈 수 있다면 나는?</h2>
+          <div>
+            <label class="btnAVG" btn-outline-dark>
+              <img src="/images/recommendation/q1AVG.jpg" />
+              사람들과 볼거리가 많은 유명 관광지로! AVG</label
+            >
+            <label class="btnGS">
+              <img src="/images/recommendation/q1GS.jpg" />
+              공기 좋고 조용한 푸르른 자연 속으로! GS</label
+            >
+          </div>
         </div>
         <div class="">
-          <label class="btnGS">GS<input type="radio" name="Q02" /></label>
-          <label class="btnFA">FA<input type="radio" name="Q02" /></label>
-        </div>
-        <div class="">
-          <label class="btnGS">GS<input type="radio" name="Q03" /></label>
-          <label class="btnAVG">AVG<input type="radio" name="Q03" /></label>
-        </div>
-        <div class="">
-          <label class="btnAVG">AVG<input type="radio" name="Q04" /></label>
-          <label class="btnCE">CE<input type="radio" name="Q04" /></label>
-        </div>
-        <div class="">
-          <label class="btnCE">CE<input type="radio" name="Q05" /></label>
-          <label class="btnFA">FA<input type="radio" name="Q05" /></label>
-        </div>
-        <div class="">
-          <label class="btnCE btnRF">CE<input type="radio" name="Q06" /></label>
-          <label class="btnAVG btnRF"
-            >AVG<input type="radio" name="Q06"
+          Q2 긴장되고 설레는 첫 공항! <br />
+          <label class="btnCE"
+            >무조건 2시간 전 도착 엄수! CE<input type="radio" name="Q05"
           /></label>
+          <br />
+          <label class="btnFA"
+            >아슬아슬하게 도착해도... 어떻게든 되겠지ㅎㅎ FA<input
+              type="radio"
+              name="Q05"
+          /></label>
+          <br />
+        </div>
+        <div class="">
+          Q3 눈앞에 펄쳐진 산호빛 바다를 본 당신의 선택은? <br />
+          <label class="btnAVG"
+            >에어컨이 빵빵한 오션뷰 호텔에서 달콤한 휴식~~ AVG<input
+              type="radio"
+              name="Q04"
+          /></label>
+          <br />
+          <label class="btnFA"
+            >당장 수영복을 입고 바다로 뛰어든다!!! FA<input
+              type="radio"
+              name="Q04"
+          /></label>
+          <br />
+        </div>
+        <div class="">
+          Q4 둘 중 절대 포기할 수 없는 것은? <br />
+          <label class="btnCE"
+            >구비구비 산골짜기 고즈넉한 온천료칸! CE<input
+              type="radio"
+              name="Q01"
+          /></label>
+          <br />
+          <label class="btnFA"
+            >도심 한복판 초호화 풀옵션 5성급 호텔! FA<input
+              type="radio"
+              name="Q01"
+          /></label>
+          <br />
+        </div>
+        <div class="">
+          Q5 둘 중 내가 더 잘 할 수 있는 연기는? <br />
+          <label class="btnGS">
+            화 났는데 안 난 척 하기 GS<input type="radio" name="Q02"
+          /></label>
+          <br />
+          <label class="btnAVG"
+            >무서운데 안 무서운 척 하기 AVG<input type="radio" name="Q02"
+          /></label>
+          <br />
+        </div>
+        <div class="">
+          Q6 여행지에서 하루를 마무리하며 노을을 바라보는데... <br />
+          <label class="btnGS btnRF"
+            >남는건 사진뿐! 앨범에 담는다. GS<input type="radio" name="Q06"
+          /></label>
+          <br />
+          <label class="btnCE btnRF"
+            >이 순간을 온전히 눈과 마음으로 담는다. CE<input
+              type="radio"
+              name="Q06"
+          /></label>
+          <br />
         </div>
       </div>
       <div id="imageFrame"></div>
@@ -49,34 +102,30 @@
         let AVG = 1;
         let array = new Array();
         $(".btnGS").on("click", function () {
-          GS = GS + 1;
+          if (GS < 4) {
+            GS = GS + 1;
+          }
           $(this).parent().css("display", "none");
         });
         $(".btnCE").on("click", function () {
-          CE = CE + 1;
+          if (CE < 4) {
+            CE = CE + 1;
+          }
           $(this).parent().css("display", "none");
         });
         $(".btnFA").on("click", function () {
-          FA = FA + 1;
+          if (FA < 4) {
+            FA = FA + 1;
+          }
           $(this).parent().css("display", "none");
         });
         $(".btnAVG").on("click", function () {
-          AVG = AVG + 1;
+          if (AVG < 4) {
+            AVG = AVG + 1;
+          }
           $(this).parent().css("display", "none");
         });
         $(".btnRF").on("click", function () {
-          if (GS >= 4) {
-            GS = 4;
-          }
-          if (CE >= 4) {
-            CE = 4;
-          }
-          if (FA >= 4) {
-            FA = 4;
-          }
-          if (AVG >= 4) {
-            AVG = 4;
-          }
           console.log("GS: " + GS);
           console.log("CE: " + CE);
           console.log("FA: " + FA);
@@ -95,29 +144,41 @@
               // console.log(res);
               let tempHtml = "";
               tempHtml += `
-              <div class="imgFrame" style="display:flex; text-align:center;">
-                  <img src="http://localhost:9091/upload/${res[0].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[0].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[1].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[1].pkgNo}"/>
+              <div class="imgFrame">
+                <h4>Which one do you prefer?</h4>
+                  <div style="display:flex; text-align:center;">
+                    <img src="http://localhost:9091/upload/${res[0].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[0].pkgNo}"/>
+                    <img src="http://localhost:9091/upload/${res[1].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[1].pkgNo}"/>
+                  </div>
                 </div>
-                <div class="imgFrame" style="display:flex; text-align:center;">
-                  <img src="http://localhost:9091/upload/${res[2].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[2].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[3].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[3].pkgNo}"/>
+                <div class="imgFrame">
+                <h4>Which one do you prefer?</h4>
+                  <div style="display:flex; text-align:center;">
+                    <img src="http://localhost:9091/upload/${res[2].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[2].pkgNo}"/>
+                    <img src="http://localhost:9091/upload/${res[3].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[3].pkgNo}"/>
+                  </div>
                 </div>
-                <div class="imgFrame" style="display:flex; text-align:center;">
-                  <img src="http://localhost:9091/upload/${res[4].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[4].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[5].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[5].pkgNo}"/>
+                <div class="imgFrame">
+                <h4>Which one do you prefer?</h4>
+                  <div style="display:flex; text-align:center;">
+                    <img src="http://localhost:9091/upload/${res[4].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[4].pkgNo}"/>
+                    <img src="http://localhost:9091/upload/${res[5].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[5].pkgNo}"/>
+                  </div>
                 </div>
-                <div class="imgFrame" style="display:flex; text-align:center;">
-                  <img src="http://localhost:9091/upload/${res[6].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[6].pkgNo}"/>
-                  <img src="http://localhost:9091/upload/${res[7].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[7].pkgNo}"/>
+                <div class="imgFrame">
+                <h4>Which one do you prefer?</h4>
+                  <div style="display:flex; text-align:center;">
+                    <img src="http://localhost:9091/upload/${res[6].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[6].pkgNo}"/>
+                    <img src="http://localhost:9091/upload/${res[7].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[7].pkgNo}"/>
+                  </div>
                 </div>
                   `;
               $("#imageFrame").html(tempHtml);
             },
           });
         });
-        $("#imageFrame").on("click", ".imgFrame img", function () {
-          $(this).parent().css("display", "none");
+        $("#imageFrame").on("click", ".imgFrame div img", function () {
+          $(this).parent().parent().css("display", "none");
           array.push($(this).data("no"));
           const sendData = {
             pkgNo01: array[0],
@@ -177,6 +238,7 @@
               `;
               });
               $("#recommendedResult").html(tempHtml);
+              $(".footer").css("display", "none");
             },
           });
         });
