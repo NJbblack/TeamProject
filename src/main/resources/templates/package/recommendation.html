@@ -258,6 +258,10 @@
             pkgNo03: array[2],
             pkgNo04: array[3],
           };
+          console.log(array[3]);
+          if (array[3] == undefined) {
+            return false;
+          }
           $.ajax({
             url: "/package/getRecommendedList",
             data: sendData,
@@ -265,7 +269,7 @@
             success: function (response) {
               console.log(response);
               let tempVideo = `
-              <video class="pkgCountryVideo visual_img" src="/videos/recommendation.mp4" autoplay muted loop style="position:fixed; width:100vw; height:100vh; left:0; top:0;"></video>
+              <video class="pkgCountryVideo visual_img" src="/videos/recommendation.mp4" autoplay muted loop></video>
               `;
               let tempHtml = "";
               $.each(response, function (idx, item) {

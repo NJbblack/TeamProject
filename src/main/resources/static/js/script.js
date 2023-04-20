@@ -144,7 +144,8 @@ $("#btnCurrentReserv").on("click", function (e) {
             </div>
           </div>
         </button>
-        </form>`;
+        </form>
+        `;
       });
       $(".result").html(tempHtml);
     },
@@ -172,7 +173,8 @@ $("#btnPastReserv").on("click", function (e) {
         <input type="hidden" name="reservNo" value=${item.reservNo}>
         <button href="" class="card cardReserv btn-secondary w-100" style="height:26vh;" disabled>
           <div class="card-text"><strong><small>Reservation No: ${item.reservNo}</small></strong>ㅤㅤㅤ&nbsp;&nbsp;&nbsp;
-          <a href="/reservation/review?reservNo=${item.reservNo}&selectedPkgNo=${item.selectedPkgNo}" class="btn btn-dark btnReview" style="padding:3px; padding-bottom:8px; opacity:${item.reviewAvailable};">Write Review</a>
+          <a href="/reservation/review?reservNo=${item.reservNo}&selectedPkgNo=${item.selectedPkgNo}" class="btn btn-dark btnReview" 
+          style="padding:3px; padding-bottom:8px; opacity:${item.reviewAvailable}; position:absolute; top:0vh; right:11.5vw">Write Review</a>
           </div>
           <div class="card-body package_result row">
             <div class="col-2">
@@ -181,7 +183,7 @@ $("#btnPastReserv").on("click", function (e) {
             alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
             />
             </div>
-            <div class="col-3" style="text-align:left; margin-top:-45px; margin-left:45px; ">
+            <div class="col-3" style="text-align:left; margin-top:-20px; margin-left:45px; ">
               <h4 class="card-title"><strong>${item.reservPkg}</strong></h4>
               <div>
               <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
@@ -229,7 +231,8 @@ $("#btnCanceledReserv").on("click", function (e) {
         >
         <input type="hidden" name="reservNo" value=${item.reservNo}>
         <button href="" class="card cardReserv btn-danger w-100" style="height:26vh;" disabled>
-        <div class="card-text"><strong><small>Reservation No: ${item.reservNo}</small></strong></div>
+        <div class="card-text"><strong><small>Reservation No: ${item.reservNo}</small></strong>ㅤㅤㅤ&nbsp;&nbsp;&nbsp;
+        </div>
         <div class="card-body package_result row">
           <div class="col-2">
           <img
@@ -285,36 +288,35 @@ $("#btnReqOngoing").on("click", function (e) {
         <input type="hidden" name="reqNo" value=${item.reqNo}>
         <input type="hidden" name="reservNo" value=${item.reservNo}>
         <button href="" class="card cardReserv btn-outline-primary w-100" style="height:26vh;">
-          <div class="card-text"><strong><small>Request No: ${item.reqNo}</small></strong></div>
-          <div class="card-body package_result row w-100">
-            <div class="col-3 reqPic">
-            <img
-            src="http://localhost:9091/upload/${item.requestImg}"
-            alt="${item.requestImg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
-            />
-            </div>
-            <div class="col-3 reqInfo" style="text-align:left;">
-              <h4 class="card-title"><strong>${item.pkgName}</strong></h4>
-              <div>
-              <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
-              </div>
-              <div>
-              <span style="font-size:13px;">Departure Date: </span><br><strong style="font-size:16px;">${item.pkgDepart}</strong>
-              </div>
-              <div>
-              <span style="font-size:13px;">Return Date: </span><br><strong style="font-size:16px;">${item.pkgReturn}</strong>
-              </div>
-            </div>
-            <div class="col-6 reqDetail" style="text-align:left;">
-            <div style="position: absolute; top:0; right:5px;">
-            <span style="font-size:13px;">Request Date: &ensp;</span><strong>20${item.reqDate}</strong>
+        <div class="card-text"><strong><small>Reservation No: ${item.reservNo}</small></strong>ㅤㅤㅤ&nbsp;&nbsp;&nbsp;
+        <a href="/reservation/review?reservNo=${item.reservNo}&selectedPkgNo=${item.selectedPkgNo}" class="btn btn-dark btnReview" style="padding:3px; padding-bottom:8px; opacity:${item.reviewAvailable};">Write Review</a>
+        </div>
+        <div class="card-body package_result row">
+          <div class="col-2">
+          <img
+          src="http://localhost:9091/upload/${item.reservImg}"
+          alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
+          />
+          </div>
+          <div class="col-3" style="text-align:left; margin-top:-20px; margin-left:45px; ">
+            <h4 class="card-title"><strong>${item.reservPkg}</strong></h4>
+            <div>
+            <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
             </div>
             <div>
-              <span style="font-size:13px;">Request Title: </span><br><h3>${item.reqTitle}</h3>
-              </div>
-            <span style="font-size:12px; line-height:0; margin:0;">${item.reqContents}</span>
+            <span style="font-size:13px;">Departure Date: </span><br><strong style="font-size:16px;">${item.reservDepart}</strong>
+            </div>
+            <div>
+            <span style="font-size:13px;">Return Date: </span><br><strong style="font-size:16px;">${item.reservReturn}</strong>
             </div>
           </div>
+          <div class="col" style="text-align:left; margin-top:0; margin-left:-110px;  margin-bottom:40px;">
+          <div style="position: absolute; top:0; right:5px;">
+          <span style="font-size:13px;">Reservation Date: &ensp;</span><strong>20${item.reservRegDate}</strong>
+          </div>
+          <span style="font-size:12px; line-height:0; margin:0;">${item.pkgContents}</span>
+          </div>
+        </div>
         </button>
         </form>`;
       });
