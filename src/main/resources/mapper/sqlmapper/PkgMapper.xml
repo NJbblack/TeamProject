@@ -30,7 +30,7 @@
   </update>
 
   <select id="getReview" parameterType="PkgDto" resultType="ReviewDto">
-    SELECT * FROM REVIEW WHERE PKGNAME=#{pkgName} ORDER BY REVIEWNO DESC
+    SELECT * FROM REVIEW WHERE PKGNAME=#{pkgName} AND REVIEWAVAILABLE=1 ORDER BY REVIEWNO DESC
   </select>
 
   <select id="getSelectedReview" parameterType="Integer" resultType="ReviewDto">

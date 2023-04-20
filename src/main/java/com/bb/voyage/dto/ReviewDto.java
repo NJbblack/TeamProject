@@ -18,4 +18,5 @@ public class ReviewDto {
     private String ratingAVGTxt;
     private String pkgName;
     private String reviewName; // DB에 안 들어감
+    private int reviewAvailable;
 }

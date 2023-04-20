@@ -20,6 +20,7 @@
                     <th scope="col">Package Name</th>
                     <th scope="col">Review Title</th>
                     <th scope="col">Review Date</th>
+                    <th scope="col">Available</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,7 @@
                     <td th:text="${item.pkgName}">2023.03.23</td>
                     <td th:text="${item.reviewTitle}">1</td>
                     <td th:text="${item.reviewDate}">1</td>
+                    <td th:text="${item.reviewAvailable}">1</td>
                     <td><a th:href="@{/admin/reviewmodify(reviewNo=${item.reviewNo})}" class="btn btn-primary btn-sm">MODIFY</a></td>
                   </tr>
                 </tbody>

@@ -174,7 +174,7 @@ $("#btnPastReserv").on("click", function (e) {
         <button href="" class="card cardReserv btn-secondary w-100" style="height:26vh;" disabled>
           <div class="card-text"><strong><small>Reservation No: ${item.reservNo}</small></strong>ㅤㅤㅤ&nbsp;&nbsp;&nbsp;
           <a href="/reservation/review?reservNo=${item.reservNo}&selectedPkgNo=${item.selectedPkgNo}" class="btn btn-dark btnReview" 
-          style="padding:3px; padding-bottom:8px; opacity:${item.reviewAvailable}; position:absolute; top:0vh; right:11.5vw">Write Review</a>
+          style="padding:3px; padding-bottom:8px; opacity:${item.reviewAvailable}; position:absolute; top:0vh; right:13vw">Write Review</a>
           </div>
           <div class="card-body package_result row">
             <div class="col-2">

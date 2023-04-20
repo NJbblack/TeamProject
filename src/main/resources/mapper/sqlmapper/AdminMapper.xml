@@ -296,7 +296,7 @@
 </select>
 
 <update id="reviewModifyProcess" parameterType="ReviewDto">
-  UPDATE REVIEW SET REVIEWTITLE=#{reviewTitle}, REVIEWCONTENTS=#{reviewContents}, RATINGGS=#{ratingGS}, RATINGFA=#{ratingFA}, RATINGCE=#{ratingCE}, RATINGAVG=#{ratingAVG}, RATINGAVGTXT=#{ratingAVGTxt} WHERE REVIEWNO=#{reviewNo}
+  UPDATE REVIEW SET REVIEWTITLE=#{reviewTitle}, REVIEWCONTENTS=#{reviewContents}, RATINGGS=#{ratingGS}, RATINGFA=#{ratingFA}, RATINGCE=#{ratingCE}, RATINGAVG=#{ratingAVG}, RATINGAVGTXT=#{ratingAVGTxt}, REVIEWAVAILABLE=#{reviewAvailable} WHERE REVIEWNO=#{reviewNo}
 </update>
 
 </mapper>
