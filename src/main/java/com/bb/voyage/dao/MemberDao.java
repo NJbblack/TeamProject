@@ -19,4 +19,7 @@ public interface MemberDao {
   public int memberDeleteProcess (MemberDto memberDto);
   public int updateUserAlert(HashMap<String,Integer> hashMap);
   public int updateAdminAlert(Integer userAlert);
+
+  public MemberDto getMemberByReservNo(Integer reservNo);
+
 }

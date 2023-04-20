@@ -64,6 +64,10 @@ public class MemberServiceImpl implements MemberService {
     int result = memberDao.updateAdminAlert(userAlert);
     return result;
   }
+
+  public MemberDto getMemberByReservNo(Integer reservNo) {
+    return memberDao.getMemberByReservNo(reservNo);
+  }
   
   
   

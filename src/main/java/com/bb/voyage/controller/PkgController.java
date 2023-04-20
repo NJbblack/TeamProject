@@ -15,6 +15,7 @@ import com.bb.voyage.dto.PkgDto;
 import com.bb.voyage.dto.PkgSubImgDto;
 import com.bb.voyage.dto.ReviewDto;
 import com.bb.voyage.service.AdminService;
+import com.bb.voyage.service.MemberService;
 import com.bb.voyage.service.PkgService;
 import com.bb.voyage.service.ReservService;
 
@@ -31,6 +32,8 @@ public class PkgController {
     PkgService pkgService;
     @Autowired
     ReservService reservService;
+    @Autowired
+    MemberService memberService;
 
 /////////////////////////////////////////////////////////////////////
 ////Package 관련 컨트롤러
@@ -60,6 +63,10 @@ public class PkgController {
       PkgDto pkgDto = adminService.getOnePkg(pkgNo);
       PkgSubImgDto pkgSubImgDto = adminService.getOnePkgSubImg(pkgNo);
       List<ReviewDto> reviewList =  pkgService.getReview(pkgDto);
+
+      for(ReviewDto item : reviewList){
+      item.setReviewName(memberService.getMemberByReservNo(item.getReservNo()).getUserNickname()); 
+      }
       model.addAttribute("pkgDto", pkgDto);
       model.addAttribute("pkgSubImgDto", pkgSubImgDto);
       model.addAttribute("reviewList", reviewList);

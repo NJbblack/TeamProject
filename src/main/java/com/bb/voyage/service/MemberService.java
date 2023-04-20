@@ -12,5 +12,6 @@ public interface MemberService {
   public int updateUserAlert(int userNo, int userAlert);
   public int clearUserAlert(int userNo);
   public int updateAdminAlert(Integer userAlert);
+  public MemberDto getMemberByReservNo(Integer reservNo);
 
 }

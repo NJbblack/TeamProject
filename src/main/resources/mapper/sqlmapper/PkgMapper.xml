@@ -44,4 +44,5 @@
   <select id="getRecommendedList" parameterType="HashMap" resultType="PkgDto">
     SELECT * FROM PACKAGE WHERE PKGNO = #{pkgNo01} OR PKGNO = #{pkgNo02} OR PKGNO = #{pkgNo03} OR PKGNO = #{pkgNo04} 
   </select>
+
 </mapper>

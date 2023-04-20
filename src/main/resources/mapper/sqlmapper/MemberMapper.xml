@@ -51,4 +51,9 @@
   <update id="updateAdminAlert" parameterType="Integer">
     UPDATE MEMBER SET USERALERT = #{userAlert} WHERE USERRANK = 9
   </update>
+
+    <select id="getMemberByReservNo" parameterType="Integer" resultType="MemberDto">
+  SELECT * FROM MEMBER WHERE NO =(SELECT CUSTOMERNO FROM (SELECT * FROM RESERVATION WHERE RESERVNO = #{reservNo}))
+  </select>
+  
 </mapper>
