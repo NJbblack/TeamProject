@@ -21,6 +21,8 @@ public interface BoardService {
   int faqBoardModifyProcess(FaqBoardDto faqBoardDto);
   int faqBoardDeleteProcess(int faqNo, String userPw);
   
+
+
   // =================NoticeBoard 관련
   List<NoticeBoardDto> getAllNotice(int page, String searchTxt, String category);    
   NoticeBoardDto getOneNotice(int no);
@@ -30,10 +32,14 @@ public interface BoardService {
   int noticeBoardModifyProcess(NoticeBoardDto noticeBoardDto);
   int noticeBoardDeleteProcess(int noticeNo, String userPw);
   
+
+
   // =================Faq/Notice 댓글 관련
   int insertFaqComment(FaqCommentDto faqCommentDto, HttpServletRequest request,  HttpServletResponse response);
   List<FaqCommentDto> getAllFaqComment(int faqId);
 
+
+  
   // =================QnaBoard 관련
   List<QnaBoardDto> getAllQna(int page, String searchTxt, String category);    
   QnaBoardDto getOneQna(int no);

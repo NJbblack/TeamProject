@@ -145,7 +145,8 @@
       #{ratingCE},
       #{ratingAVG},
       #{ratingAVGTxt},
-      #{pkgName}
+      #{pkgName},
+      1
       )
   </insert>
 

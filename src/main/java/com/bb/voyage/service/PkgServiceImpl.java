@@ -9,12 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.bb.voyage.dao.PkgDao;
 import com.bb.voyage.dto.PkgDto;
-import com.bb.voyage.dto.PkgSubImgDto;
 import com.bb.voyage.dto.ReviewDto;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class PkgServiceImpl implements PkgService {
 
@@ -76,11 +72,8 @@ public class PkgServiceImpl implements PkgService {
         return pkgList;
     }
 
-    public List<PkgDto> getRecommendedList(HashMap hashMap) {
+    public List<PkgDto> getRecommendedList(HashMap<String,Object> hashMap) {
         return pkgDao.getRecommendedList(hashMap);
     }
-
-
-    
 
 }

@@ -19,9 +19,6 @@ import com.bb.voyage.service.MemberService;
 import com.bb.voyage.service.PkgService;
 import com.bb.voyage.service.ReservService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @RequestMapping("/package")
 public class PkgController {
@@ -104,7 +101,7 @@ public class PkgController {
     @PostMapping("/getRecommendedList")
     @ResponseBody
     public List<PkgDto> getRecommendedList(int pkgNo01, int pkgNo02, int pkgNo03, int pkgNo04){
-      HashMap hashmap = new HashMap<>();
+      HashMap<String,Object> hashmap = new HashMap<>();
       hashmap.put("pkgNo01", pkgNo01);
       hashmap.put("pkgNo02", pkgNo02);
       hashmap.put("pkgNo03", pkgNo03);

@@ -16,9 +16,6 @@ import com.bb.voyage.dto.RequestDto;
 import com.bb.voyage.service.PkgService;
 import com.bb.voyage.service.ReservService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @RequestMapping("/reservation")
 public class ReservController {

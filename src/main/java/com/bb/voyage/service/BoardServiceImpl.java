@@ -69,6 +69,8 @@ public class BoardServiceImpl implements BoardService {
         return boardDao.faqBoardDeleteProcess(hashMap);
     }
 
+
+
 /////////////////////////////////////////////////////////////////////
 ////NoticeBoard 관련 서비스
     public List<NoticeBoardDto> getAllNotice(int page, String searchTxt, String category) {
@@ -110,6 +112,8 @@ public class BoardServiceImpl implements BoardService {
         return boardDao.noticeBoardDeleteProcess(hashMap);
     }    
 
+
+
 /////////////////////////////////////////////////////////////////////
 ////Faq/Notice 댓글 관련 서비스
     public int insertFaqComment(FaqCommentDto faqCommentDto, HttpServletRequest request,
@@ -126,6 +130,8 @@ public class BoardServiceImpl implements BoardService {
         return faqCommentList;
     }  
 
+
+    
 /////////////////////////////////////////////////////////////////////
 ////QnaBoard 관련 서비스
 public List<QnaBoardDto> getAllQna(int page, String searchTxt, String category) {

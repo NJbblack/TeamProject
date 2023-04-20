@@ -93,6 +93,10 @@ public class ReservServiceImpl implements ReservService{
         return reservDao.reservationModifyProcess(reservDto);
     }
 
+
+
+/////////////////////////////////////////////////////////////////////
+////Request 관련 서비스
     public int requestProcess(RequestDto requestDto) {
         List<RequestDto> requestList = reservDao.getAllRequestFor(requestDto.getReservNo());
         int totalNow = 0;
