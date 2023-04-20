@@ -265,8 +265,8 @@
               let tempHtml = "";
               $.each(response, function (idx, item) {
                 tempHtml += `
-                <a href="/package/pkgdetailview?pkgNo=${item.pkgNo}"
-                class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;" data-aos="fade">
+                <a href="/package/pkgdetailview?pkgNo=${item.pkgNo} "
+                class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;" data-aos="zoom-in" data-aos-duration="600" >
                 <div class="row g-0">
                   <div class="col-md-4">
                   <img src="http://localhost:9091/upload/${item.pkgMainRenamedPath}" class="img-fluid rounded-start mt-3 ml-1 packageImage"
