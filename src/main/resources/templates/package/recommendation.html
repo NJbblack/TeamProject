@@ -123,6 +123,20 @@
       <div id="imageFrame"></div>
       <div id="recommendedVideo"></div>
       <div
+        id="recommendedTitle"
+        style="
+          font-size: 50px;
+          font-weight: 700;
+          position: absolute;
+          top: 20vh;
+          left: 30vw;
+          z-index: 999999;
+          display: none;
+        "
+      >
+        Our Recommendations for you!!!
+      </div>
+      <div
         id="recommendedResult"
         style="position: relative; top: -85vh; height: 100vh"
       ></div>
@@ -193,28 +207,28 @@
               let tempHtml = "";
               tempHtml += `
               <div class="imgFrame" style="z-index: 19">
-                <h2>Which scenery do you prefer?</h2>
+                <h2>Which one do you prefer?</h2>
                   <div style="display:flex; text-align:center;">
                     <label><img src="http://localhost:9091/upload/${res[0].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[0].pkgNo}"/></label>
                     <label><img src="http://localhost:9091/upload/${res[1].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[1].pkgNo}"/></label>
                   </div>
                 </div>
                 <div class="imgFrame" style="z-index: 18">
-                <h2>Which scenery do you prefer?</h2>
+                <h2>Which one do you prefer?</h2>
                   <div style="display:flex; text-align:center;">
                     <label><img src="http://localhost:9091/upload/${res[2].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[2].pkgNo}"/></label>
                     <label><img src="http://localhost:9091/upload/${res[3].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[3].pkgNo}"/></label>
                   </div>
                 </div>
                 <div class="imgFrame" style="z-index: 17">
-                <h2>Which scenery do you prefer?</h2>
+                <h2>Which one do you prefer?</h2>
                   <div style="display:flex; text-align:center;">
                     <label><img src="http://localhost:9091/upload/${res[4].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[4].pkgNo}"/></label>
                     <label><img src="http://localhost:9091/upload/${res[5].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[5].pkgNo}"/></label>
                   </div>
                 </div>
                 <div class="imgFrame" style="z-index: 16">
-                <h2>Which scenery do you prefer?</h2>
+                <h2>Which one do you prefer?</h2>
                   <div style="display:flex; text-align:center;">
                     <label><img src="http://localhost:9091/upload/${res[6].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[6].pkgNo}"/></label>
                     <label><img src="http://localhost:9091/upload/${res[7].pkgMainRenamedPath}" style="height:50vh;width:33.3vw" data-no="${res[7].pkgNo}"/></label>
@@ -292,6 +306,7 @@
               $("#videoObj").trigger("play");
               setTimeout(function () {
                 $("#videoObj").css("display", "none");
+                $("#recommendedTitle").css("display", "block");
                 $("#recommendedVideo").html(tempVideo);
                 $("#recommendedResult").html(tempHtml);
                 $(".footer").css("display", "none");
