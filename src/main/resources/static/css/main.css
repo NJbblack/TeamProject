@@ -1577,14 +1577,16 @@ h2 {
 }
 .QuestionTxt div h2 {
   display: block;
+  width: 71vw;
   font-size: 32px;
-  background-color: white;
+  background-color: blueviolet;
+  text-align: start;
+  color: white;
 }
 .QuestionTxt div div {
   margin: 6vh auto;
   display: flex;
-  width: 67.5vw;
-  height: 55vh;
+  width: 71vw;
   font-size: 25px;
   flex-direction: row;
   text-align: center;
@@ -1592,13 +1594,16 @@ h2 {
 .QuestionTxt div div label {
   display: block;
   font-weight: 700;
-  padding: 20px 10px;
   position: relative;
 }
 .QuestionTxt div div label img {
-  width: 32.5vw;
+  width: 35vw;
   height: 45vh;
-  margin-bottom: 2vh;
+  margin: 0 5px;
+  margin-bottom: 10px;
+}
+.QuestionTxt div div label:hover {
+  color: blueviolet;
 }
 .QuestionTxt div div label:hover:after {
   background-color: rgba(0, 0, 0, 0);
@@ -1607,13 +1612,13 @@ h2 {
   position: absolute;
   content: "";
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 35vw;
+  height: 45vh;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   top: 0;
   left: 0;
-  border-radius: 10px;
+  margin: 0 5px;
 }
 
 #imageFrame {
@@ -1624,7 +1629,6 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: white;
   margin-top: 5vh;
   transition: all ease 0.5s;
   text-align: center;
@@ -1632,14 +1636,16 @@ h2 {
 }
 #imageFrame div h2 {
   display: block;
+  width: 71vw;
   font-size: 32px;
-  background-color: white;
+  background-color: #297bf6;
+  text-align: start;
+  color: white;
 }
 #imageFrame div div {
   margin: 6vh auto;
   display: flex;
   width: 70vw;
-  height: 55vh;
   font-size: 25px;
   flex-direction: row;
   text-align: center;
@@ -1647,13 +1653,13 @@ h2 {
 #imageFrame div div label {
   display: block;
   font-weight: 700;
-  padding: 20px 10px;
   position: relative;
 }
 #imageFrame div div label img {
-  width: 32.5vw;
-  height: 45vh;
-  margin-bottom: 2vh;
+  width: 35vw !important;
+  height: 45vh !important;
+  margin: 0 5px;
+  margin-bottom: 10px;
 }
 #imageFrame div div label:hover:after {
   background-color: rgba(0, 0, 0, 0);
@@ -1662,11 +1668,19 @@ h2 {
   position: absolute;
   content: "";
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 35vw;
+  height: 45vh;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   top: 0;
   left: 0;
-  border-radius: 10px;
+  margin: 0 5px;
+}
+
+.pkgCountryVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }

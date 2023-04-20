@@ -77,4 +77,9 @@ public class PageController {
         return "/transportation/train";
     }
 
+    @GetMapping("/transportation/associated")
+    public String associated(){
+        return "/transportation/associated";
+    }
+
 }
