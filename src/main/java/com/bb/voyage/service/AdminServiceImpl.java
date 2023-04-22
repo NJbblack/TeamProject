@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.bb.voyage.dao.AdminDao;
 import com.bb.voyage.dao.MemberDao;
+import com.bb.voyage.dao.PkgDao;
 import com.bb.voyage.dao.ReservDao;
 import com.bb.voyage.dto.MemberDto;
 import com.bb.voyage.dto.PkgDto;
@@ -33,6 +34,8 @@ public class AdminServiceImpl implements AdminService {
     MemberDao memberDao;
     @Autowired
     MemberService memberService;
+    @Autowired
+    PkgDao pkgDao;
     @Value("${file.path}")
     private String uploadFolder;
 
@@ -267,6 +270,27 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int reviewModifyProcess(ReviewDto reviewDto) {
+
+      double ratingAVG = Math.round(((reviewDto.getRatingCE()+reviewDto.getRatingFA()+reviewDto.getRatingGS())/3.0)*10)/10.0;
+      reviewDto.setRatingAVG(ratingAVG);
+      reviewDto.setRatingAVGTxt(""+ratingAVG);
+      adminDao.reviewModifyProcess(reviewDto);
+      
+      PkgDto pkgDto = reservDao.reqGetPkg(reviewDto.getReservNo());
+      double ratedGS = (double)((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS()-reviewDto.getPreviousGS())/(pkgDto.getRatedCount());
+      double ratedFA = (double)((pkgDto.getRatedFA())*(pkgDto.getRatedCount())+reviewDto.getRatingFA()-reviewDto.getPreviousFA())/(pkgDto.getRatedCount());
+      double ratedCE = (double)((pkgDto.getRatedCE())*(pkgDto.getRatedCount())+reviewDto.getRatingCE()-reviewDto.getPreviousCE())/(pkgDto.getRatedCount());
+      int ratedCount = (pkgDto.getRatedCount());
+      double ratedAvg = Math.round(((ratedGS+ratedFA+ratedCE)/3.0)*10)/10.0;
+      pkgDto.setRatedAVG(ratedAvg);
+      pkgDto.setRatedAVGTxt(""+ratedAvg);
+      pkgDto.setRatedStar(Math.round(pkgDto.getRatedAVG()));
+      pkgDto.setRatedGS(ratedGS);
+      pkgDto.setRatedFA(ratedFA);
+      pkgDto.setRatedCE(ratedCE);
+      pkgDto.setRatedCount(ratedCount);
+      pkgDao.pkgSetRating(pkgDto);
+      reservDao.updateReviewAvailable(reviewDto.getReservNo());
       return adminDao.reviewModifyProcess(reviewDto);
     }
     

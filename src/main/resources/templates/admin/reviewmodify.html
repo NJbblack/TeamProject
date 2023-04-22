@@ -32,6 +32,21 @@
             name="reservNo"
             th:value="${reviewDto.reservNo}"
           />
+          <input
+            type="hidden"
+            name="previousGS"
+            th:value="${reviewDto.ratingGS}"
+          />
+          <input
+            type="hidden"
+            name="previousFA"
+            th:value="${reviewDto.ratingFA}"
+          />
+          <input
+            type="hidden"
+            name="previousCE"
+            th:value="${reviewDto.ratingCE}"
+          />
           <input type="hidden" name="pkgNo" th:value="${reviewDto.pkgNo}" />
           <div class="mb-2 leftAlign">
             <label for="" class="form-label">Package Name</label>

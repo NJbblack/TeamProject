@@ -153,9 +153,9 @@ public class ReservController {
       reviewDto.setRatingAVGTxt(""+ratingAVG);
       reservService.reviewProcess(reviewDto);
       PkgDto pkgDto = reservService.reqGetPkg(reviewDto.getReservNo());
-      int ratedGS = ((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS())/(pkgDto.getRatedCount()+1);
-      int ratedFA = ((pkgDto.getRatedFA())*(pkgDto.getRatedCount())+reviewDto.getRatingFA())/(pkgDto.getRatedCount()+1);
-      int ratedCE = ((pkgDto.getRatedCE())*(pkgDto.getRatedCount())+reviewDto.getRatingCE())/(pkgDto.getRatedCount()+1);
+      double ratedGS = (double)((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS())/(pkgDto.getRatedCount()+1);
+      double ratedFA = (double)((pkgDto.getRatedFA())*(pkgDto.getRatedCount())+reviewDto.getRatingFA())/(pkgDto.getRatedCount()+1);
+      double ratedCE = (double)((pkgDto.getRatedCE())*(pkgDto.getRatedCount())+reviewDto.getRatingCE())/(pkgDto.getRatedCount()+1);
       int ratedCount = (pkgDto.getRatedCount()+1);
       double ratedAvg = Math.round(((ratedGS+ratedFA+ratedCE)/3.0)*10)/10.0;
       pkgDto.setRatedAVG(ratedAvg);

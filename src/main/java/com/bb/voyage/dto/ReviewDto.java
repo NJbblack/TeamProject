@@ -11,12 +11,15 @@ public class ReviewDto {
     private String reviewTitle;
     private String reviewContents;
     private String reviewDate;
-    private int ratingGS; 
-    private int ratingFA; 
-    private int ratingCE; 
+    private double ratingGS; 
+    private double ratingFA; 
+    private double ratingCE; 
     private double ratingAVG;
     private String ratingAVGTxt;
     private String pkgName;
     private String reviewName; // DB에 안 들어감
     private int reviewAvailable;
+    private double previousGS; // DB에 안 들어감
+    private double previousFA; // DB에 안 들어감
+    private double previousCE; // DB에 안 들어감
 }

@@ -19,9 +19,9 @@ public class PkgDto {
     private String pkgMainOriginPath;
     private String pkgMainRenamedPath;
     private int pkgSubImgNo;
-    private int ratedGS;
-    private int ratedFA;
-    private int ratedCE; 
+    private double ratedGS;
+    private double ratedFA;
+    private double ratedCE; 
     private int ratedCount;
     private double ratedAVG;
     private String ratedAVGTxt;
