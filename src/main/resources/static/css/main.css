@@ -350,6 +350,8 @@ h2 {
 }
 
 /************ common end ************/
+/*===========================================================*/
+/*======================= INDEX START =======================*/
 .visual {
   position: relative;
   width: 100%;
@@ -814,57 +816,11 @@ h2 {
   right: -50px;
 }
 
-/************ discount 끝 **************/
-.btnWrite {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pageNum {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.searchContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.searchContainer .searchContainer_item {
-  display: flex;
-}
-
-.btnWrite {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pageNum {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.searchContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.searchContainer .searchContainer_item {
-  display: flex;
-}
-
-.section {
-  background-color: #fff;
-}
-
+/********** discount 끝 *************/
+/*======================= INDEX END =========================*/
+/*===========================================================*/
+/*===========================================================*/
+/*======================= COUNTRY START =====================*/
 .main-img {
   width: 100%;
   top: 0;
@@ -1179,22 +1135,6 @@ h2 {
   overflow: hidden;
 }
 
-.adminContainer {
-  padding: 200px 200px 100px 250px;
-  text-align: center;
-}
-.adminContainer .form-label {
-  font-size: 28px;
-  font-weight: 500;
-  display: inline-block;
-  padding: 0.1em 0;
-  background: #b9d6e0;
-  color: black;
-}
-.adminContainer .col {
-  font-size: 25px;
-}
-
 #sending img {
   width: 1100px;
 }
@@ -1312,6 +1252,101 @@ h2 {
   margin: 0 auto;
 }
 
+.discount2 {
+  width: 99vw;
+  margin-left: -16vw;
+  overflow: hidden;
+  margin-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 100px;
+  background: rgb(34, 193, 195);
+  background: linear-gradient(0deg, rgba(34, 193, 195, 0.3547794118) 41%, rgba(253, 45, 45, 0) 100%);
+}
+.discount2 .container {
+  flex-direction: column;
+  align-items: start;
+}
+.discount2 .discount-title {
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+.discount2 .discount-title .btn {
+  border: solid var(--green) 1px;
+  color: var(--green);
+  border-radius: 20px;
+  margin: auto 0;
+}
+.discount2 .discount-title .btn:hover {
+  color: var(--white);
+  background-color: var(--green);
+}
+.discount2 .discount-title .discount-btn {
+  margin-left: 50px;
+}
+.discount2 .discount-title h2 {
+  margin-left: 70px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+.discount2 .discount-title h4 {
+  margin-right: 70px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: var(--red);
+  text-align: right;
+}
+.discount2 .discount-banner {
+  width: 100%;
+  position: relative;
+}
+.discount2 .discount-banner .btn {
+  position: absolute;
+  transform: translateY(-80px);
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  color: var(--gray);
+}
+.discount2 .discount-banner .btn--prev {
+  left: -50px;
+}
+.discount2 .discount-banner .btn--next {
+  right: -50px;
+}
+.discount2 .discount-img {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.discount2 .discount-img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 280px;
+  width: 100%;
+}
+.discount2 .discount-img .sticker {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: #fff;
+  background-color: var(--red);
+  opacity: 0.7;
+  padding: 10px;
+  /* position을 주면 inline도 상하패딩 먹음 */
+}
+.discount2 .discount-txt h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+/*======================= COUNTRY END =======================*/
+/*===========================================================*/
+/*===========================================================*/
+/*======================= PACKAGE START =====================*/
 .companyContainer {
   padding: 200px 200px 100px 200px;
 }
@@ -1366,323 +1401,5 @@ h2 {
   height: 100vh;
 }
 
-.adminList {
-  font-size: 12px;
-}
-.adminList .btn {
-  font-size: 12px;
-  padding: 7.5px 10px;
-}
-
-.paging {
-  font-weight: 700;
-}
-
-.packageImage {
-  width: 10vw;
-  height: 28vh;
-}
-
-.packageDetailImage {
-  width: 18vw !important;
-  height: 26vh !important;
-  margin-bottom: 0;
-}
-
-.discount2 {
-  width: 99vw;
-  margin-left: -16vw;
-  overflow: hidden;
-  margin-top: 50px;
-  padding-top: 30px;
-  padding-bottom: 100px;
-  background: rgb(34, 193, 195);
-  background: linear-gradient(0deg, rgba(34, 193, 195, 0.3547794118) 41%, rgba(253, 45, 45, 0) 100%);
-}
-
-.discount2 .container {
-  flex-direction: column;
-  align-items: start;
-}
-
-.discount2 .discount-title {
-  width: 100%;
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  justify-content: space-between;
-  vertical-align: middle;
-}
-
-.discount2 .discount-title .btn {
-  border: solid var(--green) 1px;
-  color: var(--green);
-  border-radius: 20px;
-  margin: auto 0;
-}
-
-.discount2 .discount-title .discount-btn {
-  margin-left: 50px;
-}
-
-.discount2 .discount-title .btn:hover {
-  color: var(--white);
-  background-color: var(--green);
-}
-
-.discount2 .discount-title h2 {
-  margin-right: 70px;
-  margin-bottom: 10px;
-  text-align: right;
-}
-
-.discount2 .discount-title h4 {
-  margin-right: 70px;
-  margin-bottom: 30px;
-  font-size: 20px;
-  color: var(--red);
-  text-align: right;
-}
-
-.discount2 .discount-banner {
-  width: 100%;
-  position: relative;
-}
-
-.discount2 .discount-img {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-}
-
-.discount2 .discount-img img {
-  -o-object-fit: cover;
-     object-fit: cover;
-  height: 280px;
-  width: 100%;
-}
-
-.discount2 .discount-img .sticker {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  color: #fff;
-  background-color: var(--red);
-  opacity: 0.7;
-  padding: 10px;
-  /* position을 주면 inline도 상하패딩 먹음 */
-}
-
-.discount2 .discount-txt h3 {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 20px 0;
-}
-
-.discount2 .discount-banner .btn {
-  position: absolute;
-  transform: translateY(-80px);
-  background-color: rgba(255, 255, 255, 0.5);
-  z-index: 2;
-  color: var(--gray);
-}
-
-.discount2 .discount-banner .btn--prev {
-  left: -50px;
-}
-
-.discount2 .discount-banner .btn--next {
-  right: -50px;
-}
-
-/*** admin alarm ***/
-.infoContainer {
-  position: relative;
-}
-
-.adminAlarm {
-  position: fixed;
-  bottom: 0.5vh;
-  right: 0.5vw;
-  width: 22.5vw;
-  height: 10vh;
-  padding: 15px 15px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: solid 2px rgba(100, 100, 100, 0.5);
-  border-radius: 30px;
-  opacity: 0;
-}
-.adminAlarm .adminAlarmExit {
-  display: absolute;
-  width: 15px;
-  top: 0;
-  right: 0;
-  color: var(--red);
-}
-.adminAlarm .adminAlarmExit a {
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  font-size: 24px;
-}
-
-.star-rating {
-  display: flex;
-  flex-direction: row-reverse;
-  font-size: 1rem;
-  line-height: 1.7rem;
-  justify-content: space-around;
-  padding: 0 0.2em;
-  text-align: center;
-  width: 5em;
-}
-
-.star-rating input {
-  display: none;
-}
-
-.star-rating label {
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1.3px;
-  -webkit-text-stroke-color: #2b2a29;
-  cursor: pointer;
-}
-
-.star-rating :checked ~ label {
-  -webkit-text-fill-color: #ccac00;
-}
-
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  -webkit-text-fill-color: #ccac00;
-}
-
-.btnGoReserv {
-  margin-top: 0 !important;
-}
-
-.QuestionTxt {
-  position: relative;
-  height: 100vh;
-}
-.QuestionTxt div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: white;
-  margin-top: 5vh;
-  transition: all ease 0.5s;
-  text-align: center;
-  margin-left: 2vw;
-}
-.QuestionTxt div h2 {
-  display: block;
-  width: 71vw;
-  font-size: 32px;
-  background-color: rgb(12, 12, 14);
-  text-align: start;
-  color: white;
-}
-.QuestionTxt div div {
-  margin: 6vh auto;
-  display: flex;
-  width: 71vw;
-  font-size: 25px;
-  flex-direction: row;
-  text-align: center;
-}
-.QuestionTxt div div label {
-  display: block;
-  font-weight: 700;
-  position: relative;
-}
-.QuestionTxt div div label img {
-  width: 35vw;
-  height: 45vh;
-  margin: 0 5px;
-  margin-bottom: 10px;
-}
-.QuestionTxt div div label:hover {
-  color: blueviolet;
-}
-.QuestionTxt div div label:hover:after {
-  background-color: rgba(0, 0, 0, 0);
-}
-.QuestionTxt div div label::after {
-  position: absolute;
-  content: "";
-  display: block;
-  width: 35vw;
-  height: 45vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  top: 0;
-  left: 0;
-  margin: 0 5px;
-}
-
-#imageFrame {
-  position: relative;
-  top: -100vh;
-}
-#imageFrame div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-top: 5vh;
-  transition: all ease 0.5s;
-  text-align: center;
-  margin-left: 2vw;
-}
-#imageFrame div h2 {
-  display: block;
-  width: 71vw;
-  font-size: 32px;
-  background-color: #297bf6;
-  text-align: start;
-  color: white;
-}
-#imageFrame div div {
-  margin: 6vh auto;
-  display: flex;
-  width: 70vw;
-  font-size: 25px;
-  flex-direction: row;
-  text-align: center;
-}
-#imageFrame div div label {
-  display: block;
-  font-weight: 700;
-  position: relative;
-}
-#imageFrame div div label img {
-  width: 35vw !important;
-  height: 45vh !important;
-  margin: 0 5px;
-  margin-bottom: 10px;
-}
-#imageFrame div div label:hover:after {
-  background-color: rgba(0, 0, 0, 0);
-}
-#imageFrame div div label::after {
-  position: absolute;
-  content: "";
-  display: block;
-  width: 35vw;
-  height: 45vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  top: 0;
-  left: 0;
-  margin: 0 5px;
-}
-
-.pkgCountryVideo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  -o-object-fit: fill;
-     object-fit: fill;
-}
+/*======================= PACKAGE END =======================*/
+/*===========================================================*/
