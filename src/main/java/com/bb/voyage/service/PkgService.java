@@ -7,6 +7,7 @@ import com.bb.voyage.dto.PkgDto;
 import com.bb.voyage.dto.ReviewDto;
 
 public interface PkgService {
+    // =================Package 관련
     public List<PkgDto> pkgKoreaList();
     public List<PkgDto> pkgJapanList();
     public List<PkgDto> pkgChinaList();

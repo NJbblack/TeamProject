@@ -228,29 +228,7 @@ public String reviewmodify(int reviewNo, Model model){
 
 @PostMapping("/reviewModifyProcess")
 public String reviewModifyProcess(ReviewDto reviewDto){
-  
-  // double ratingAVG = Math.round(((reviewDto.getRatingCE()+reviewDto.getRatingFA()+reviewDto.getRatingGS())/3.0)*10)/10.0;
-  // reviewDto.setRatingAVG(ratingAVG);
-  // reviewDto.setRatingAVGTxt(""+ratingAVG);
-  // adminService.reviewModifyProcess(reviewDto);
-  // PkgDto pkgDto = reservService.reqGetPkg(reviewDto.getReservNo());
-  // int ratedGS = ((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS())/(pkgDto.getRatedCount());
-  // int ratedFA = ((pkgDto.getRatedFA())*(pkgDto.getRatedCount())+reviewDto.getRatingFA())/(pkgDto.getRatedCount());
-  // int ratedCE = ((pkgDto.getRatedCE())*(pkgDto.getRatedCount())+reviewDto.getRatingCE())/(pkgDto.getRatedCount());
-  // int ratedCount = (pkgDto.getRatedCount());
-  // double ratedAvg = Math.round(((ratedGS+ratedFA+ratedCE)/3.0)*10)/10.0;
-  // pkgDto.setRatedAVG(ratedAvg);
-  // pkgDto.setRatedAVGTxt(""+ratedAvg);
-  // pkgDto.setRatedStar(Math.round(pkgDto.getRatedAVG()));
-  // pkgDto.setRatedGS(ratedGS);
-  // pkgDto.setRatedFA(ratedFA);
-  // pkgDto.setRatedCE(ratedCE);
-  // pkgDto.setRatedCount(ratedCount);
-  // pkgService.pkgSetRating(pkgDto);
-  // reservService.updateReviewAvailable(reviewDto.getReservNo());
-
   adminService.reviewModifyProcess(reviewDto);
-
   return "redirect:/admin/reviewlist";
 }
 }

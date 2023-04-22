@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bb.voyage.dao.PkgDao;
 import com.bb.voyage.dao.ReservDao;
 import com.bb.voyage.dto.MemberDto;
 import com.bb.voyage.dto.PkgDto;
@@ -22,6 +23,8 @@ public class ReservServiceImpl implements ReservService{
     ReservDao reservDao;
     @Autowired
     MemberService memberService;
+    @Autowired
+    PkgDao pkgDao;
 
 /////////////////////////////////////////////////////////////////////
 ////Reservation 관련 서비스
@@ -163,7 +166,26 @@ public class ReservServiceImpl implements ReservService{
 /////////////////////////////////////////////////////////////////////
 ////Review 관련 서비스
     public int reviewProcess(ReviewDto reviewDto) {
+        double ratingAVG = Math.round(((reviewDto.getRatingCE()+reviewDto.getRatingFA()+reviewDto.getRatingGS())/3.0)*10)/10.0;
+        reviewDto.setRatingAVG(ratingAVG);
+        reviewDto.setRatingAVGTxt(""+ratingAVG);
         int result = reservDao.reviewProcess(reviewDto);
+        
+        PkgDto pkgDto = reservDao.reqGetPkg(reviewDto.getReservNo());
+        double ratedGS = (double)((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS())/(pkgDto.getRatedCount()+1);
+        double ratedFA = (double)((pkgDto.getRatedFA())*(pkgDto.getRatedCount())+reviewDto.getRatingFA())/(pkgDto.getRatedCount()+1);
+        double ratedCE = (double)((pkgDto.getRatedCE())*(pkgDto.getRatedCount())+reviewDto.getRatingCE())/(pkgDto.getRatedCount()+1);
+        int ratedCount = (pkgDto.getRatedCount()+1);
+        double ratedAvg = Math.round(((ratedGS+ratedFA+ratedCE)/3.0)*10)/10.0;
+        pkgDto.setRatedAVG(ratedAvg);
+        pkgDto.setRatedAVGTxt(""+ratedAvg);
+        pkgDto.setRatedStar(Math.round(pkgDto.getRatedAVG()));
+        pkgDto.setRatedGS(ratedGS);
+        pkgDto.setRatedFA(ratedFA);
+        pkgDto.setRatedCE(ratedCE);
+        pkgDto.setRatedCount(ratedCount);
+        pkgDao.pkgSetRating(pkgDto);
+        reservDao.updateReviewAvailable(reviewDto.getReservNo());
         return result;
     }
 

@@ -21,7 +21,6 @@ public class HomeController {
   public String home(Model model) {
     List<PkgDto> recommededPkgList = pkgService.getRecommendedPkgList();
     List<PkgDto> discountedPkgList = pkgService.getDiscountedPkgList();
-
     model.addAttribute("recommededPkgList", recommededPkgList);
     model.addAttribute("discountedPkgList", discountedPkgList);
     return "/index/index";

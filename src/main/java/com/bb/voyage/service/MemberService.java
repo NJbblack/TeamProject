@@ -3,6 +3,7 @@ package com.bb.voyage.service;
 import com.bb.voyage.dto.MemberDto;
 
 public interface MemberService {
+  // =================Member 관련
   public MemberDto getMemberInfo(int no);
   public int memberJoinProcess(MemberDto memberDto);
   public MemberDto memberLoginProcess(MemberDto memberDto);

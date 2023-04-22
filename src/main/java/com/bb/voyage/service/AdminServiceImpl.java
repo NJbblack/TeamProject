@@ -274,7 +274,7 @@ public class AdminServiceImpl implements AdminService {
       double ratingAVG = Math.round(((reviewDto.getRatingCE()+reviewDto.getRatingFA()+reviewDto.getRatingGS())/3.0)*10)/10.0;
       reviewDto.setRatingAVG(ratingAVG);
       reviewDto.setRatingAVGTxt(""+ratingAVG);
-      adminDao.reviewModifyProcess(reviewDto);
+      int result = adminDao.reviewModifyProcess(reviewDto);
       
       PkgDto pkgDto = reservDao.reqGetPkg(reviewDto.getReservNo());
       double ratedGS = (double)((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS()-reviewDto.getPreviousGS())/(pkgDto.getRatedCount());
@@ -291,9 +291,6 @@ public class AdminServiceImpl implements AdminService {
       pkgDto.setRatedCount(ratedCount);
       pkgDao.pkgSetRating(pkgDto);
       reservDao.updateReviewAvailable(reviewDto.getReservNo());
-      return adminDao.reviewModifyProcess(reviewDto);
+      return result;
     }
-    
-    
-
 }
