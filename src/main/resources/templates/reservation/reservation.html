@@ -244,6 +244,8 @@
           loadPkg();
         }
 
+      /*=======================================================================*/
+      /*=========================== RESERVATION START =========================*/
       // 패키지 여행 상품 검색 기능
       $("#btnPkgSearch").on("click", function () {
       const sendData = {
@@ -340,26 +342,10 @@
               $("#selectedPkgInfo").html(tempHtml);
             }})
             gsap.to("#selectedPkgInfo",{opacity:1, delay:0.2,})
-
       })
-
-
-
-      
-
-
-        // 달력 함수 script.js로 옮겼습니다.
+      /*=========================== RESERVATION END =========================*/
+      /*=======================================================================*/
       </script>
     </div>
   </body>
 </html>
-
-<!-- <div class="joinBtn">
-<button type="button confirm" class="btn btn-primary btn-lg">
-Submit
-</button>
-<button type="button reset" class="btn btn-secondary btn-lg">
-Reset
-</button>
-</div>
-</div> -->

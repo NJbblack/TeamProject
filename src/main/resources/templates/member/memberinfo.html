@@ -130,12 +130,13 @@
       <div id="alarmMsg" class="adminAlarm" style="display:block;">
       </div>
       <script>
-
-      //////////////////////화면 알림창 관련 Json 받아오기
-      getAlert();
-      function getAlert() {
-        const sendData = {
-          userNo: $("#loggedMemberNo").val(),
+        /*=======================================================================*/
+        /*=========================== INFO ALERT START ==========================*/
+        // 화면 알림창 관련 Json 받아오기
+        getAlert();
+        function getAlert() {
+          const sendData = {
+            userNo: $("#loggedMemberNo").val(),
           };
           $.ajax({
             url: "/member/memberAlert",
@@ -143,9 +144,9 @@
             type: "POST",
             success: function (response) {
               console.log(response);
-              if(response.msg){
-              $("#alarmMsg").attr("style","opacity:1 !important");
-              const tempHtml = `
+              if (response.msg) {
+                $("#alarmMsg").attr("style", "opacity:1 !important");
+                const tempHtml = `
               <div>
                 <div style="text-align:center;"><span>${response.msg}</span></div>
                 <div class="row text-center mt-2">
@@ -160,21 +161,20 @@
                 </div>
               </div>
               `;
-              $("#alarmMsg").html(tempHtml);}
-              else{
-
+                $("#alarmMsg").html(tempHtml);
+              } else {
               }
             },
           });
         }
 
-        //////////////////////알림 메시지 띄우기
-        $("#alarmMsg").on("click","#btnAlarmClose",function () {
-          $("#alarmMsg").css("display","none");
-        })
+        // 화면 알림 메시지 띄우기
+        $("#alarmMsg").on("click", "#btnAlarmClose", function () {
+          $("#alarmMsg").css("display", "none");
+        });
 
-        $("#alarmMsg").on("click","#btnAlarmConfirm",function () {
-          $("#alarmMsg").css("display","none");
+        $("#alarmMsg").on("click", "#btnAlarmConfirm", function () {
+          $("#alarmMsg").css("display", "none");
           const sendData = {
             userNo: $("#loggedMemberNo").val(),
           };
@@ -183,9 +183,12 @@
             data: sendData,
             type: "POST",
             success: function (response) {
-              console.log(response)
-            }
-        })})
+              console.log(response);
+            },
+          });
+        });
+        /*=========================== INFO ALERT END ============================*/
+        /*=======================================================================*/
       </script>
     </div>
   </body>

@@ -58,29 +58,10 @@
       </div>
       <div id="alarmMsg" class="adminAlarm" style="display: block"></div>
       <script>
-        //////////////////////화면 알림창 관련 Json 받아오기
-        getAlert();
-        function getAlert() {
-          const sendData = {
-            userNo: $("#loggedMemberNo").val(),
-          };
-          $.ajax({
-            url: "/member/memberreservation",
-            data: sendData,
-            type: "POST",
-            success: function (response) {
-              console.log(response);
-            },
-          });
-        }
-
+        /*=======================================================================*/
+        /*=========================== INFO RESERVATION START ====================*/
+        // Reservation 화면 로드시 자동으로 현재 Reservation을 띄우기
         currentReserv();
-        console.log("안녕");
-        //////////////////////info 화면에서 버튼 클릭시 현재 예약 정보를 뿌리는 기능
-        $("#btnCurrentReserv").on("click", function (e) {
-          currentReserv();
-        });
-
         function currentReserv() {
           const sendData = {
             no: $("#loggedMemberNo").val(),
@@ -134,8 +115,12 @@
             },
           });
         }
+        /*=========================== INFO RESERVATION END ======================*/
+        /*=======================================================================*/
 
-        //////////////////////화면 알림창 관련 Json 받아오기
+        /*=======================================================================*/
+        /*=========================== INFO ALERT START ==========================*/
+        // 화면 알림창 관련 Json 받아오기
         getAlert();
         function getAlert() {
           const sendData = {
@@ -171,7 +156,7 @@
           });
         }
 
-        //////////////////////알림 메시지 띄우기
+        // 화면 알림 메시지 띄우기
         $("#alarmMsg").on("click", "#btnAlarmClose", function () {
           $("#alarmMsg").css("display", "none");
         });
@@ -190,6 +175,8 @@
             },
           });
         });
+        /*=========================== INFO ALERT END ============================*/
+        /*=======================================================================*/
       </script>
     </div>
   </body>

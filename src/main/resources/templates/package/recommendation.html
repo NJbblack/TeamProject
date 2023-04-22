@@ -26,7 +26,7 @@
           min-width: 100%;
           min-height: 100%;
           width: 100%;
-          height: auto;
+          height: 100%;
           z-index: 9999;
           display: none;
         "
@@ -146,6 +146,9 @@
         style="position: relative; top: -85vh; height: 100vh"
       ></div>
       <script>
+        /*=======================================================================*/
+        /*=========================== RECOMMENDATION #1 START ===================*/
+        // 텍스트 선택지로 추천 후보 리스트를 선정한 후, 서브 이미지 랜덤 표시
         let GS = 1;
         let FA = 1;
         let CE = 1;
@@ -245,6 +248,12 @@
             },
           });
         });
+        /*=========================== RECOMMENDATION #1 END =====================*/
+        /*=======================================================================*/
+
+        /*=======================================================================*/
+        /*=========================== RECOMMENDATION #2 START ===================*/
+        // 표시된 이미지 중 선택된 이미지에만 해당하는 패키지 상품을 추천목록으로 표시
         $("#imageFrame").on("click", ".imgFrame div label", function () {
           const clicked = $(this).parent().parent();
           setTimeout(function () {
@@ -268,6 +277,8 @@
             type: "POST",
             success: function (response) {
               console.log(response);
+              $("#airportVideo").css("display", "none");
+
               let tempVideo = `
               <video class="pkgCountryVideo visual_img" src="/videos/recommendation.mp4" autoplay muted loop></video>
               `;
@@ -315,7 +326,6 @@
               $("#videoObj").trigger("play");
               setTimeout(function () {
                 $("#videoObj").css("display", "none");
-                $("#airportVideo").css("display", "none");
                 $("#recommendedTitle").css("display", "block");
                 $("#recommendedVideo").html(tempVideo);
                 $("#recommendedResult").html(tempHtml);
@@ -324,6 +334,8 @@
             },
           });
         });
+        /*=========================== RECOMMENDATION #2 END =====================*/
+        /*=======================================================================*/
       </script>
     </div>
   </body>
