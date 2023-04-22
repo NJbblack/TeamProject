@@ -154,6 +154,7 @@
     UPDATE RESERVATION SET REVIEWAVAILABLE = 0 WHERE RESERVNO = #{reservNo}
   </update>
   
-
-
+  <select id="getUserReview" parameterType = "Integer" resultType="ReviewDto">
+    SELECT * FROM REVIEW WHERE MEMBERNO = #{no}
+  </select>
 </mapper>

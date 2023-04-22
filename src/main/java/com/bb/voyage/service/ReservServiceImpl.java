@@ -194,5 +194,9 @@ public class ReservServiceImpl implements ReservService{
         return result;
     }
 
+    public List<ReviewDto> getUserReview(int no) {
+        return reservDao.getUserReview(no);
+    }
+
 
 }

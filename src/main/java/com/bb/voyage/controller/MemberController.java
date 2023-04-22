@@ -39,6 +39,11 @@ public class MemberController {
     return "/member/memberrequest";
   }
 
+  @GetMapping("/memberreview")
+  public String memberreview(){
+    return "/member/memberreview";
+  }
+
   @PostMapping("/memberAlert")
   @ResponseBody
   public Map<String, Object> getMemberInfo(int userNo) {

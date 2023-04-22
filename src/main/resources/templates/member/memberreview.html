@@ -32,14 +32,14 @@
           <hr />
 
           <div>
-            <a href="/member/memberrequest" style="color: rgb(5, 99, 193)"
-              ><h4>My <br />Request</h4></a
+            <a href="/member/memberrequest"
+              ><h5 style="font-weight: normal">My Request</h5></a
             >
           </div>
           <hr />
           <div>
-            <a href="/member/memberreview"
-              ><h5 style="font-weight: normal">My Review</h5></a
+            <a href="/member/memberrequest" style="color: rgb(5, 99, 193)"
+              ><h4>My <br />Review</h4></a
             >
           </div>
         </div>
@@ -49,80 +49,101 @@
           th:value="${session.loggedMember.no}"
         />
         <div id="" class="reserv col ms-5">
-          <h2>My Request</h2>
-          <a class="btn btn-primary" id="btnReqOngoing">Ongoing Request</a>
-          <a class="btn btn-secondary" id="btnReqClosed">Closed Request</a>
-          <div class="resultReq"></div>
+          <h2>My Review</h2>
+          <div class="row">
+            <div class="col-7">
+              <hr />
+              <table width="100%" class="table" id="reviewTable">
+                <thead>
+                  <tr class="table-dark" style="font-weight: 700">
+                    <th>Rating</th>
+                    <th>Package Name</th>
+                    <th>Review Title</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="reviewList"></tbody>
+              </table>
+            </div>
+            <div class="col-5" id="reviewDetails"></div>
+          </div>
         </div>
       </div>
       <div id="alarmMsg" class="adminAlarm" style="display: block"></div>
       <script>
         /*=======================================================================*/
-        /*=========================== INFO REQUEST START ========================*/
-        // Request 화면 로드시 자동으로 현재 Request 띄우기
-        reqOngoing();
-        $("#btnReqOngoing").on("click", function (e) {
-          reqOngoing();
+        /*=========================== INFO REVIEW START ========================*/
+        // Review 화면 로드시 자동으로 Review 목록 띄우기
+        reviewList();
+        $("#btnReviewOngoing").on("click", function (e) {
+          reviewList();
         });
 
-        function reqOngoing() {
+        function reviewList() {
           const sendData = {
             no: $("#loggedMemberNo").val(),
           };
           $.ajax({
-            url: "/reservation/getAllRequest",
+            url: "/reservation/getUserReview",
             data: sendData,
             type: "POST",
             success: function (response) {
               console.log(response);
               let tempHtml = "";
               $.each(response, function (idx, item) {
-                tempHtml += `      <div class="resultReq">
-        <form           
-        action="/reservation/requestview"
-        method="post"
-        >
-        <input type="hidden" name="reqNo" value=${item.reqNo}>
-        <input type="hidden" name="reservNo" value=${item.reservNo}>
-        <button href="" class="card cardReserv btn-outline-primary w-100" style="height:26vh;">
-          <div class="card-text"><strong><small>Request No: ${item.reqNo}</small></strong></div>
-          <div class="card-body package_result row w-100">
-            <div class="col-3 reqPic">
-            <img
-            src="http://localhost:9091/upload/${item.requestImg}"
-            alt="${item.requestImg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
-            />
-            </div>
-            <div class="col-3 reqInfo" style="text-align:left;">
-              <h4 class="card-title"><strong>${item.pkgName}</strong></h4>
-              <div>
-              <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
-              </div>
-              <div>
-              <span style="font-size:13px;">Departure Date: </span><br><strong style="font-size:16px;">${item.pkgDepart}</strong>
-              </div>
-              <div>
-              <span style="font-size:13px;">Return Date: </span><br><strong style="font-size:16px;">${item.pkgReturn}</strong>
-              </div>
-            </div>
-            <div class="col-6 reqDetail" style="text-align:left;">
-            <div style="position: absolute; top:0; right:5px;">
-            <span style="font-size:13px;">Request Date: &ensp;</span><strong>20${item.reqDate}</strong>
-            </div>
-            <div>
-              <span style="font-size:13px;">Request Title: </span><br><h3>${item.reqTitle}</h3>
-              </div>
-            <span style="font-size:12px; line-height:0; margin:0;">${item.reqContents}</span>
-            </div>
-          </div>
-        </button>
-        </form>`;
+                tempHtml += `     
+                    <tr id="selectedReview" class="btn-outline-secondary" style="color:black" data-no="${item.reviewNo}">
+                      <td style="color:#ccac00; font-weight: 700;">${item.ratingAVG}</td>
+                      <td style="font-weight: 700;"><a href="/package/pkgdetailview?pkgNo=${item.pkgNo}" target="_blank">${item.pkgName}</a></td>
+                      <td style="font-weight: 700;">${item.reviewTitle}</td>
+                      <td >${item.reviewDate}</td>
+                    </tr>
+                `;
               });
-              $(".resultReq").html(tempHtml);
+              $("#reviewList").html(tempHtml);
             },
           });
         }
-        /*=========================== INFO REQUEST END ========================*/
+        // Review 클릭시 해당 Review의 내용 표시
+        $("#reviewTable").on("click", "#selectedReview", function () {
+          const sendData = {
+            reviewNo: $(this).data("no"),
+          };
+          $.ajax({
+            url: "/package/getSelectedReview",
+            data: sendData,
+            type: "POST",
+            success: function (response) {
+              console.log(response);
+              let tempHtml = "";
+              tempHtml += `
+                <hr>
+                <table width="100%" class="table table-bordered" id="reviewTable" style="border-color:#8c8e90;">
+                  <thead>
+                    <tr class="table-dark" style="font-weight:700;">
+                      <th width="35%">Rating Details</th>
+                      <th>Review Contents</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-start" style="font-size:13px;">
+                      <strong>General Service: </strong><p style="color:#ccac00; font-size:16px; font-weight:700; text-align:right; margin:0;">${response.ratingGS}/5</p>
+                      <br>
+                      <strong>Food & Accommodation: </strong><p style="color:#ccac00; font-size:16px; font-weight:700; text-align:right; margin:0;">${response.ratingFA}/5</p>
+                      <br>
+                      <strong>Cost-Effectiveness: </strong><p style="color:#ccac00; font-size:16px; font-weight:700; text-align:right; margin:0;">${response.ratingCE}/5</p>
+                      </td>
+                      <td class="text-start"><br><span style="font-size: 14px; color:black;">${response.reviewContents}</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                `;
+              $("#reviewDetails").html(tempHtml);
+            },
+          });
+        });
+        /*=========================== INFO REVIEW END ========================*/
         /*=======================================================================*/
 
         /*=======================================================================*/

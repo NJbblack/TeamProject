@@ -151,4 +151,10 @@ public class ReservController {
       reservService.reviewProcess(reviewDto);
       return "redirect:/member/memberreservation";
     }
+
+    @PostMapping("/getUserReview")
+    @ResponseBody
+    public List<ReviewDto> getUserReview(int no){
+        return reservService.getUserReview(no);
+    }
 }

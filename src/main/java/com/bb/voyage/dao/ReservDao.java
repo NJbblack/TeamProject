@@ -49,4 +49,6 @@ public interface ReservDao {
   // =================Review 관련
   public int reviewProcess(ReviewDto reviewDto);
   public int updateReviewAvailable(int reservNo);
+  public List<ReviewDto> getUserReview(int no); 
+
 }
