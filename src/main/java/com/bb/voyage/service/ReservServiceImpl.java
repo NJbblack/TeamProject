@@ -186,6 +186,7 @@ public class ReservServiceImpl implements ReservService{
         pkgDto.setRatedCount(ratedCount);
         pkgDao.pkgSetRating(pkgDto);
         reservDao.updateReviewAvailable(reviewDto.getReservNo());
+        memberService.updateUserAlert(reviewDto.getMemberNo(),31);
         return result;
     }
 

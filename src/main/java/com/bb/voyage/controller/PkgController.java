@@ -19,6 +19,9 @@ import com.bb.voyage.service.MemberService;
 import com.bb.voyage.service.PkgService;
 import com.bb.voyage.service.ReservService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/package")
 public class PkgController {
@@ -106,6 +109,7 @@ public class PkgController {
       hashmap.put("pkgNo02", pkgNo02);
       hashmap.put("pkgNo03", pkgNo03);
       hashmap.put("pkgNo04", pkgNo04);
+      log.info("결과: {}",hashmap);
       return pkgService.getRecommendedList(hashmap);
     }
 

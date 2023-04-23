@@ -19,6 +19,7 @@
       <div class="col-5">
         <input type="hidden" name="reqNo" value=${requestDto.reqNo}>
         <input type="hidden" name="reqUserNo" value=${requestDto.reqUserNo}>
+        <h3>Ongoing Request</h3>
           <table class="table " style="text-align: left; font-size: 14px;">
             <colgroup>
             <col width="25%">
@@ -41,12 +42,12 @@
         </form>
         <div id="" class="reserv mt-5">
           <!-- <a class="btn btn-primary" id="btnReqOngoing">Ongoing Request</a> -->
-          <a class="btn btn-secondary" id="btnReqClosed">Closed Request</a>
+          <!-- <a class="btn btn-secondary" id="btnReqClosed">Closed Request</a>
           <div class="resultReq">
-          </div>
+          </div> -->
         </div>
-          <h2>User Information</h2>
-          <table class="table mt-5">
+          <h3>User Information</h3>
+          <table class="table">
             <colgroup>
               <col class="th" />
               <col class="td" />
@@ -96,7 +97,7 @@
         <input type="hidden" id="loggedMemberNo" th:value="${memberDto.no}">
       <div class="col-7">
           <div id="sending">
-            <h2>Admin Modify Reservation</h2>
+            <h3>Admin Modify Reservation</h3>
             <form action="/admin/reservModifyProcess" method="post">
               <input
                 type="hidden"

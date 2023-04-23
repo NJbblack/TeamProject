@@ -55,6 +55,7 @@ public class MemberController {
       case 20: sendJson.put("msg","Your new Request was sent successfully!"); break;
       case 21: sendJson.put("msg","Your Request is now updated!"); break;
       case 22: sendJson.put("msg","Your Request is now closed!"); break;
+      case 31: sendJson.put("msg","Your Review is now registered!"); break;
       case 90: sendJson.put("msg","A New Request has arrived!"); break;
       default: return null;
     }

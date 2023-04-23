@@ -149,7 +149,7 @@ public class ReservController {
     @PostMapping("/reviewProcess")
     public String reviewProcess(ReviewDto reviewDto){
       reservService.reviewProcess(reviewDto);
-      return "redirect:/member/memberreservation";
+      return "redirect:/member/memberreview";
     }
 
     @PostMapping("/getUserReview")

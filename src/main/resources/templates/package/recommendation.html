@@ -135,8 +135,8 @@
           position: absolute;
           top: 20vh;
           left: 30vw;
-          z-index: 999999;
           display: none;
+          color: white;
         "
       >
         Our Recommendations for you!!!
@@ -254,37 +254,45 @@
         /*=======================================================================*/
         /*=========================== RECOMMENDATION #2 START ===================*/
         // 표시된 이미지 중 선택된 이미지에만 해당하는 패키지 상품을 추천목록으로 표시
+        let isOngoing = false;
         $("#imageFrame").on("click", ".imgFrame div label", function () {
-          const clicked = $(this).parent().parent();
-          setTimeout(function () {
-            clicked.css("display", "none");
-          }, 500);
-          $(this).parent().parent().css("opacity", "0");
-          array.push($(this).children("img").data("no"));
-          const sendData = {
-            pkgNo01: array[0],
-            pkgNo02: array[1],
-            pkgNo03: array[2],
-            pkgNo04: array[3],
-          };
-          console.log(array[3]);
-          if (array[3] == undefined) {
+          if (isOngoing) {
             return false;
-          }
-          $.ajax({
-            url: "/package/getRecommendedList",
-            data: sendData,
-            type: "POST",
-            success: function (response) {
-              console.log(response);
-              $("#airportVideo").css("display", "none");
+          } else {
+            isOngoing = true;
+            const clicked = $(this).parent().parent();
+            setTimeout(function () {
+              clicked.css("display", "none");
+            }, 500);
+            setTimeout(function () {
+              isOngoing = false;
+            }, 500);
+            $(this).parent().parent().css("opacity", "0");
+            array.push($(this).children("img").data("no"));
+            const sendData = {
+              pkgNo01: array[0],
+              pkgNo02: array[1],
+              pkgNo03: array[2],
+              pkgNo04: array[3],
+            };
+            console.log(array[3]);
+            if (array[3] == undefined) {
+              return false;
+            }
+            $.ajax({
+              url: "/package/getRecommendedList",
+              data: sendData,
+              type: "POST",
+              success: function (response) {
+                console.log(response);
+                $("#airportVideo").css("display", "none");
 
-              let tempVideo = `
+                let tempVideo = `
               <video class="pkgCountryVideo visual_img" src="/videos/recommendation.mp4" autoplay muted loop></video>
               `;
-              let tempHtml = "";
-              $.each(response, function (idx, item) {
-                tempHtml += `
+                let tempHtml = "";
+                $.each(response, function (idx, item) {
+                  tempHtml += `
                 <a href="/package/pkgdetailview?pkgNo=${item.pkgNo} "
                 class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;" data-aos="zoom-in" data-aos-duration="600" >
                 <div class="row g-0">
@@ -321,18 +329,19 @@
             </div>
           </a>
               `;
-              });
-              $("#videoObj").css("display", "block");
-              $("#videoObj").trigger("play");
-              setTimeout(function () {
-                $("#videoObj").css("display", "none");
-                $("#recommendedTitle").css("display", "block");
-                $("#recommendedVideo").html(tempVideo);
-                $("#recommendedResult").html(tempHtml);
-                $(".footer").css("display", "none");
-              }, 3500);
-            },
-          });
+                });
+                $("#videoObj").css("display", "block");
+                $("#videoObj").trigger("play");
+                setTimeout(function () {
+                  $("#videoObj").css("display", "none");
+                  $("#recommendedTitle").css("display", "block");
+                  $("#recommendedVideo").html(tempVideo);
+                  $("#recommendedResult").html(tempHtml);
+                  $(".footer").css("display", "none");
+                }, 3500);
+              },
+            });
+          }
         });
         /*=========================== RECOMMENDATION #2 END =====================*/
         /*=======================================================================*/

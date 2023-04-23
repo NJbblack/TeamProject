@@ -155,6 +155,6 @@
   </update>
   
   <select id="getUserReview" parameterType = "Integer" resultType="ReviewDto">
-    SELECT * FROM REVIEW WHERE MEMBERNO = #{no}
+    SELECT * FROM REVIEW WHERE MEMBERNO = #{no} ORDER BY REVIEWNO DESC
   </select>
 </mapper>

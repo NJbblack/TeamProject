@@ -28,7 +28,7 @@ $("#btnCurrentReserv").on("click", function (e) {
               alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
               />
               </div>
-              <div class="col-3" style="text-align:left; margin-top:-20px; margin-left:45px; ">
+              <div class="col-3" style="text-align:left; margin-top:-7%; margin-left:45px; ">
                 <h4 class="card-title"><strong>${item.reservPkg}</strong></h4>
                 <div>
                 <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
@@ -87,7 +87,7 @@ $("#btnPastReserv").on("click", function (e) {
               alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
               />
               </div>
-              <div class="col-3" style="text-align:left; margin-top:-20px; margin-left:45px; ">
+              <div class="col-3" style="text-align:left; margin-top:-7%; margin-left:45px; ">
                 <h4 class="card-title"><strong>${item.reservPkg}</strong></h4>
                 <div>
                 <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
@@ -144,7 +144,7 @@ $("#btnCanceledReserv").on("click", function (e) {
             alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
             />
             </div>
-            <div class="col-3" style="text-align:left; margin-top:-20px; margin-left:45px; ">
+            <div class="col-3" style="text-align:left; margin-top:-7%; margin-left:45px; ">
               <h4 class="card-title"><strong>${item.reservPkg}</strong></h4>
               <div>
               <span style="font-size:13px;">Reservation Name: </span><br><strong style="font-size:16px;">${item.reservName}</strong>
