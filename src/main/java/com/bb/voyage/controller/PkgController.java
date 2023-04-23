@@ -104,6 +104,11 @@ public class PkgController {
     @PostMapping("/getRecommendedList")
     @ResponseBody
     public List<PkgDto> getRecommendedList(int pkgNo01, int pkgNo02, int pkgNo03, int pkgNo04){
+      log.info("no1: {}",pkgNo01);
+      log.info("no2: {}",pkgNo02);
+      log.info("no3: {}",pkgNo03);
+      log.info("no4: {}",pkgNo04);
+
       HashMap<String,Object> hashmap = new HashMap<>();
       hashmap.put("pkgNo01", pkgNo01);
       hashmap.put("pkgNo02", pkgNo02);
