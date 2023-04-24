@@ -80,6 +80,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public int pkgModifyProcess(PkgDto pkgDto) {
+      pkgDto.setRatedAVG(Math.round(((pkgDto.getRatedCE()+pkgDto.getRatedFA()+pkgDto.getRatedGS())/3.0)*10)/10.0);
+      pkgDto.setRatedAVGTxt(""+pkgDto.getRatedAVG());
       int result = adminDao.pkgModifyProcess(pkgDto);
       adminDao.pkgModifyReservProcess(pkgDto);
       return result;

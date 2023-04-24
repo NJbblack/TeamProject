@@ -11,6 +11,7 @@ import com.bb.voyage.dto.MemberDto;
 import com.bb.voyage.dto.PkgDto;
 import com.bb.voyage.dto.ReservDto;
 import com.bb.voyage.dto.ReviewDto;
+import com.bb.voyage.utils.AvgCalculater;
 import com.bb.voyage.dto.RequestDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -165,28 +166,13 @@ public class ReservServiceImpl implements ReservService{
 
 /////////////////////////////////////////////////////////////////////
 ////Review 관련 서비스
-    public int reviewProcess(ReviewDto reviewDto) {
-        double ratingAVG = Math.round(((reviewDto.getRatingCE()+reviewDto.getRatingFA()+reviewDto.getRatingGS())/3.0)*10)/10.0;
-        reviewDto.setRatingAVG(ratingAVG);
-        reviewDto.setRatingAVGTxt(""+ratingAVG);
-        int result = reservDao.reviewProcess(reviewDto);
-        
+    public int reviewProcess(ReviewDto reviewDto, AvgCalculater avgCalculater) {
+        int result = reservDao.reviewProcess(avgCalculater.getReviewAVG(reviewDto));
         PkgDto pkgDto = reservDao.reqGetPkg(reviewDto.getReservNo());
-        double ratedGS = (double)((pkgDto.getRatedGS())*(pkgDto.getRatedCount())+reviewDto.getRatingGS())/(pkgDto.getRatedCount()+1);
-        double ratedFA = (double)((pkgDto.getRatedFA())*(pkgDto.getRatedCount())+reviewDto.getRatingFA())/(pkgDto.getRatedCount()+1);
-        double ratedCE = (double)((pkgDto.getRatedCE())*(pkgDto.getRatedCount())+reviewDto.getRatingCE())/(pkgDto.getRatedCount()+1);
-        int ratedCount = (pkgDto.getRatedCount()+1);
-        double ratedAvg = Math.round(((ratedGS+ratedFA+ratedCE)/3.0)*10)/10.0;
-        pkgDto.setRatedAVG(ratedAvg);
-        pkgDto.setRatedAVGTxt(""+ratedAvg);
-        pkgDto.setRatedStar(Math.round(pkgDto.getRatedAVG()));
-        pkgDto.setRatedGS(ratedGS);
-        pkgDto.setRatedFA(ratedFA);
-        pkgDto.setRatedCE(ratedCE);
-        pkgDto.setRatedCount(ratedCount);
-        pkgDao.pkgSetRating(pkgDto);
+        pkgDao.pkgSetRating(avgCalculater.getPkgAVG(reviewDto, pkgDto));
         reservDao.updateReviewAvailable(reviewDto.getReservNo());
         memberService.updateUserAlert(reviewDto.getMemberNo(),31);
+        
         return result;
     }
 

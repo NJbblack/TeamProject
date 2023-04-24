@@ -15,6 +15,7 @@ import com.bb.voyage.dto.ReviewDto;
 import com.bb.voyage.dto.RequestDto;
 import com.bb.voyage.service.PkgService;
 import com.bb.voyage.service.ReservService;
+import com.bb.voyage.utils.AvgCalculater;
 
 @Controller
 @RequestMapping("/reservation")
@@ -147,8 +148,8 @@ public class ReservController {
     }
 
     @PostMapping("/reviewProcess")
-    public String reviewProcess(ReviewDto reviewDto){
-      reservService.reviewProcess(reviewDto);
+    public String reviewProcess(ReviewDto reviewDto, AvgCalculater avgCalculater){
+      reservService.reviewProcess(reviewDto, avgCalculater);
       return "redirect:/member/memberreview";
     }
 

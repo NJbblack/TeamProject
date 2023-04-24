@@ -98,6 +98,8 @@ public class PkgController {
     @PostMapping("/getTempRecoList")
     @ResponseBody
     public List<PkgDto> getTempRecoList(PkgDto pkgDto){
+      log.info("결과: {}",pkgDto);
+      log.info("결과2: {}",pkgService.getTempRecoList(pkgDto));
       return pkgService.getTempRecoList(pkgDto);
     }
 
