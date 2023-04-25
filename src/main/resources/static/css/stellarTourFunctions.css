@@ -63,7 +63,7 @@ body::-webkit-scrollbar-thumb {
 
 .adminAlarm {
   position: fixed;
-  bottom: 0.5vh;
+  bottom: -11vh;
   right: 0.5vw;
   width: 22.5vw;
   height: 10vh;

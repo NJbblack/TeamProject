@@ -140,6 +140,7 @@
               console.log(response);
               if (response.msg) {
                 $("#alarmMsg").attr("style", "opacity:1 !important");
+                $("#alarmMsg").fadeIn(3000).fadeOut(9000);
                 const tempHtml = `
               <div>
                 <div style="text-align:center;"><span>${response.msg}</span></div>
@@ -156,6 +157,7 @@
               </div>
               `;
                 $("#alarmMsg").html(tempHtml);
+                gsap.to("#alarmMsg", { y: -110, duration: 0.75 });
               } else {
               }
             },

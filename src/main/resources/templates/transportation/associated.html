@@ -8,7 +8,7 @@
     <div id="contents" layout:fragment="contents">
 
         
-        <section class="section01 investors01 invContainer">
+        <section class="section01 investors01 invContainer" style="height:auto;">
         <div
           class="container01 products-title"
         >
@@ -120,6 +120,12 @@
     console.log(scrollY);
 });
 </script> -->
-</div>
+<script>
+  setTimeout(function () {
+  $(".footer").css("display", "none");
+  $(".btn-top").css("display", "none");
+  }, 1);
+  </script>
   </body>
+</div>
 </html>
