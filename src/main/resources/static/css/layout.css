@@ -87,7 +87,7 @@ img {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 10vw 0 10vw;
   width: 100%;
   box-sizing: border-box;
   position: fixed;
@@ -102,7 +102,7 @@ img {
   align-items: center;
   font-size: var(--font-size);
   margin-left: 0;
-  margin-right: 200px;
+  margin-right: 130px;
   margin-top: 4px;
 }
 
@@ -221,9 +221,20 @@ img {
 }
 
 /**********footer**********/
+.footerContainer {
+  padding-left: 20px;
+  padding-right: 100px;
+}
+
+.footer__item:nth-child(1) {
+  padding-left: 20px;
+  width: 150px;
+  top: 0;
+}
+
 .footer {
   background-color: var(--blue);
-  padding: 80px 0;
+  padding: 80px 0px 0px 60px;
   color: #fff;
 }
 
@@ -259,7 +270,7 @@ img {
 }
 
 .footer .footer-items .footer__item dl dt {
-  width: 70px;
+  width: 150px;
 }
 
 .footer .footer-copyright {
@@ -291,4 +302,118 @@ img {
 
 .leftAlign {
   text-align: left;
+}
+
+.invContainer {
+  padding-top: 100px;
+  height: 100vh;
+}
+
+.section01 {
+  padding: 100px 80px;
+}
+
+.section01 .container01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 150px 0 50px 0;
+}
+
+.investors01 {
+  background-image: url("/images/investors/banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.investors01 h2 {
+  margin-bottom: 40px;
+}
+
+.investors01 .container01 {
+  flex-direction: column;
+  align-items: start;
+  color: white;
+}
+
+.investors01 .investors__list {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 50px;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.investors01 .investors__list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  filter: grayscale(1);
+  transition: filter 0.5s ease;
+}
+
+.investors01 .investors__list li:hover {
+  filter: grayscale(0);
+}
+
+.investors01 .investors__list li img {
+  width: 300px;
+}
+
+.navy {
+  color: rgb(78, 112, 126);
+}
+
+.navybar {
+  content: "";
+  display: block;
+  width: 98px;
+  height: 9px;
+  background-color: #8b9ea2;
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+.graybar {
+  content: "";
+  display: block;
+  width: 98px;
+  height: 9px;
+  background-color: #595961;
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+.txt__box02 {
+  display: flex;
+  justify-content: space-between;
+}
+.txt__box02 .img__box img {
+  margin-left: 10px;
+  height: 22vw;
+  width: 33vw;
+  overflow: hidden;
+}
+.txt__box02 .img__txt {
+  font-family: "Ubuntu";
+  display: flex;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  outline: 1px solid #ccc;
+}
+.txt__box02 .img__txt h1 {
+  font-size: 40px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+.txt__box02 .img__txt p {
+  font-size: 17px;
+  color: #4e4e4e;
 }

@@ -137,7 +137,13 @@
           </a>
         </div>
       </div>
-      <script></script>
+      <script>
+        $(document).ready(function () {
+          $("button").before(function () {
+            $(".btn-top").css("background-color", "rgb(255, 166, 0)");
+          });
+        });
+      </script>
     </div>
   </body>
 </html>

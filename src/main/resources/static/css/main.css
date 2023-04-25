@@ -9,6 +9,10 @@
 .formContainer {
   padding: 180px 250px 200px 250px;
 }
+.formContainer img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
 #boardSending {
   width: 100%;
@@ -1187,7 +1191,7 @@ h2 {
   font-size: 70px;
   color: black;
   text-shadow: -4px 0 white, 0 4px white, 4px 0 white, 0 -4px white;
-  left: 300px;
+  left: 440px;
   margin-left: 200px;
   margin-top: 20px;
 }
@@ -1253,8 +1257,8 @@ h2 {
 }
 
 .discount2 {
-  width: 99vw;
-  margin-left: -16vw;
+  width: 99.9vw;
+  margin-left: -12.5vw;
   overflow: hidden;
   margin-top: 50px;
   padding-top: 30px;
