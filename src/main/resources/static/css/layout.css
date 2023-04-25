@@ -417,3 +417,19 @@ img {
   font-size: 17px;
   color: #4e4e4e;
 }
+
+.pbox {
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.invBox {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20%;
+  margin-top: -40px;
+  margin-bottom: 30px;
+}
