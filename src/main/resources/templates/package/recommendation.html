@@ -291,35 +291,37 @@
                 tempHtml += `
                 <a href="/package/pkgdetailview?pkgNo=${item.pkgNo} "
                 class="card mb-3 btn-outline-light pkgCountryList" style="opacity:0.8;" data-aos="zoom-in" data-aos-duration="600" >
-                <div class="row g-0">
-                  <div class="col-md-4">
-                  <img src="http://localhost:9091/upload/${item.pkgMainRenamedPath}" class="img-fluid rounded-start mt-3 ml-1 packageImage"
+                <div class="row g-0 recoResult">
+                  <div class="col-md-4 depth011">
+                  <img src="http://localhost:9091/upload/${item.pkgMainRenamedPath}" class="img-fluid rounded-start mt-3 ml-1 packageImage depth011Img"
                   style="width:22.5vw;height:30vh"/>
                   </div>
-                <div class="col-md-8">
+                <div class="col-md-8 depth012">
                   <div class="card-body" style="text-align: left;font-size: 14px;color: black;font-weight: bold;">
                   <h5><span class="card-title" style="color: white;display: inline-block;padding: 0.1em 0;background: rgb(152, 55, 146);">
                     &nbsp;${item.pkgName}&nbsp;</span>
-                    <span style="color: #ccac00; font-size: 17px">${item.ratedAVGTxt}</span>
+                    <span class="recoRate">${item.ratedAVGTxt}</span>
                   </h5>
-                  Package No:ㅤㅤㅤㅤㅤ&nbsp;
+                  <span>Package No</span> <span>:</span> 
                   <span style="font-size: 13px;color: black;font-weight: normal;font-weight: normal;" class="card-text">
                     ${item.pkgNo}</span>
-                  <br/> Package Region:ㅤㅤㅤ
+                  <br/> <span>Package Region</span> <span>:</span>
                   <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
                     ${item.pkgRegion}</span>
-                  <br/> Departure Date:ㅤㅤㅤ
+                  <br/> <span> Departure Date</span> <span>:</span>
                   <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
                     ${item.pkgDepart}</span>
-                  <br /> Return Date:ㅤㅤㅤㅤㅤ
+                  <br /> <span>Return Date</span> <span>:</span>
                   <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
                     ${item.pkgReturn}</span>
-                  <br/> Package Budget:ㅤㅤ&nbsp;&nbsp;&nbsp;
+                  <br/> <span>Package Budget</span> <span>:</span>
                   <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
                     ${item.pkgBudget}</span>
-                  <br/> Package Contents: 
-                  <br/><span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
-                    ${item.pkgContents}</span>
+                  <br/> <span>Package Contents</span> <span>:</span> 
+                  <div class="recoContent">
+                    <span style="font-size: 13px; color: black; font-weight: normal" class="card-text">
+                      ${item.pkgContents}</span>
+                  </div>
                 </div>
               </div>
             </div>
