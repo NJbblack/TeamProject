@@ -1,5 +1,7 @@
 package com.bb.voyage.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,8 +77,9 @@ public class PkgController {
 
     @PostMapping("/pkgdetailview")
     @ResponseBody
-    public PkgDto pkgViewImg02(int pkgNo, Model model){
+    public PkgDto pkgViewImg02(int pkgNo, Model model) throws UnknownHostException{
       PkgDto pkgDto = adminService.getOnePkg(pkgNo);
+      pkgDto.setIpAddress(InetAddress.getLocalHost().getHostAddress());
       return pkgDto;
     }
 
@@ -97,10 +100,12 @@ public class PkgController {
 
     @PostMapping("/getTempRecoList")
     @ResponseBody
-    public List<PkgDto> getTempRecoList(PkgDto pkgDto){
-      log.info("결과: {}",pkgDto);
-      log.info("결과2: {}",pkgService.getTempRecoList(pkgDto));
-      return pkgService.getTempRecoList(pkgDto);
+    public List<PkgDto> getTempRecoList(PkgDto pkgDto) throws UnknownHostException{
+      List<PkgDto> pkgList = pkgService.getTempRecoList(pkgDto);
+      for(PkgDto item : pkgList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+      return pkgList;
     }
 
     @PostMapping("/getRecommendedList")

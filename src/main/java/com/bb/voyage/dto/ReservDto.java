@@ -21,6 +21,8 @@ public class ReservDto {
     int reservReqNo;
     int reviewAvailable;
     String pkgContents; // DB에는 들어가지 않음
+    private String ipAddress; // DB에는 들어가지 않음
+
 }
 
 

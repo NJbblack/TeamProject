@@ -1,5 +1,7 @@
 package com.bb.voyage.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import com.bb.voyage.service.PkgService;
 import com.bb.voyage.service.ReservService;
 import com.bb.voyage.utils.AvgCalculater;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/reservation")
 public class ReservController {
@@ -34,20 +39,32 @@ public class ReservController {
 
     @PostMapping("/getAllReserv")
     @ResponseBody
-    public List<ReservDto> getAllReserv(int no){
-        return reservService.getAllReserv(no);
+    public List<ReservDto> getAllReserv(int no) throws UnknownHostException{
+      List<ReservDto> reservList = reservService.getAllReserv(no);
+      for(ReservDto item : reservList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+        return reservList;
     }
 
     @PostMapping("/getPastReserv")
     @ResponseBody
-    public List<ReservDto> getPastReserv(int no){
-        return reservService.getPastReserv(no);
+    public List<ReservDto> getPastReserv(int no) throws UnknownHostException{
+      List<ReservDto> reservList = reservService.getPastReserv(no);
+      for(ReservDto item : reservList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+        return reservList;
     }
 
     @PostMapping("/getCanceledReserv")
     @ResponseBody
-    public List<ReservDto> getCanceledReserv(int no){
-        return reservService.getCanceledReserv(no);
+    public List<ReservDto> getCanceledReserv(int no)throws UnknownHostException{
+      List<ReservDto> reservList = reservService.getCanceledReserv(no);
+      for(ReservDto item : reservList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+        return reservList;
     }
 
     @PostMapping("/getDetailReserv")
@@ -69,8 +86,11 @@ public class ReservController {
 
     @GetMapping("/getFilteredPkg")
     @ResponseBody
-    public List<PkgDto> getFilteredPkg(PkgDto pkgDto){
+    public List<PkgDto> getFilteredPkg(PkgDto pkgDto) throws UnknownHostException{
       List<PkgDto> pkgList = reservService.getFilteredPkg(pkgDto);
+      for(PkgDto item : pkgList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
         return pkgList;
     }
     
@@ -124,14 +144,22 @@ public class ReservController {
    
     @PostMapping("/getAllRequest")
     @ResponseBody
-    public List<RequestDto> getAllRequest(int no){
-        return reservService.getAllRequest(no);
+    public List<RequestDto> getAllRequest(int no) throws UnknownHostException{
+      List<RequestDto> requestList = reservService.getAllRequest(no);
+      for(RequestDto item : requestList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+        return requestList;
     }
 
     @PostMapping("/getClosedRequest")
     @ResponseBody
-    public List<RequestDto> getClosedRequest(int no){
-        return reservService.getClosedRequest(no);
+    public List<RequestDto> getClosedRequest(int no) throws UnknownHostException{
+      List<RequestDto> requestList = reservService.getClosedRequest(no);
+      for(RequestDto item : requestList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+        return requestList;
     }
 
 

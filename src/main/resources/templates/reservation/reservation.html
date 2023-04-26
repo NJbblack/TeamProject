@@ -272,7 +272,7 @@
                 <div class="card-body package_result">
                   <div class="package_result_1">
                     <img
-                    src="http://192.168.0.149:9091/upload/${item.pkgMainRenamedPath}"
+                    src="http://${item.ipAddress}:9091/upload/${item.pkgMainRenamedPath}"
                     alt="${item.pkgName}"
                     />
                   </div>
@@ -324,7 +324,7 @@
                 <div><span>Package No: ${response.pkgNo}</span></div>
                 <div><span><h5><strong>${response.pkgName}</strong></h5></span></div>
                 <div>
-                  <img src="http://192.168.0.149:9091/upload/${response.pkgMainRenamedPath}"
+                  <img src="http://${response.ipAddress}:9091/upload/${response.pkgMainRenamedPath}"
                   alt="${response.pkgMainRenamedPath}" style="width:10vw; height: 12.5vh;"
                   />  
                 </div>

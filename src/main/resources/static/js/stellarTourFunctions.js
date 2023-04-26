@@ -24,7 +24,7 @@ $("#btnCurrentReserv").on("click", function (e) {
             <div class="card-body package_result row">
               <div class="col-2">
               <img
-              src="http://192.168.0.149:9091/upload/${item.reservImg}"
+              src="http://${item.ipAddress}:9091/upload/${item.reservImg}"
               alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
               />
               </div>
@@ -83,7 +83,7 @@ $("#btnPastReserv").on("click", function (e) {
             <div class="card-body package_result row">
               <div class="col-2">
               <img
-              src="http://192.168.0.149:9091/upload/${item.reservImg}"
+              src="http://${item.ipAddress}:9091/upload/${item.reservImg}"
               alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
               />
               </div>
@@ -140,7 +140,7 @@ $("#btnCanceledReserv").on("click", function (e) {
           <div class="card-body package_result row">
             <div class="col-2">
             <img
-            src="http://192.168.0.149:9091/upload/${item.reservImg}"
+            src="http://${item.ipAddress}:9091/upload/${item.reservImg}"
             alt="${item.reservPkg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
             />
             </div>
@@ -200,7 +200,7 @@ $("#btnReqOngoing").on("click", function (e) {
             <div class="card-body package_result row w-100">
               <div class="col-3 reqPic">
               <img
-              src="http://192.168.0.149:9091/upload/${item.requestImg}"
+              src="http://${item.ipAddress}:9091/upload/${item.requestImg}"
               alt="${item.requestImg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
               />
               </div>
@@ -259,7 +259,7 @@ $("#btnReqClosed").on("click", function (e) {
             <div class="card-body package_result row w-100">
               <div class="col-3 reqPic">
               <img
-              src="http://192.168.0.149:9091/upload/${item.requestImg}"
+              src="http://${item.ipAddress}:9091/upload/${item.requestImg}"
               alt="${item.requestImg}" style="width:15vw; height: 20vh; padding:0; top:4vh; left:5px; position:absolute;"
               />
               </div>

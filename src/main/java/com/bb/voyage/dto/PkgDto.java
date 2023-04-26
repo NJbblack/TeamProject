@@ -26,4 +26,5 @@ public class PkgDto {
     private double ratedAVG;
     private String ratedAVGTxt;
     private double ratedStar;
+    private String ipAddress; // DB에는 들어가지 않음
 }

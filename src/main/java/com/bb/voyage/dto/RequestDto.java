@@ -18,4 +18,6 @@ private String pkgReturn;
 private String requestImg;
 private String reservName;
 private String reqDate;
+private String ipAddress; // DB에는 들어가지 않음
+
 }
