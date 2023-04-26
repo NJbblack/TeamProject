@@ -191,7 +191,7 @@
           $.ajax({
             url: "/reservation/getFilteredPkg",
             data: sendData,
-            type: "POST",
+            type: "GET",
             success: function (response) {
               console.log(response);
               let tempHtml = "";
@@ -258,7 +258,7 @@
           $.ajax({
             url: "/reservation/getFilteredPkg",
             data: sendData,
-            type: "POST",
+            type: "GET",
             success: function (response) {
               console.log(response);
               let tempHtml = "";

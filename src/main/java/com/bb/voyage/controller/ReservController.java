@@ -67,7 +67,7 @@ public class ReservController {
         return "redirect:/member/memberreservation";
     }
 
-    @PostMapping("/getFilteredPkg")
+    @GetMapping("/getFilteredPkg")
     @ResponseBody
     public List<PkgDto> getFilteredPkg(PkgDto pkgDto){
       List<PkgDto> pkgList = reservService.getFilteredPkg(pkgDto);
