@@ -25,7 +25,10 @@ import com.bb.voyage.service.MemberService;
 import com.bb.voyage.utils.HitChecker;
 import com.bb.voyage.utils.PagingMaker;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -65,7 +68,10 @@ public class BoardController {
   @GetMapping("/faqboardview")
   public String faqBoardView(Model model, int no, HttpServletRequest request, HttpServletResponse response, HitChecker hitChecker){
     FaqBoardDto faqBoardDto = boardService.getOneFaq(no);
-    MemberDto memberDto = memberService.getMemberInfo(no);
+    MemberDto memberDto = memberService.getMemberInfo((int)faqBoardDto.getFaqWriterNo());
+    log.info("결과1: {}",faqBoardDto);
+    log.info("결과2: {}",memberDto);
+    
     model.addAttribute("faqBoardDto", faqBoardDto);
     model.addAttribute("memberDto", memberDto);
     hitChecker.faqHitChecker(no, request, response, boardService);
@@ -137,7 +143,7 @@ public class BoardController {
   @GetMapping("/noticeboardview")
   public String noticeBoardView(Model model, int no, HttpServletRequest request, HttpServletResponse response, HitChecker hitChecker){
     NoticeBoardDto noticeBoardDto = boardService.getOneNotice(no);
-    MemberDto memberDto = memberService.getMemberInfo(no);
+    MemberDto memberDto = memberService.getMemberInfo((int)noticeBoardDto.getNoticeWriterNo());
     model.addAttribute("noticeBoardDto", noticeBoardDto);
     model.addAttribute("memberDto", memberDto);
     hitChecker.noticeHitChecker(no, request, response, boardService);
@@ -226,7 +232,7 @@ public String faqBoardWriteProcess(QnaBoardDto qnaBoardDto) {
 @GetMapping("/qnaboardview")
 public String qnaBoardView(Model model, int no, HttpServletRequest request, HttpServletResponse response, HitChecker hitChecker){
   QnaBoardDto qnaBoardDto = boardService.getOneQna(no);
-  MemberDto memberDto = memberService.getMemberInfo(no);
+  MemberDto memberDto = memberService.getMemberInfo((int)qnaBoardDto.getQnaWriterNo());
   model.addAttribute("qnaBoardDto", qnaBoardDto);
   model.addAttribute("memberDto", memberDto);
   hitChecker.qnaHitChecker(no, request, response, boardService);

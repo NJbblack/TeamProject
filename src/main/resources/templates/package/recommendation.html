@@ -166,7 +166,7 @@
         $(".btnGS").on("click", function () {
           const clicked = $(this).parent().parent();
           if (GS < 3) {
-            GS = GS + 1;
+            GS = GS + 0.5;
           }
           $(this).parent().parent().css("opacity", "0");
           setTimeout(function () {
@@ -176,7 +176,7 @@
         $(".btnCE").on("click", function () {
           const clicked = $(this).parent().parent();
           if (CE < 3) {
-            CE = CE + 1;
+            CE = CE + 0.5;
           }
           $(this).parent().parent().css("opacity", "0");
           setTimeout(function () {
@@ -186,7 +186,7 @@
         $(".btnFA").on("click", function () {
           const clicked = $(this).parent().parent();
           if (FA < 3) {
-            FA = FA + 1;
+            FA = FA + 0.5;
           }
           $(this).parent().parent().css("opacity", "0");
           setTimeout(function () {
@@ -196,7 +196,7 @@
         $(".btnAVG").on("click", function () {
           const clicked = $(this).parent().parent();
           if (AVG < 3) {
-            AVG = AVG + 1;
+            AVG = AVG + 0.5;
           }
           $(this).parent().parent().css("opacity", "0");
           setTimeout(function () {
