@@ -44,12 +44,21 @@
             class="card mb-3 btn-outline-success pkgCountryList"
           >
             <div class="row g-0">
-              <div class="col-md-4">
+              <div
+                class="col-md-4"
+                style="
+                  margin-top: 10px;
+                  padding-left: 15px;
+                  padding-right: 10px;
+                  padding-top: 5px;
+                "
+              >
                 <img
                   src="..."
                   th:src="@{|/upload/${item.pkgMainRenamedPath}|}"
                   class="img-fluid rounded-start mt-3 ml-1 packageImage"
                   alt="..."
+                  style="box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5)"
                 />
               </div>
               <div class="col-md-8">
@@ -125,11 +134,21 @@
                   ><br />
                   Package Contents:
                   <br />
-                  <span
-                    style="font-size: 13px; color: black; font-weight: normal"
-                    class="card-text"
-                    th:text="${item.pkgContents}"
-                  ></span>
+                  <div
+                    class="card-container"
+                    style="
+                      background-color: rgba(56, 149, 112, 0.5);
+                      border-radius: 20px;
+                      padding: 10px;
+                      margin-top: 10px;
+                    "
+                  >
+                    <span
+                      style="font-size: 13px; color: black; font-weight: normal"
+                      class="card-text"
+                      th:text="${item.pkgContents}"
+                    ></span>
+                  </div>
                 </div>
               </div>
             </div>
