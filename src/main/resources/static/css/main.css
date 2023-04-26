@@ -1190,7 +1190,7 @@ h2 {
 .text-deco03 .main-img__txt {
   font-size: 70px;
   color: black;
-  text-shadow: -4px 0 white, 0 4px white, 4px 0 white, 0 -4px white;
+  text-shadow: 4px 0 white, 4px 4px white, 4px 0 white, 0 4px white;
   left: 440px;
   margin-left: 200px;
   margin-top: 20px;
