@@ -38,8 +38,9 @@ public class ReservController {
     @ResponseBody
     public List<ReservDto> getAllReserv(int no) throws UnknownHostException{
       List<ReservDto> reservList = reservService.getAllReserv(no);
+      String ipAddress = InetAddress.getLocalHost().getHostAddress();
       for(ReservDto item : reservList){
-        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+        item.setIpAddress(ipAddress);
       }
         return reservList;
     }
@@ -48,8 +49,9 @@ public class ReservController {
     @ResponseBody
     public List<ReservDto> getPastReserv(int no) throws UnknownHostException{
       List<ReservDto> reservList = reservService.getPastReserv(no);
+      String ipAddress = InetAddress.getLocalHost().getHostAddress();
       for(ReservDto item : reservList){
-        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+        item.setIpAddress(ipAddress);
       }
         return reservList;
     }
@@ -58,8 +60,9 @@ public class ReservController {
     @ResponseBody
     public List<ReservDto> getCanceledReserv(int no)throws UnknownHostException{
       List<ReservDto> reservList = reservService.getCanceledReserv(no);
+      String ipAddress = InetAddress.getLocalHost().getHostAddress();
       for(ReservDto item : reservList){
-        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+        item.setIpAddress(ipAddress);
       }
         return reservList;
     }
@@ -85,8 +88,9 @@ public class ReservController {
     @ResponseBody
     public List<PkgDto> getFilteredPkg(PkgDto pkgDto) throws UnknownHostException{
       List<PkgDto> pkgList = reservService.getFilteredPkg(pkgDto);
+      String ipAddress = InetAddress.getLocalHost().getHostAddress();
       for(PkgDto item : pkgList){
-        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+        item.setIpAddress(ipAddress);
       }
         return pkgList;
     }
@@ -143,8 +147,10 @@ public class ReservController {
     @ResponseBody
     public List<RequestDto> getAllRequest(int no) throws UnknownHostException{
       List<RequestDto> requestList = reservService.getAllRequest(no);
+      String ipAddress = InetAddress.getLocalHost().getHostAddress();
+
       for(RequestDto item : requestList){
-        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+        item.setIpAddress(ipAddress);
       }
         return requestList;
     }
@@ -153,8 +159,9 @@ public class ReservController {
     @ResponseBody
     public List<RequestDto> getClosedRequest(int no) throws UnknownHostException{
       List<RequestDto> requestList = reservService.getClosedRequest(no);
+      String ipAddress = InetAddress.getLocalHost().getHostAddress();
       for(RequestDto item : requestList){
-        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+        item.setIpAddress(ipAddress);
       }
         return requestList;
     }
