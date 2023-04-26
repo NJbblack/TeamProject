@@ -110,19 +110,18 @@ public class PkgController {
 
     @PostMapping("/getRecommendedList")
     @ResponseBody
-    public List<PkgDto> getRecommendedList(int pkgNo01, int pkgNo02, int pkgNo03, int pkgNo04){
-      log.info("no1: {}",pkgNo01);
-      log.info("no2: {}",pkgNo02);
-      log.info("no3: {}",pkgNo03);
-      log.info("no4: {}",pkgNo04);
-
+    public List<PkgDto> getRecommendedList(int pkgNo01, int pkgNo02, int pkgNo03, int pkgNo04) throws UnknownHostException{
       HashMap<String,Object> hashmap = new HashMap<>();
       hashmap.put("pkgNo01", pkgNo01);
       hashmap.put("pkgNo02", pkgNo02);
       hashmap.put("pkgNo03", pkgNo03);
       hashmap.put("pkgNo04", pkgNo04);
       log.info("결과: {}",hashmap);
-      return pkgService.getRecommendedList(hashmap);
+      List<PkgDto> recommendedList = pkgService.getRecommendedList(hashmap);
+      for(PkgDto item : recommendedList){
+        item.setIpAddress(InetAddress.getLocalHost().getHostAddress());
+      }
+      return recommendedList;
     }
 
 }

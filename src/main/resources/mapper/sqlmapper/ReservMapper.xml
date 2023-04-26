@@ -113,7 +113,10 @@
   </insert>
 
   <update id="requesttoReserv" parameterType="RequestDto">
-    UPDATE RESERVATION SET RESERVREQ = 1, RESERVREQNO = REQUEST_SEQ.NEXTVAL - 1 WHERE RESERVNO = #{reservNo}
+    UPDATE RESERVATION SET 
+      RESERVREQ = 1, 
+      RESERVREQNO = REQUEST_SEQ.NEXTVAL - 1 
+      WHERE RESERVNO = #{reservNo}
   </update>
 
   <update id="requestModifyProcess" parameterType="RequestDto">
