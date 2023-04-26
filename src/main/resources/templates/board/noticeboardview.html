@@ -39,7 +39,13 @@
 
           <tr class="boardContents">
             <th>Contents</th>
-            <td th:text="${noticeBoardDto.noticeContents}"></td>
+            <td>
+              <textarea
+                class="form-control"
+                rows="10"
+                th:text="${noticeBoardDto.noticeContents}"
+              ></textarea>
+            </td>
           </tr>
         </table>
 

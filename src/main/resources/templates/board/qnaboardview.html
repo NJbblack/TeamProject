@@ -39,10 +39,16 @@
 
           <tr class="boardContents">
             <th>Contents</th>
-            <td th:text="${qnaBoardDto.qnaContents}"></td>
+            <td>
+              <textarea
+                class="form-control"
+                rows="5"
+                th:text="${qnaBoardDto.qnaContents}"
+              ></textarea>
+            </td>
           </tr>
         </table>
-        <div class="joinBtn">
+        <div class="joinBtn mb-3">
           <td>
             <a
               href=""
@@ -61,15 +67,27 @@
             >
           </td>
         </div>
+        <hr />
         <div class="replyBox">
-          <ul>
+          <h5>
+            <span
+              style="
+                background: linear-gradient(
+                  to top,
+                  rgb(204, 226, 249) 50%,
+                  transparent 50%
+                );
+              "
+              >Answer</span
+            >
+          </h5>
+          <ul style="margin-left: 30px; margin-right: 30px; margin-top: -10px">
             <li>댓글이 출력됩니다.</li>
             <li>댓글이 출력됩니다.</li>
             <li>댓글이 출력됩니다.</li>
             <li>댓글이 출력됩니다.</li>
           </ul>
         </div>
-        <hr />
         <div class="container" style="width: 100vw !important">
           <div class="row" style="width: 80vw !important">
             <div class="col-9">
@@ -112,7 +130,17 @@
                     // console.log(response);
                     let tempHtml = "";
                     $.each(response, function(idx, item){
-                        tempHtml += `<li>${item.commenter}  |  ${item.comments}</li>`// commenter가 표시될 수 있게 수정
+                        tempHtml += `<li>
+                          <div style="display:flex; flex-direction: column; flex-wrap: wrap;
+                          white-space: pre-line; word-wrap: break-word;">
+                            <div style="color: #6272a9;">
+                              |ㅤ${item.commenter}ㅤ|ㅤ
+                            </div>
+                            <div>
+                              ${item.comments}
+                            </div>
+                          </div>
+                          </li>`// commenter가 표시될 수 있게 수정
                     });
                     $(".replyBox ul").html(tempHtml);
                 },
@@ -138,7 +166,17 @@
                   console.log(response);
                     let tempHtml = "";
                     $.each(response, function(idx, item){
-                        tempHtml += `<li>${item.commenter}  |  ${item.comments}</li>` // commenter가 표시될 수 있게 수정
+                        tempHtml += `<li>
+                          <div style="display:flex; flex-direction: column; flex-wrap: wrap;
+                          white-space: pre-line; word-wrap: break-word;">
+                            <div style="color: #6272a9;">
+                              |ㅤ${item.commenter}ㅤ|ㅤ
+                            </div>
+                            <div>
+                              ${item.comments}
+                            </div>
+                          </div>
+                          </li>`
                     });
                     $(".replyBox ul").html(tempHtml);
                     $(".reply").val("");
