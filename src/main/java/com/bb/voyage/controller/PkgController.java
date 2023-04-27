@@ -67,7 +67,7 @@ public class PkgController {
       List<ReviewDto> reviewList =  pkgService.getReview(pkgDto);
 
       for(ReviewDto item : reviewList){
-      item.setReviewName(memberService.getMemberByReservNo(item.getReservNo()).getUserNickname()); 
+      item.setReviewName(memberService.getMemberInfo(item.getMemberNo()).getUserNickname()); 
       }
       model.addAttribute("pkgDto", pkgDto);
       model.addAttribute("pkgSubImgDto", pkgSubImgDto);
