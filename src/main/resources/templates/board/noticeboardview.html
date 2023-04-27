@@ -54,7 +54,7 @@
           <td>
             <a
               href=""
-              class="btn btn-primary sessionCheck"
+              class="btn btn-primary sessionCheck vipCheck"
               th:href="@{/board/noticeboardmodify(no=${noticeBoardDto.noticeNo})}"
               >Modify</a
             >
@@ -63,7 +63,7 @@
             <a
               href=""
               id="btnNoticeDeleteBoardAjax"
-              class="btn btn-danger"
+              class="btn btn-danger sessionCheck vipCheck"
               th:href="@{/board/noticeBoardDeleteProcess(no=${noticeBoardDto.noticeNo})}"
               >Delete</a
             >

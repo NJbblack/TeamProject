@@ -53,7 +53,7 @@
           <td>
             <a
               href=""
-              class="btn btn-primary sessionCheck"
+              class="btn btn-primary sessionCheck vipCheck"
               th:href="@{/board/faqboardmodify(no=${faqBoardDto.faqNo})}"
               >Modify</a
             >
@@ -61,7 +61,7 @@
           <td>
             <a
               href=""
-              class="btn btn-danger"
+              class="btn btn-danger sessionCheck vipCheck"
               id="btnDeleteBoardAjax"
               th:href="@{/board/faqBoardDeleteProcess(no=${faqBoardDto.faqNo})}"
               >Delete</a
