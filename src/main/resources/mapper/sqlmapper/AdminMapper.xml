@@ -261,18 +261,12 @@
       <when test="category=='all'">
       AND 
       (REVIEWNO LIKE '%' || #{searchTxt} || '%') OR
-      (PKGNO LIKE '%' || #{searchTxt} || '%') OR
       (PKGNAME LIKE '%' || #{searchTxt} || '%') OR
-      (REVIEWTITLE LIKE '%' || #{searchTxt} || '%') OR
-      (REVIEWCONTENTS LIKE '%' || #{searchTxt} || '%') OR
+      (REVIEWTITLE LIKE '%' || #{searchTxt} || '%')
       </when>
       <when test="category=='reviewNo'">
       AND 
       (REVIEWNO LIKE '%' || #{searchTxt} || '%')
-      </when>
-      <when test="category=='pkgNo'">
-      AND 
-      (PKGNO LIKE '%' || #{searchTxt} || '%')
       </when>
       <when test="category=='pkgName'">
       AND 
@@ -281,10 +275,6 @@
       <when test="category=='reviewTitle'">
       AND 
       (REVIEWTITLE LIKE '%' || #{searchTxt} || '%')
-      </when>
-      <when test="category=='reviewContents'">
-      AND 
-      (REVIEWCONTENTS LIKE '%' || #{searchTxt} || '%')
       </when>
     </choose>
   </if>          

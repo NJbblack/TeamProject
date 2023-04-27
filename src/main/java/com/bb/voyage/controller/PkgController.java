@@ -80,6 +80,8 @@ public class PkgController {
     public PkgDto pkgViewImg02(int pkgNo, Model model) throws UnknownHostException{
       PkgDto pkgDto = adminService.getOnePkg(pkgNo);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
+
       pkgDto.setIpAddress(ipAddress);
       return pkgDto;
     }
@@ -104,6 +106,8 @@ public class PkgController {
     public List<PkgDto> getTempRecoList(PkgDto pkgDto) throws UnknownHostException{
       List<PkgDto> pkgList = pkgService.getTempRecoList(pkgDto);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
+
       for(PkgDto item : pkgList){
         item.setIpAddress(ipAddress);
       }
@@ -121,6 +125,8 @@ public class PkgController {
       log.info("결과: {}",hashmap);
       List<PkgDto> recommendedList = pkgService.getRecommendedList(hashmap);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
+
       for(PkgDto item : recommendedList){
         item.setIpAddress(ipAddress);
       }

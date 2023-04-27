@@ -31,8 +31,9 @@
               <tr class=""><th class="table-dark">Package No </th><td th:text="${pkgDto.pkgNo}"></td></tr>
               <tr class=""><th class="table-dark">Package Name </th><td th:text="${pkgDto.pkgName}"></td></tr>
               <tr class=""><th class="table-dark">Category </th><td th:text="${requestDto.reqCategory}"></td></tr>
-              <tr class=""><th class="table-dark">Depart </th><td>2023/04/01</td></tr>
-              <tr class=""><th class="table-dark">Return </th><td>2023/04/31</td></tr>
+              <tr class=""><th class="table-dark">Depart </th><td th:text="${pkgDto.pkgDepart}">2023/04/01</td></tr>
+              <tr class=""><th class="table-dark">Return </th><td th:text="${pkgDto.pkgReturn}">2023/04/31</td></tr>
+              <tr class=""><th class="table-dark">Request Title </th><td th:text="${requestDto.reqTitle}"></td></tr>
               <tr class="">
                 <th class="table-dark">Contents</th>
                 <td  th:text="${requestDto.reqContents}"></td>

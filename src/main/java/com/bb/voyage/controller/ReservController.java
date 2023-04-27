@@ -39,6 +39,8 @@ public class ReservController {
     public List<ReservDto> getAllReserv(int no) throws UnknownHostException{
       List<ReservDto> reservList = reservService.getAllReserv(no);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
+
       for(ReservDto item : reservList){
         item.setIpAddress(ipAddress);
       }
@@ -50,6 +52,8 @@ public class ReservController {
     public List<ReservDto> getPastReserv(int no) throws UnknownHostException{
       List<ReservDto> reservList = reservService.getPastReserv(no);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
+
       for(ReservDto item : reservList){
         item.setIpAddress(ipAddress);
       }
@@ -61,6 +65,8 @@ public class ReservController {
     public List<ReservDto> getCanceledReserv(int no)throws UnknownHostException{
       List<ReservDto> reservList = reservService.getCanceledReserv(no);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
+
       for(ReservDto item : reservList){
         item.setIpAddress(ipAddress);
       }
@@ -89,6 +95,7 @@ public class ReservController {
     public List<PkgDto> getFilteredPkg(PkgDto pkgDto) throws UnknownHostException{
       List<PkgDto> pkgList = reservService.getFilteredPkg(pkgDto);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
       for(PkgDto item : pkgList){
         item.setIpAddress(ipAddress);
       }
@@ -148,6 +155,7 @@ public class ReservController {
     public List<RequestDto> getAllRequest(int no) throws UnknownHostException{
       List<RequestDto> requestList = reservService.getAllRequest(no);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
 
       for(RequestDto item : requestList){
         item.setIpAddress(ipAddress);
@@ -160,6 +168,7 @@ public class ReservController {
     public List<RequestDto> getClosedRequest(int no) throws UnknownHostException{
       List<RequestDto> requestList = reservService.getClosedRequest(no);
       String ipAddress = InetAddress.getLocalHost().getHostAddress();
+      // String ipAddress = "221.139.100.224";
       for(RequestDto item : requestList){
         item.setIpAddress(ipAddress);
       }

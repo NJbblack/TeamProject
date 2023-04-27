@@ -41,7 +41,7 @@ public class AdminController {
     @GetMapping("/pkglist")
     public String pkgList(Model model, PagingMaker pagingMaker, @RequestParam(value = "page",defaultValue = "1")int page, String searchTxt, String category){
       List<PkgDto> pkgList = adminService.getAllPkg(page, searchTxt, category);
-      pagingMaker.setTotalCount(adminService.totalCountPkg(), (int)page);
+      pagingMaker.setTotalCount(pkgList.size(), (int)page);
       model.addAttribute("pkgList", pkgList);
       model.addAttribute("pagingMaker", pagingMaker);
       return "/admin/pkglist";
@@ -131,10 +131,10 @@ public class AdminController {
 /////////////////////////////////////////////////////////////////////
 ////관리자용 Reservation 관리 컨트롤러
     @GetMapping("/reservlist")
-    public String reservList(Model model, PagingMaker pagingMaker, @RequestParam(value = "page",defaultValue = "1")int page, String searchTxt, String category, @RequestParam(value = "requested",defaultValue = "1")int requested){
-      log.info("원인: {}",requested);
+    public String reservList(Model model, PagingMaker pagingMaker, @RequestParam(value = "page",defaultValue = "1")int page, String searchTxt, String category, @RequestParam(value = "requested",defaultValue = "0")int requested){
       List<ReservDto> reservList = adminService.getAllReserv(page, searchTxt, category, (int)requested);
-      pagingMaker.setTotalCount(adminService.totalCountReserv(), (int)page);
+      pagingMaker.setTotalCount(reservList.size(), (int)page);
+      log.info("페이지 메이커: {}",pagingMaker);
       model.addAttribute("reservList", reservList);
       model.addAttribute("pagingMaker", pagingMaker);
       return "/admin/reservlist";
@@ -180,7 +180,7 @@ public class AdminController {
   @GetMapping("/memberlist")
   public String memberList(Model model, PagingMaker pagingMaker, @RequestParam(value = "page",defaultValue = "1")int page, String searchTxt, String category){
     List<MemberDto> memberList = adminService.getAllMember(page, searchTxt, category);
-    pagingMaker.setTotalCount(adminService.totalCountMember(), (int)page);
+    pagingMaker.setTotalCount(memberList.size(), (int)page);
     model.addAttribute("memberList", memberList);
     model.addAttribute("pagingMaker", pagingMaker);
     return "/admin/memberlist";
@@ -212,7 +212,7 @@ public class AdminController {
 @GetMapping("/reviewlist")
 public String reviewList(Model model, PagingMaker pagingMaker, @RequestParam(value = "page",defaultValue = "1")int page, String searchTxt, String category){
   List<ReviewDto> reviewList = adminService.getAllReview(page, searchTxt, category);
-  pagingMaker.setTotalCount(adminService.totalCountReserv(), (int)page);
+  pagingMaker.setTotalCount(reviewList.size(), (int)page);
   log.info("결과: {}",reviewList);
   model.addAttribute("reviewList", reviewList);
   model.addAttribute("pagingMaker", pagingMaker);
