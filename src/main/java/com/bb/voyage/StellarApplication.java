@@ -9,6 +9,4 @@ public class StellarApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StellarApplication.class, args);
 	}
-
 }
-
